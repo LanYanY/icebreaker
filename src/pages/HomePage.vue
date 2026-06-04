@@ -262,7 +262,7 @@ function handleToastClose() {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  z-index: 10;
+  z-index: 110; /* 高于抽一张按钮的 z-index: 101 */
   overflow: hidden;
 }
 
