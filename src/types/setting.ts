@@ -5,7 +5,7 @@ export interface UserSetting {
   defaultTone: string
   useOfflineFirst: boolean
   allowHistoryForDedup: boolean
-  theme: 'light' | 'dark' | 'system'
+  theme: 'light' | 'dark' | 'auto'
 }
 
 // 默认用户设置
@@ -15,5 +15,5 @@ export const DEFAULT_USER_SETTING: UserSetting = {
   defaultTone: 'light',
   useOfflineFirst: false,
   allowHistoryForDedup: true,
-  theme: 'light'
+  theme: 'auto'
 }

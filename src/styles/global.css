@@ -77,16 +77,50 @@
 
 /* 暗色主题 */
 [data-theme="dark"] {
-  --color-bg-primary: #1A1A1A;
-  --color-bg-secondary: #2D2D2D;
-  --color-bg-card: #2D2D2D;
+  --color-bg-primary: #0F0F1A;
+  --color-bg-secondary: #1A1A2E;
+  --color-bg-card: #1E1E32;
   
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B0B0B0;
-  --color-text-tertiary: #808080;
+  --color-text-primary: #EAEAEA;
+  --color-text-secondary: #999999;
+  --color-text-tertiary: #666666;
   
-  --color-border: #404040;
-  --color-border-light: #333333;
+  --color-accent-primary: #D48FB0;
+  --color-accent-secondary: #8BADD4;
+  --color-accent-success: #D4A0B0;
+  
+  --color-border: #2A2A40;
+  --color-border-light: #222236;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* 跟随系统暗色模式 */
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    --color-bg-primary: #0F0F1A;
+    --color-bg-secondary: #1A1A2E;
+    --color-bg-card: #1E1E32;
+    
+    --color-text-primary: #EAEAEA;
+    --color-text-secondary: #999999;
+    --color-text-tertiary: #666666;
+    
+    --color-accent-primary: #D48FB0;
+    --color-accent-secondary: #8BADD4;
+    --color-accent-success: #D4A0B0;
+    
+    --color-border: #2A2A40;
+    --color-border-light: #222236;
+    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* 全局样式 */

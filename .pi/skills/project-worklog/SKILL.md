@@ -2,9 +2,7 @@
 version: 1.1
 name: project-worklog
 description: 维护项目工作日志，记录开发进展、决策、变更和协作信息。适用于所有软件开发项目，在任务开始、变更、审查、交接、恢复或协调工作时使用。
-version: 1.1
 ---
-version: 1.1
 
 # 项目工作日志
 

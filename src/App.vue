@@ -7,6 +7,8 @@ const settingStore = useSettingStore()
 
 onMounted(async () => {
   await settingStore.initSettings()
+  // 应用主题
+  document.documentElement.setAttribute('data-theme', settingStore.userSetting.theme)
 })
 </script>
 

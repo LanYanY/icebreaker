@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useSettingStore } from '@/stores/settingStore'
 import { useCategoryStore } from '@/stores/categoryStore'
 import { LLM_PROVIDER_PRESETS } from '@/types/llm'
@@ -7,6 +7,20 @@ import type { LLMProvider } from '@/types/llm'
 
 const settingStore = useSettingStore()
 const categoryStore = useCategoryStore()
+
+// 应用主题
+function applyTheme(theme: string) {
+  document.documentElement.setAttribute('data-theme', theme)
+}
+
+// 监听主题变化
+watch(() => settingStore.userSetting.theme, (newTheme) => {
+  applyTheme(newTheme)
+})
+
+onMounted(() => {
+  applyTheme(settingStore.userSetting.theme)
+})
 
 const showAdvanced = ref(false)
 const showClearConfirm = ref(false)
@@ -171,6 +185,31 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           <option value="humorous">Humorous</option>
           <option value="warm">Warm</option>
         </select>
+      </div>
+      
+      <!-- 主题切换 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">Theme</span>
+          <span class="label-desc">App appearance mode</span>
+        </div>
+        <div class="theme-switcher">
+          <button
+            class="theme-btn"
+            :class="{ active: formData.theme === 'light' }"
+            @click="handleSaveSetting('theme', 'light'); formData.theme = 'light'"
+          >☀️</button>
+          <button
+            class="theme-btn"
+            :class="{ active: formData.theme === 'auto' }"
+            @click="handleSaveSetting('theme', 'auto'); formData.theme = 'auto'"
+          >🔄</button>
+          <button
+            class="theme-btn"
+            :class="{ active: formData.theme === 'dark' }"
+            @click="handleSaveSetting('theme', 'dark'); formData.theme = 'dark'"
+          >🌙</button>
+        </div>
       </div>
       
       <!-- 优先使用离线题库 -->
@@ -795,6 +834,35 @@ input:checked + .switch-slider:before {
 
 .action-button.danger:active {
   background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* 主题切换器 */
+.theme-switcher {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) ease;
+}
+
+.theme-btn.active {
+  border-color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.15);
+}
+
+.theme-btn:active {
+  transform: scale(0.9);
 }
 
 /* 模态框样式 */
