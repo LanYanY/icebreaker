@@ -376,7 +376,9 @@ function handleToastClose() {
 .draw-button-area {
   display: flex;
   justify-content: center;
-  padding-bottom: var(--spacing-lg);
+  padding-bottom: calc(76px + var(--spacing-lg)); /* 底部导航高度 + 额外间距 */
+  position: relative;
+  z-index: 101; /* 高于 BottomNav 的 z-index: 100 */
 }
 
 .draw-button {

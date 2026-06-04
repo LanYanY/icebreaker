@@ -19,13 +19,40 @@
 
 ## 最近工作记录
 
-## 2026-06-04 18:25 CST - pi
+## 2026-06-04 19:25 CST - pi
 
-- Context: APK构建成功
-- Changes: 生成了android/app/build/outputs/apk/debug/app-debug.apk
-- Verification: APK文件大小为3.7MB
-- Decisions: 使用debug模式构建，后续可以构建release版本
-- Next: 测试APK功能
+- Context: 修复LLM集成、分类切换和收藏查询bug
+- Problem: 
+  1. LLM生成功能不生效，始终使用离线题库
+  2. 分类切换后问题不更新
+  3. 收藏页面无法显示收藏的问题
+- Root Cause: 
+  1. ensureService()函数只初始化一次，后续调用不会重新加载设置
+  2. getFavoriteQuestions()使用.equals(1)查询布尔字段
+  3. 调试日志过多影响性能
+- Solution: 
+  1. 修改ensureService()函数，每次调用时都重新加载设置
+  2. 修改getFavoriteQuestions()使用.filter(q => q.favorite === true)
+  3. 清理调试日志，移除不必要的console.log
+- Changes: 
+  - src/stores/questionStore.ts: 修改ensureService()函数
+  - src/db/index.ts: 修改getFavoriteQuestions()和clearAllFavorites()函数
+  - src/services/questionService.ts: 清理调试日志
+- Verification: 
+  - LLM生成功能正常工作，显示"AI 生成"标签
+  - 分类切换正常工作，不同分类的问题正常生成
+  - 收藏页面正常显示收藏的问题
+  - 历史记录页面正常显示AI生成和离线题库的问题
+  - 设置页面正常显示API配置
+- Decisions: 
+  - 每次调用ensureService()时都重新加载设置，确保设置变更生效
+  - 使用.filter()替代.equals()查询布尔字段
+  - 保留关键日志，移除调试日志
+- Lessons Learned: 
+  - Vue 3的生命周期钩子执行顺序：子组件的onMounted先于父组件的onMounted执行
+  - IndexedDB存储布尔值时使用布尔类型，不是数字类型
+  - Dexie.js的.where().equals()对布尔值查询需要使用布尔值，不是数字
+- Next: 重新构建APK并测试
 
 ## 2026-06-04 18:30 CST - pi
 
@@ -100,3 +127,38 @@
   - 副标题：一张卡，打开一个话题
   - 分类名称：轻松开场（原轻松破冰）
 - Next: 重新构建APK
+
+## 2026-06-04 19:25 CST - pi
+
+- Context: 修复LLM集成、分类切换和收藏查询bug
+- Problem: 
+  1. LLM生成功能不生效，始终使用离线题库
+  2. 分类切换后问题不更新
+  3. 收藏页面无法显示收藏的问题
+- Root Cause: 
+  1. ensureService()函数只初始化一次，后续调用不会重新加载设置
+  2. getFavoriteQuestions()使用.equals(1)查询布尔字段
+  3. 调试日志过多影响性能
+- Solution: 
+  1. 修改ensureService()函数，每次调用时都重新加载设置
+  2. 修改getFavoriteQuestions()使用.filter(q => q.favorite === true)
+  3. 清理调试日志，移除不必要的console.log
+- Changes: 
+  - src/stores/questionStore.ts: 修改ensureService()函数
+  - src/db/index.ts: 修改getFavoriteQuestions()和clearAllFavorites()函数
+  - src/services/questionService.ts: 清理调试日志
+- Verification: 
+  - LLM生成功能正常工作，显示"AI 生成"标签
+  - 分类切换正常工作，不同分类的问题正常生成
+  - 收藏页面正常显示收藏的问题
+  - 历史记录页面正常显示AI生成和离线题库的问题
+  - 设置页面正常显示API配置
+- Decisions: 
+  - 每次调用ensureService()时都重新加载设置，确保设置变更生效
+  - 使用.filter()替代.equals()查询布尔字段
+  - 保留关键日志，移除调试日志
+- Lessons Learned: 
+  - Vue 3的生命周期钩子执行顺序：子组件的onMounted先于父组件的onMounted执行
+  - IndexedDB存储布尔值时使用布尔类型，不是数字类型
+  - Dexie.js的.where().equals()对布尔值查询需要使用布尔值，不是数字
+- Next: 重新构建APK并测试

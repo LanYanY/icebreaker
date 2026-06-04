@@ -105,7 +105,7 @@ export class QuestionService {
           category: response.category || category,
           depth: response.depth || depth,
           tone: response.tone || tone,
-          tags: response.tags || [],
+          tags: [...(response.tags || [])],
           source: 'llm',
           hash: generateHash(response.question),
           createdAt: Date.now(),

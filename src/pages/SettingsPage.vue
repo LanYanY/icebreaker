@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useSettingStore } from '@/stores/settingStore'
 import { useCategoryStore } from '@/stores/categoryStore'
+import { LLM_PROVIDER_PRESETS } from '@/types/llm'
+import type { LLMProvider } from '@/types/llm'
 
 const settingStore = useSettingStore()
 const categoryStore = useCategoryStore()
@@ -29,6 +31,20 @@ const formData = ref({
 const apiKeyInput = ref('')
 const showApiKey = ref(false)
 
+// 当前选中的提供商
+const currentProvider = computed(() => settingStore.llmConfig.provider || 'deepseek')
+
+// 当前提供商的预设
+const currentPreset = computed(() => LLM_PROVIDER_PRESETS.find(p => p.id === currentProvider.value))
+
+// 切换提供商
+async function handleSwitchProvider(provider: LLMProvider) {
+  await settingStore.switchProvider(provider)
+  // 更新表单数据
+  formData.value.baseUrl = settingStore.llmConfig.baseUrl
+  formData.value.model = settingStore.llmConfig.model
+}
+
 // 保存设置
 async function handleSaveSetting(key: string, value: any) {
   await settingStore.saveUserSetting({ [key]: value })
@@ -54,7 +70,10 @@ async function handleClearApiKey() {
 
 // 清空数据
 async function handleClearData() {
-  // TODO: 实际清空数据
+  if (clearType.value === 'apiKey') {
+    await settingStore.clearApiKey()
+  }
+  // TODO: 实现清空历史记录和收藏
   showClearConfirm.value = false
 }
 
@@ -187,52 +206,104 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       </div>
     </section>
     
-    <!-- API设置 -->
+    <!-- AI 设置 -->
     <section class="settings-section">
-      <h2 class="section-title">API 设置</h2>
+      <h2 class="section-title">🤖 AI 设置</h2>
       
-      <!-- API Base URL -->
-      <div class="setting-item">
-        <div class="setting-label">
-          <span class="label-text">API Base URL</span>
-          <span class="label-desc">LLM API的基础地址</span>
+      <!-- AI 提供商选择 -->
+      <div class="provider-section">
+        <div class="provider-grid">
+          <button
+            v-for="preset in LLM_PROVIDER_PRESETS"
+            :key="preset.id"
+            class="provider-card"
+            :class="{ active: currentProvider === preset.id }"
+            @click="handleSwitchProvider(preset.id)"
+          >
+            <span class="provider-icon">{{ preset.icon }}</span>
+            <span class="provider-name">{{ preset.name }}</span>
+            <span v-if="currentProvider === preset.id" class="provider-check">✓</span>
+          </button>
         </div>
-        <input
-          type="text"
-          v-model="formData.baseUrl"
-          class="setting-input"
-          placeholder="https://api.openai.com/v1"
-          @blur="handleSaveLLMConfig('baseUrl', formData.baseUrl)"
-        >
+        
+        <!-- 提供商描述 -->
+        <div v-if="currentPreset" class="provider-info">
+          <p class="provider-desc">{{ currentPreset.description }}</p>
+          <a
+            v-if="currentPreset.apiKeyUrl"
+            :href="currentPreset.apiKeyUrl"
+            target="_blank"
+            class="api-key-link"
+          >
+            获取 API Key →
+          </a>
+        </div>
       </div>
       
-      <!-- 模型名称 -->
-      <div class="setting-item">
+      <!-- 模型选择（仅非自定义提供商显示） -->
+      <div v-if="currentProvider !== 'custom' && currentPreset?.models.length" class="setting-item">
         <div class="setting-label">
-          <span class="label-text">模型名称</span>
-          <span class="label-desc">使用的LLM模型</span>
+          <span class="label-text">模型选择</span>
+          <span class="label-desc">选择使用的AI模型</span>
         </div>
-        <input
-          type="text"
+        <select
           v-model="formData.model"
-          class="setting-input"
-          placeholder="gpt-3.5-turbo"
-          @blur="handleSaveLLMConfig('model', formData.model)"
+          class="setting-select"
+          @change="handleSaveLLMConfig('model', formData.model)"
         >
+          <option
+            v-for="model in currentPreset?.models"
+            :key="model.id"
+            :value="model.id"
+          >
+            {{ model.name }}
+          </option>
+        </select>
       </div>
+      
+      <!-- 自定义 API 配置（仅自定义提供商显示） -->
+      <template v-if="currentProvider === 'custom'">
+        <div class="setting-item">
+          <div class="setting-label">
+            <span class="label-text">API Base URL</span>
+            <span class="label-desc">OpenAI兼容的API地址</span>
+          </div>
+          <input
+            type="text"
+            v-model="formData.baseUrl"
+            class="setting-input"
+            placeholder="https://api.example.com/v1"
+            @blur="handleSaveLLMConfig('baseUrl', formData.baseUrl)"
+          >
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-label">
+            <span class="label-text">模型名称</span>
+            <span class="label-desc">使用的模型ID</span>
+          </div>
+          <input
+            type="text"
+            v-model="formData.model"
+            class="setting-input"
+            placeholder="gpt-4o-mini"
+            @blur="handleSaveLLMConfig('model', formData.model)"
+          >
+        </div>
+      </template>
       
       <!-- API Key -->
-      <div class="setting-item">
+      <div class="setting-item api-key-item">
         <div class="setting-label">
           <span class="label-text">API Key</span>
-          <span class="label-desc">你的API密钥</span>
+          <span class="label-desc">{{ currentPreset?.apiKeyPlaceholder || '输入你的API密钥' }}</span>
         </div>
         <div class="api-key-input-group">
           <input
             :type="showApiKey ? 'text' : 'password'"
             v-model="apiKeyInput"
             class="setting-input"
-            placeholder="输入API Key"
+            :placeholder="currentPreset?.apiKeyPlaceholder || 'sk-xxx...'"
           >
           <button
             class="api-key-toggle"
@@ -248,7 +319,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           </button>
         </div>
         <div v-if="settingStore.hasApiKey()" class="api-key-status">
-          <span class="status-text">已配置</span>
+          <span class="status-text">✓ 已配置</span>
           <button
             class="clear-key-button"
             @click="handleClearApiKey"
@@ -555,17 +626,104 @@ input:checked + .switch-slider:before {
   transform: translateX(20px);
 }
 
+/* 提供商选择样式 */
+.provider-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.provider-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-fast) ease;
+  position: relative;
+}
+
+.provider-card:active {
+  transform: scale(0.95);
+}
+
+.provider-card.active {
+  border-color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.1);
+}
+
+.provider-icon {
+  font-size: 24px;
+}
+
+.provider-name {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.provider-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-accent-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.provider-info {
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+}
+
+.provider-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.api-key-link {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+.api-key-link:hover {
+  text-decoration: underline;
+}
+
+.api-key-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .api-key-input-group {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   width: 100%;
-  max-width: 280px;
+  margin-top: var(--spacing-sm);
 }
 
 .api-key-input-group .setting-input {
   flex: 1;
   width: auto;
+  text-align: left;
 }
 
 .api-key-toggle,

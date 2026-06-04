@@ -70,8 +70,9 @@ ${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
    */
   private async callAPI(prompt: string): Promise<string> {
     const url = `${this.config.baseUrl}/chat/completions`
+    console.log('LLM请求URL:', url, '模型:', this.config.model)
     
-    const body = {
+    const body: Record<string, unknown> = {
       model: this.config.model,
       messages: [
         {
@@ -80,7 +81,9 @@ ${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
         }
       ],
       temperature: this.config.temperature,
-      max_tokens: this.config.maxTokens
+      max_tokens: this.config.maxTokens,
+      // DeepSeek V4 默认启用思考模式，生成短文本时禁用以节省 token
+      thinking: { type: 'disabled' }
     }
 
     const controller = new AbortController()
@@ -105,6 +108,7 @@ ${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
       }
 
       const data = await response.json()
+      console.log('LLM响应:', JSON.stringify(data).substring(0, 500))
       
       if (!data.choices || !data.choices[0] || !data.choices[0].message) {
         throw new Error('API返回格式错误')

@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { UserSetting } from '@/types/setting'
 import { DEFAULT_USER_SETTING } from '@/types/setting'
-import type { LLMConfig } from '@/types/llm'
-import { DEFAULT_LLM_CONFIG } from '@/types/llm'
+import type { LLMConfig, LLMProvider } from '@/types/llm'
+import { DEFAULT_LLM_CONFIG, LLM_PROVIDER_PRESETS } from '@/types/llm'
 import * as db from '@/db'
 
 export const useSettingStore = defineStore('setting', () => {
@@ -31,6 +31,7 @@ export const useSettingStore = defineStore('setting', () => {
       if (savedTheme) userSetting.value.theme = savedTheme as UserSetting['theme']
       
       // 从数据库加载LLM配置
+      const savedProvider = await db.getSetting('llm_provider')
       const savedBaseUrl = await db.getSetting('llm_baseUrl')
       const savedModel = await db.getSetting('llm_model')
       const savedTemperature = await db.getSetting('llm_temperature')
@@ -38,8 +39,29 @@ export const useSettingStore = defineStore('setting', () => {
       const savedTimeoutMs = await db.getSetting('llm_timeoutMs')
       const savedMaxRetries = await db.getSetting('llm_maxRetries')
       
+      if (savedProvider) llmConfig.value.provider = savedProvider as LLMProvider
       if (savedBaseUrl) llmConfig.value.baseUrl = savedBaseUrl
       if (savedModel) llmConfig.value.model = savedModel
+      
+      // 迁移旧的 DeepSeek 配置到新格式
+      let needMigration = false
+      if (llmConfig.value.baseUrl === 'https://api.deepseek.com/v1') {
+        llmConfig.value.baseUrl = 'https://api.deepseek.com'
+        needMigration = true
+      }
+      if (llmConfig.value.model === 'deepseek-chat') {
+        llmConfig.value.model = 'deepseek-v4-flash'
+        needMigration = true
+      }
+      if (llmConfig.value.model === 'deepseek-reasoner') {
+        llmConfig.value.model = 'deepseek-v4-pro'
+        needMigration = true
+      }
+      if (needMigration) {
+        await db.setSetting('llm_baseUrl', llmConfig.value.baseUrl)
+        await db.setSetting('llm_model', llmConfig.value.model)
+        console.log('已迁移 DeepSeek 配置到新版格式')
+      }
       if (savedTemperature) llmConfig.value.temperature = parseFloat(savedTemperature)
       if (savedMaxTokens) llmConfig.value.maxTokens = parseInt(savedMaxTokens)
       if (savedTimeoutMs) llmConfig.value.timeoutMs = parseInt(savedTimeoutMs)
@@ -74,6 +96,21 @@ export const useSettingStore = defineStore('setting', () => {
     }
   }
   
+  // 切换LLM提供商
+  async function switchProvider(provider: LLMProvider) {
+    const preset = LLM_PROVIDER_PRESETS.find(p => p.id === provider)
+    if (!preset) return
+    
+    llmConfig.value.provider = provider
+    llmConfig.value.baseUrl = preset.baseUrl
+    llmConfig.value.model = preset.defaultModel
+    
+    // 保存到数据库
+    await db.setSetting('llm_provider', provider)
+    await db.setSetting('llm_baseUrl', preset.baseUrl)
+    await db.setSetting('llm_model', preset.defaultModel)
+  }
+  
   // 保存API Key
   async function saveApiKey(key: string) {
     apiKey.value = key
@@ -102,6 +139,7 @@ export const useSettingStore = defineStore('setting', () => {
     await db.deleteSetting('useOfflineFirst')
     await db.deleteSetting('allowHistoryForDedup')
     await db.deleteSetting('theme')
+    await db.deleteSetting('llm_provider')
     await db.deleteSetting('llm_baseUrl')
     await db.deleteSetting('llm_model')
     await db.deleteSetting('llm_temperature')
@@ -121,6 +159,7 @@ export const useSettingStore = defineStore('setting', () => {
     initSettings,
     saveUserSetting,
     saveLLMConfig,
+    switchProvider,
     saveApiKey,
     clearApiKey,
     resetAllSettings,

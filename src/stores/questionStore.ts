@@ -34,9 +34,11 @@ export const useQuestionStore = defineStore('question', () => {
       // 确保离线题库已加载
       await questionService.value!.loadOfflineQuestions()
 
+      console.log('[Store] 开始抽卡, category:', category, 'useOffline:', useOffline)
       const question = await questionService.value!.generateQuestion(category, useOffline)
 
       if (question) {
+        console.log('[Store] 抽到问题:', question.text, 'source:', question.source)
         currentQuestion.value = question
         return question
       } else {

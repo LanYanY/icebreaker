@@ -13,7 +13,7 @@ export class DedupService {
   constructor(
     recentQuestions: string[] = [],
     hiddenHashes: Set<string> = new Set(),
-    similarityThreshold = 0.6
+    similarityThreshold = 0.85
   ) {
     this.recentQuestions = recentQuestions
     this.hiddenHashes = hiddenHashes
@@ -30,11 +30,13 @@ export class DedupService {
 
     // 检查是否在隐藏列表中
     if (this.hiddenHashes.has(hash)) {
+      console.log('[Dedup] 在隐藏列表中:', text)
       return true
     }
 
     // 检查是否与最近问题相似
     if (isTooSimilar(text, this.recentQuestions, this.similarityThreshold)) {
+      console.log('[Dedup] 与最近问题相似:', text, '最近问题数:', this.recentQuestions.length)
       return true
     }
 
