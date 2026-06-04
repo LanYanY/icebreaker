@@ -34,15 +34,15 @@ export class LLMService {
     
     // 分类生成方向映射
     const categoryGuides: Record<string, string> = {
-      'random': '轻松、随机、低压力、适合自然开场的问题',
-      'if_you_could': '以\"If you could...\"开头或类似结构的假设类问题，轻松、有想象空间，适合发散聊天',
-      'would_you_rather': '\"Would you rather...\"结构的二选一偏好题，适合多人玩、快速回答、轻松互动。问题应轻松、有趣、没有压力',
-      'experiences': '围绕经历、回忆、故事、旅行、成长片段和难忘瞬间的问题，鼓励分享故事，但不要触碰创伤或过度隐私',
-      'life': '围绕人生、价值观、生活状态、自我理解和未来期待的问题，有一定深度但不要太沉重',
-      'deep': '更深入的问题，围绕内心感受、自我认知、关系、成长和选择展开，适合熟一点之后聊，但不要像审问'
+      'random': 'Light, random, low-pressure questions for easy and natural conversation starters',
+      'if_you_could': 'Hypothetical questions in an "If you could..." style, imaginative, light, and easy to expand on',
+      'would_you_rather': 'Clear two-choice "Would you rather..." questions, light, fun, low-pressure, and suitable for groups',
+      'experiences': 'Questions about experiences, memories, stories, travel, growth moments, and meaningful small events',
+      'life': 'Questions about life, values, lifestyle, self-understanding, future hopes, and what matters to someone',
+      'deep': 'Deeper but gentle questions about inner feelings, self-awareness, relationships, growth, and choices'
     }
     
-    const categoryGuide = categoryGuides[category] || '适合聊天使用的开场问题'
+    const categoryGuide = categoryGuides[category] || 'Light, random, low-pressure questions for easy and natural conversation starters'
     
     let prompt = `You are an icebreaker question card generator.
 
@@ -58,12 +58,20 @@ rules:
 1. The question should be short, natural, and easy to say out loud.
 2. Do not make it too formal or stiff.
 3. Avoid topics like politics, religion, income, illness, sexual experiences, or family trauma.
-4. Do not generate anything offensive, embarrassing, or overly personal.
+4. Do not generate anything offensive, embarrassing, judgmental, or overly personal.
 5. Return ONLY valid JSON, no explanation.
 6. The question should be in English.
-7. The "category" field in the JSON must be the category id: ${category}`
+7. The "category" field in the JSON must be the category id: ${category}
+8. The "tone" field in the JSON must match the requested tone: ${tone}
+9. The "tags" field should contain 2 to 4 short lowercase English tags.
+10. Do not repeat or closely rephrase any recent questions.
+11. If recent questions are empty, ignore the recent questions section.
+12. Keep the question suitable for casual real-life conversation.
+13. Do not make the question sound like therapy, an interview, or a personality test.
+14. For "if_you_could", prefer an "If you could..." style question.
+15. For "would_you_rather", use a clear "Would you rather..." two-choice structure.`
 
-    // 添加最近历史用于去重
+    // 添加最近历史用于去重（非空时才添加）
     if (recentQuestions && recentQuestions.length > 0) {
       prompt += `\n\nrecent questions (avoid generating similar ones):\n${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
     }
@@ -73,7 +81,7 @@ rules:
   "question": "...",
   "category": "${category}",
   "depth": ${depth},
-  "tone": "...",
+  "tone": "${tone}",
   "tags": ["...", "..."]
 }`
 
