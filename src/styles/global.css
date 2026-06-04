@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* 设计变量 - 颜色 */
+:root {
+  /* 主背景色 */
+  --color-bg-primary: #F8F5F0;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  
+  /* 文字颜色 */
+  --color-text-primary: #222222;
+  --color-text-secondary: #777777;
+  --color-text-tertiary: #AAAAAA;
+  
+  /* 强调色 */
+  --color-accent-primary: #E8A0BF;
+  --color-accent-secondary: #A9C7E8;
+  --color-accent-success: #F2B8C6;
+  
+  /* 边框颜色 */
+  --color-border: #EFEAE3;
+  --color-border-light: #F5F0EA;
+  
+  /* 状态颜色 */
+  --color-success: #4CAF50;
+  --color-warning: #FF9800;
+  --color-error: #F44336;
+  --color-info: #2196F3;
+  
+  /* 分类颜色 */
+  --color-category-1: #E8A0BF; /* 轻松破冰 */
+  --color-category-2: #A9C7E8; /* 有趣脑洞 */
+  --color-category-3: #B8E6B8; /* 深入了解 */
+  --color-category-4: #FFD4A8; /* 关系与情感 */
+  --color-category-5: #D4B8E8; /* 生活偏好 */
+  --color-category-6: #A8E8E8; /* 团队互动 */
+  
+  /* 字体 */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "HarmonyOS Sans", "Microsoft YaHei", sans-serif;
+  
+  /* 字号 */
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  
+  /* 动画时长 */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+}
+
+/* 暗色主题 */
+[data-theme="dark"] {
+  --color-bg-primary: #1A1A1A;
+  --color-bg-secondary: #2D2D2D;
+  --color-bg-card: #2D2D2D;
+  
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B0B0B0;
+  --color-text-tertiary: #808080;
+  
+  --color-border: #404040;
+  --color-border-light: #333333;
+}
+
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* 移动端适配 */
+@media (max-width: 430px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+/* 选中文本样式 */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: white;
+}
+
+/* 链接样式 */
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+/* 按钮基础样式 */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* 输入框基础样式 */
+input, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* 图片响应式 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 列表样式 */
+ul, ol {
+  list-style: none;
+}
+
+/* 过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--duration-normal) ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all var(--duration-normal) ease;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}

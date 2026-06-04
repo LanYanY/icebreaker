@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useSettingStore } from '@/stores/settingStore'
+import BottomNav from '@/components/BottomNav.vue'
+
+const settingStore = useSettingStore()
+
+onMounted(async () => {
+  await settingStore.initSettings()
+})
+</script>
+
+<template>
+  <div class="app-container">
+    <main class="app-main">
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
+    <BottomNav />
+  </div>
+</template>
+
+<style scoped>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  background-color: var(--color-bg-primary);
+}
+
+.app-main {
+  flex: 1;
+  padding-bottom: 76px; /* 底部导航高度 */
+  overflow-y: auto;
+}
+</style>

@@ -1,0 +1,962 @@
+[
+  {
+    "id": "offline_001",
+    "text": "如果今天可以免费吃一种食物，你会选什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["日常", "偏好"]
+  },
+  {
+    "id": "offline_002",
+    "text": "最近有没有一部电影或电视剧让你觉得还挺好看的？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["娱乐", "日常"]
+  },
+  {
+    "id": "offline_003",
+    "text": "如果周末突然多了一天假，你最想做什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["周末", "计划"]
+  },
+  {
+    "id": "offline_004",
+    "text": "你最近有没有发现什么好吃的餐厅或小店？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["美食", "发现"]
+  },
+  {
+    "id": "offline_005",
+    "text": "如果可以给自己的生活加一个游戏技能，你会选什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["游戏", "想象"]
+  },
+  {
+    "id": "offline_006",
+    "text": "你最近有没有学到什么新东西？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["学习", "成长"]
+  },
+  {
+    "id": "offline_007",
+    "text": "如果今天可以免费去一个地方玩，你会选哪里？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["旅行", "偏好"]
+  },
+  {
+    "id": "offline_008",
+    "text": "你最近有没有什么让你觉得开心的小事？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["心情", "日常"]
+  },
+  {
+    "id": "offline_009",
+    "text": "如果可以拥有一种超能力，但只能用在日常小事上，你会选什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["想象", "日常"]
+  },
+  {
+    "id": "offline_010",
+    "text": "你最近有没有什么推荐的歌单或播客？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["音乐", "推荐"]
+  },
+  {
+    "id": "offline_011",
+    "text": "如果可以马上学会一项技能，你最想学什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["技能", "学习"]
+  },
+  {
+    "id": "offline_012",
+    "text": "你最近有没有什么让你觉得惊喜的发现？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["发现", "惊喜"]
+  },
+  {
+    "id": "offline_013",
+    "text": "如果今天可以和任何一个人吃饭，你会选谁？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["社交", "想象"]
+  },
+  {
+    "id": "offline_014",
+    "text": "你最近有没有什么让你觉得好笑的事情？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["幽默", "日常"]
+  },
+  {
+    "id": "offline_015",
+    "text": "如果可以给自己的房间加一样东西，你会选什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["生活", "偏好"]
+  },
+  {
+    "id": "offline_016",
+    "text": "你最近有没有什么让你觉得放松的活动？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["放松", "活动"]
+  },
+  {
+    "id": "offline_017",
+    "text": "如果今天可以免费看一场演出，你会选什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["娱乐", "偏好"]
+  },
+  {
+    "id": "offline_018",
+    "text": "你最近有没有什么让你觉得温暖的瞬间？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["温暖", "感受"]
+  },
+  {
+    "id": "offline_019",
+    "text": "如果可以给自己的宠物取一个有趣的名字，你会取什么？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["宠物", "想象"]
+  },
+  {
+    "id": "offline_020",
+    "text": "你最近有没有什么让你觉得有趣的朋友圈或动态？",
+    "category": "light",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["社交", "日常"]
+  },
+  {
+    "id": "offline_021",
+    "text": "如果可以给自己的人生加一个存档点，你会设在哪里？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["游戏", "人生"]
+  },
+  {
+    "id": "offline_022",
+    "text": "如果你可以给自己的人生加一个游戏技能，你会选什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["游戏", "技能"]
+  },
+  {
+    "id": "offline_023",
+    "text": "如果动物会说话，你觉得哪种动物会是最话痨的？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["动物", "想象"]
+  },
+  {
+    "id": "offline_024",
+    "text": "如果你可以给任何食物加上一种味道，你会怎么组合？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["美食", "创意"]
+  },
+  {
+    "id": "offline_025",
+    "text": "如果你可以给任何物品加上生命，你会选什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["想象", "创意"]
+  },
+  {
+    "id": "offline_026",
+    "text": "如果你可以给任何电影改结局，你会改哪部？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["电影", "创意"]
+  },
+  {
+    "id": "offline_027",
+    "text": "如果你可以给任何游戏加一个新角色，你会设计什么样的？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["游戏", "设计"]
+  },
+  {
+    "id": "offline_028",
+    "text": "如果你可以给任何城市加一个特色建筑，你会设计什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["城市", "建筑"]
+  },
+  {
+    "id": "offline_029",
+    "text": "如果你可以给任何节日加一个传统活动，你会设计什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["节日", "传统"]
+  },
+  {
+    "id": "offline_030",
+    "text": "如果你可以给任何职业加一个超能力，你会怎么搭配？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["职业", "超能力"]
+  },
+  {
+    "id": "offline_031",
+    "text": "如果你可以给任何科目加一个有趣的教学方式，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["教育", "创意"]
+  },
+  {
+    "id": "offline_032",
+    "text": "如果你可以给任何运动加一个有趣的规则，你会加什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["运动", "规则"]
+  },
+  {
+    "id": "offline_033",
+    "text": "如果你可以给任何乐器加一种新的演奏方式，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["音乐", "创意"]
+  },
+  {
+    "id": "offline_034",
+    "text": "如果你可以给任何交通工具加一个有趣的功能，你会加什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["交通", "创意"]
+  },
+  {
+    "id": "offline_035",
+    "text": "如果你可以给任何家具加一个智能功能，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["家具", "智能"]
+  },
+  {
+    "id": "offline_036",
+    "text": "如果你可以给任何天气加一种有趣的自然现象，你会设计什么？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["天气", "自然"]
+  },
+  {
+    "id": "offline_037",
+    "text": "如果你可以给任何颜色加一种有趣的效果，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["颜色", "效果"]
+  },
+  {
+    "id": "offline_038",
+    "text": "如果你可以给任何声音加一种有趣的来源，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["声音", "创意"]
+  },
+  {
+    "id": "offline_039",
+    "text": "如果你可以给任何味道加一种有趣的体验，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["味道", "体验"]
+  },
+  {
+    "id": "offline_040",
+    "text": "如果你可以给任何触感加一种有趣的反馈，你会怎么设计？",
+    "category": "creative",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["触感", "反馈"]
+  },
+  {
+    "id": "offline_041",
+    "text": "你觉得最近一年自己变化最大的地方是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["成长", "变化"]
+  },
+  {
+    "id": "offline_042",
+    "text": "你觉得自己最需要改进的地方是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["自我", "改进"]
+  },
+  {
+    "id": "offline_043",
+    "text": "你觉得自己最需要坚持的事情是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["坚持", "习惯"]
+  },
+  {
+    "id": "offline_044",
+    "text": "你觉得自己最需要学会放手的事情是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["放手", "释怀"]
+  },
+  {
+    "id": "offline_045",
+    "text": "你觉得自己最需要勇敢面对的事情是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["勇气", "面对"]
+  },
+  {
+    "id": "offline_046",
+    "text": "你觉得自己最需要珍惜的人是谁？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["珍惜", "关系"]
+  },
+  {
+    "id": "offline_047",
+    "text": "你觉得自己最需要感恩的事情是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["感恩", "生活"]
+  },
+  {
+    "id": "offline_048",
+    "text": "你觉得自己最需要原谅的人是谁？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["原谅", "释怀"]
+  },
+  {
+    "id": "offline_049",
+    "text": "你觉得自己最需要道歉的人是谁？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["道歉", "关系"]
+  },
+  {
+    "id": "offline_050",
+    "text": "你觉得自己最需要表达爱意的人是谁？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["爱", "表达"]
+  },
+  {
+    "id": "offline_051",
+    "text": "你觉得自己最需要学会的技能是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["技能", "学习"]
+  },
+  {
+    "id": "offline_052",
+    "text": "你觉得自己最需要培养的习惯是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["习惯", "培养"]
+  },
+  {
+    "id": "offline_053",
+    "text": "你觉得自己最需要克服的恐惧是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["恐惧", "克服"]
+  },
+  {
+    "id": "offline_054",
+    "text": "你觉得自己最需要建立的自信是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["自信", "建立"]
+  },
+  {
+    "id": "offline_055",
+    "text": "你觉得自己最需要改善的关系是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["关系", "改善"]
+  },
+  {
+    "id": "offline_056",
+    "text": "你觉得自己最需要学会的沟通方式是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["沟通", "方式"]
+  },
+  {
+    "id": "offline_057",
+    "text": "你觉得自己最需要学会的情绪管理是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["情绪", "管理"]
+  },
+  {
+    "id": "offline_058",
+    "text": "你觉得自己最需要学会的时间管理是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["时间", "管理"]
+  },
+  {
+    "id": "offline_059",
+    "text": "你觉得自己最需要学会的金钱管理是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["金钱", "管理"]
+  },
+  {
+    "id": "offline_060",
+    "text": "你觉得自己最需要学会的健康管理是什么？",
+    "category": "deep",
+    "depth": 2,
+    "tone": "深入",
+    "tags": ["健康", "管理"]
+  },
+  {
+    "id": "offline_061",
+    "text": "你觉得怎样的相处会让你感到放松？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["相处", "放松"]
+  },
+  {
+    "id": "offline_062",
+    "text": "你觉得一个人让你感到安心，通常是因为什么？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["安心", "信任"]
+  },
+  {
+    "id": "offline_063",
+    "text": "你觉得什么样的陪伴是最舒服的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["陪伴", "舒适"]
+  },
+  {
+    "id": "offline_064",
+    "text": "你觉得什么样的关心是最贴心的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["关心", "贴心"]
+  },
+  {
+    "id": "offline_065",
+    "text": "你觉得什么样的理解是最难得的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["理解", "难得"]
+  },
+  {
+    "id": "offline_066",
+    "text": "你觉得什么样的支持是最有力的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["支持", "力量"]
+  },
+  {
+    "id": "offline_067",
+    "text": "你觉得什么样的信任是最珍贵的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["信任", "珍贵"]
+  },
+  {
+    "id": "offline_068",
+    "text": "你觉得什么样的包容是最温暖的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["包容", "温暖"]
+  },
+  {
+    "id": "offline_069",
+    "text": "你觉得什么样的鼓励是最有效的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["鼓励", "有效"]
+  },
+  {
+    "id": "offline_070",
+    "text": "你觉得什么样的道歉是最真诚的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["道歉", "真诚"]
+  },
+  {
+    "id": "offline_071",
+    "text": "你觉得什么样的原谅是最释怀的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["原谅", "释怀"]
+  },
+  {
+    "id": "offline_072",
+    "text": "你觉得什么样的告别是最体面的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["告别", "体面"]
+  },
+  {
+    "id": "offline_073",
+    "text": "你觉得什么样的重逢是最感动的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["重逢", "感动"]
+  },
+  {
+    "id": "offline_074",
+    "text": "你觉得什么样的承诺是最可靠的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["承诺", "可靠"]
+  },
+  {
+    "id": "offline_075",
+    "text": "你觉得什么样的回忆是最珍贵的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["回忆", "珍贵"]
+  },
+  {
+    "id": "offline_076",
+    "text": "你觉得什么样的期待是最美好的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["期待", "美好"]
+  },
+  {
+    "id": "offline_077",
+    "text": "你觉得什么样的默契是最难得的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["默契", "难得"]
+  },
+  {
+    "id": "offline_078",
+    "text": "你觉得什么样的分享是最快乐的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["分享", "快乐"]
+  },
+  {
+    "id": "offline_079",
+    "text": "你觉得什么样的分担是最贴心的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["分担", "贴心"]
+  },
+  {
+    "id": "offline_080",
+    "text": "你觉得什么样的成长是最同步的？",
+    "category": "emotion",
+    "depth": 2,
+    "tone": "温暖",
+    "tags": ["成长", "同步"]
+  },
+  {
+    "id": "offline_081",
+    "text": "如果周末完全属于你，你最想怎么安排？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["周末", "安排"]
+  },
+  {
+    "id": "offline_082",
+    "text": "你理想中的早晨是什么样的？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["早晨", "理想"]
+  },
+  {
+    "id": "offline_083",
+    "text": "你最喜欢在什么样的环境下工作或学习？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["环境", "工作"]
+  },
+  {
+    "id": "offline_084",
+    "text": "你最喜欢在什么样的氛围下吃饭？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["氛围", "吃饭"]
+  },
+  {
+    "id": "offline_085",
+    "text": "你最喜欢在什么样的天气出门？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["天气", "出门"]
+  },
+  {
+    "id": "offline_086",
+    "text": "你最喜欢在什么样的地方度假？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["度假", "地方"]
+  },
+  {
+    "id": "offline_087",
+    "text": "你最喜欢在什么样的环境下阅读？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["阅读", "环境"]
+  },
+  {
+    "id": "offline_088",
+    "text": "你最喜欢在什么样的环境下运动？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["运动", "环境"]
+  },
+  {
+    "id": "offline_089",
+    "text": "你最喜欢在什么样的环境下放松？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["放松", "环境"]
+  },
+  {
+    "id": "offline_090",
+    "text": "你最喜欢在什么样的环境下社交？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["社交", "环境"]
+  },
+  {
+    "id": "offline_091",
+    "text": "你最喜欢在什么样的环境下独处？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["独处", "环境"]
+  },
+  {
+    "id": "offline_092",
+    "text": "你最喜欢在什么样的环境下创作？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["创作", "环境"]
+  },
+  {
+    "id": "offline_093",
+    "text": "你最喜欢在什么样的环境下思考？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["思考", "环境"]
+  },
+  {
+    "id": "offline_094",
+    "text": "你最喜欢在什么样的环境下入睡？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["入睡", "环境"]
+  },
+  {
+    "id": "offline_095",
+    "text": "你最喜欢在什么样的环境下醒来？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["醒来", "环境"]
+  },
+  {
+    "id": "offline_096",
+    "text": "你最喜欢在什么样的环境下做饭？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["做饭", "环境"]
+  },
+  {
+    "id": "offline_097",
+    "text": "你最喜欢在什么样的环境下喝茶或咖啡？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["喝茶", "环境"]
+  },
+  {
+    "id": "offline_098",
+    "text": "你最喜欢在什么样的环境下看电影？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["电影", "环境"]
+  },
+  {
+    "id": "offline_099",
+    "text": "你最喜欢在什么样的环境下听音乐？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["音乐", "环境"]
+  },
+  {
+    "id": "offline_100",
+    "text": "你最喜欢在什么样的环境下拍照？",
+    "category": "lifestyle",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["拍照", "环境"]
+  },
+  {
+    "id": "offline_101",
+    "text": "如果让你给团队新增一个很有趣的传统，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["团队", "传统"]
+  },
+  {
+    "id": "offline_102",
+    "text": "你觉得一个理想的团队应该具备哪些特点？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["团队", "特点"]
+  },
+  {
+    "id": "offline_103",
+    "text": "如果让你给团队设计一个团建活动，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["团建", "活动"]
+  },
+  {
+    "id": "offline_104",
+    "text": "你觉得在团队中最重要的是什么？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["团队", "重要"]
+  },
+  {
+    "id": "offline_105",
+    "text": "如果让你给团队设计一个吉祥物，你会设计什么样的？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["吉祥物", "设计"]
+  },
+  {
+    "id": "offline_106",
+    "text": "你觉得在团队中如何平衡个人和集体的利益？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["平衡", "利益"]
+  },
+  {
+    "id": "offline_107",
+    "text": "如果让你给团队设计一个口号，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["口号", "设计"]
+  },
+  {
+    "id": "offline_108",
+    "text": "你觉得在团队中如何处理冲突？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["冲突", "处理"]
+  },
+  {
+    "id": "offline_109",
+    "text": "如果让你给团队设计一个奖励机制，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["奖励", "机制"]
+  },
+  {
+    "id": "offline_110",
+    "text": "你觉得在团队中如何建立信任？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["信任", "建立"]
+  },
+  {
+    "id": "offline_111",
+    "text": "如果让你给团队设计一个沟通方式，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["沟通", "方式"]
+  },
+  {
+    "id": "offline_112",
+    "text": "你觉得在团队中如何分配任务？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["任务", "分配"]
+  },
+  {
+    "id": "offline_113",
+    "text": "如果让你给团队设计一个庆祝方式，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["庆祝", "方式"]
+  },
+  {
+    "id": "offline_114",
+    "text": "你觉得在团队中如何激励成员？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["激励", "成员"]
+  },
+  {
+    "id": "offline_115",
+    "text": "如果让你给团队设计一个学习机制，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["学习", "机制"]
+  },
+  {
+    "id": "offline_116",
+    "text": "你觉得在团队中如何提高效率？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["效率", "提高"]
+  },
+  {
+    "id": "offline_117",
+    "text": "如果让你给团队设计一个创新机制，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["创新", "机制"]
+  },
+  {
+    "id": "offline_118",
+    "text": "你觉得在团队中如何保持士气？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["士气", "保持"]
+  },
+  {
+    "id": "offline_119",
+    "text": "如果让你给团队设计一个反馈机制，你会设计什么？",
+    "category": "team",
+    "depth": 1,
+    "tone": "轻松",
+    "tags": ["反馈", "机制"]
+  },
+  {
+    "id": "offline_120",
+    "text": "你觉得在团队中如何培养新人？",
+    "category": "team",
+    "depth": 2,
+    "tone": "正式",
+    "tags": ["新人", "培养"]
+  }
+]

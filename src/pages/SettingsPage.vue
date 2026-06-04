@@ -1,0 +1,708 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useSettingStore } from '@/stores/settingStore'
+import { useCategoryStore } from '@/stores/categoryStore'
+
+const settingStore = useSettingStore()
+const categoryStore = useCategoryStore()
+
+const showAdvanced = ref(false)
+const showClearConfirm = ref(false)
+const clearType = ref<'history' | 'favorites' | 'apiKey' | 'all'>('all')
+
+// 表单数据
+const formData = ref({
+  defaultCategory: settingStore.userSetting.defaultCategory,
+  defaultDepth: settingStore.userSetting.defaultDepth,
+  defaultTone: settingStore.userSetting.defaultTone,
+  useOfflineFirst: settingStore.userSetting.useOfflineFirst,
+  allowHistoryForDedup: settingStore.userSetting.allowHistoryForDedup,
+  theme: settingStore.userSetting.theme,
+  baseUrl: settingStore.llmConfig.baseUrl,
+  model: settingStore.llmConfig.model,
+  temperature: settingStore.llmConfig.temperature,
+  maxTokens: settingStore.llmConfig.maxTokens,
+  timeoutMs: settingStore.llmConfig.timeoutMs,
+  maxRetries: settingStore.llmConfig.maxRetries
+})
+
+const apiKeyInput = ref('')
+const showApiKey = ref(false)
+
+// 保存设置
+async function handleSaveSetting(key: string, value: any) {
+  await settingStore.saveUserSetting({ [key]: value })
+}
+
+// 保存LLM配置
+async function handleSaveLLMConfig(key: string, value: any) {
+  await settingStore.saveLLMConfig({ [key]: value })
+}
+
+// 保存API Key
+async function handleSaveApiKey() {
+  if (apiKeyInput.value.trim()) {
+    await settingStore.saveApiKey(apiKeyInput.value.trim())
+    apiKeyInput.value = ''
+  }
+}
+
+// 清除API Key
+async function handleClearApiKey() {
+  await settingStore.clearApiKey()
+}
+
+// 清空数据
+async function handleClearData() {
+  // TODO: 实际清空数据
+  showClearConfirm.value = false
+}
+
+// 恢复默认设置
+async function handleResetSettings() {
+  if (confirm('确定要恢复默认设置吗？')) {
+    await settingStore.resetAllSettings()
+    // 重置表单
+    formData.value = {
+      defaultCategory: settingStore.userSetting.defaultCategory,
+      defaultDepth: settingStore.userSetting.defaultDepth,
+      defaultTone: settingStore.userSetting.defaultTone,
+      useOfflineFirst: settingStore.userSetting.useOfflineFirst,
+      allowHistoryForDedup: settingStore.userSetting.allowHistoryForDedup,
+      theme: settingStore.userSetting.theme,
+      baseUrl: settingStore.llmConfig.baseUrl,
+      model: settingStore.llmConfig.model,
+      temperature: settingStore.llmConfig.temperature,
+      maxTokens: settingStore.llmConfig.maxTokens,
+      timeoutMs: settingStore.llmConfig.timeoutMs,
+      maxRetries: settingStore.llmConfig.maxRetries
+    }
+  }
+}
+
+function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
+  clearType.value = type
+  showClearConfirm.value = true
+}
+</script>
+
+<template>
+  <div class="settings-page">
+    <!-- 页面标题 -->
+    <header class="page-header">
+      <h1 class="page-title">设置</h1>
+      <p class="page-subtitle">配置你的破冰卡牌</p>
+    </header>
+    
+    <!-- 普通设置 -->
+    <section class="settings-section">
+      <h2 class="section-title">常规设置</h2>
+      
+      <!-- 默认分类 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">默认分类</span>
+          <span class="label-desc">抽卡时默认使用的分类</span>
+        </div>
+        <select
+          v-model="formData.defaultCategory"
+          class="setting-select"
+          @change="handleSaveSetting('defaultCategory', formData.defaultCategory)"
+        >
+          <option
+            v-for="category in categoryStore.sortedCategories"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.icon }} {{ category.name }}
+          </option>
+        </select>
+      </div>
+      
+      <!-- 默认深度 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">默认深度</span>
+          <span class="label-desc">问题的深入程度</span>
+        </div>
+        <select
+          v-model="formData.defaultDepth"
+          class="setting-select"
+          @change="handleSaveSetting('defaultDepth', formData.defaultDepth)"
+        >
+          <option :value="1">轻松</option>
+          <option :value="2">适中</option>
+          <option :value="3">深入</option>
+        </select>
+      </div>
+      
+      <!-- 默认语气 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">默认语气</span>
+          <span class="label-desc">问题的表达风格</span>
+        </div>
+        <select
+          v-model="formData.defaultTone"
+          class="setting-select"
+          @change="handleSaveSetting('defaultTone', formData.defaultTone)"
+        >
+          <option value="轻松">轻松</option>
+          <option value="正式">正式</option>
+          <option value="幽默">幽默</option>
+          <option value="温暖">温暖</option>
+        </select>
+      </div>
+      
+      <!-- 优先使用离线题库 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">优先使用离线题库</span>
+          <span class="label-desc">即使配置了API也优先使用本地题库</span>
+        </div>
+        <label class="setting-switch">
+          <input
+            type="checkbox"
+            v-model="formData.useOfflineFirst"
+            @change="handleSaveSetting('useOfflineFirst', formData.useOfflineFirst)"
+          >
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+      
+      <!-- 允许发送历史给LLM -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">允许发送历史给LLM</span>
+          <span class="label-desc">将最近历史问题发送给LLM用于去重</span>
+        </div>
+        <label class="setting-switch">
+          <input
+            type="checkbox"
+            v-model="formData.allowHistoryForDedup"
+            @change="handleSaveSetting('allowHistoryForDedup', formData.allowHistoryForDedup)"
+          >
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+    </section>
+    
+    <!-- API设置 -->
+    <section class="settings-section">
+      <h2 class="section-title">API 设置</h2>
+      
+      <!-- API Base URL -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">API Base URL</span>
+          <span class="label-desc">LLM API的基础地址</span>
+        </div>
+        <input
+          type="text"
+          v-model="formData.baseUrl"
+          class="setting-input"
+          placeholder="https://api.openai.com/v1"
+          @blur="handleSaveLLMConfig('baseUrl', formData.baseUrl)"
+        >
+      </div>
+      
+      <!-- 模型名称 -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">模型名称</span>
+          <span class="label-desc">使用的LLM模型</span>
+        </div>
+        <input
+          type="text"
+          v-model="formData.model"
+          class="setting-input"
+          placeholder="gpt-3.5-turbo"
+          @blur="handleSaveLLMConfig('model', formData.model)"
+        >
+      </div>
+      
+      <!-- API Key -->
+      <div class="setting-item">
+        <div class="setting-label">
+          <span class="label-text">API Key</span>
+          <span class="label-desc">你的API密钥</span>
+        </div>
+        <div class="api-key-input-group">
+          <input
+            :type="showApiKey ? 'text' : 'password'"
+            v-model="apiKeyInput"
+            class="setting-input"
+            placeholder="输入API Key"
+          >
+          <button
+            class="api-key-toggle"
+            @click="showApiKey = !showApiKey"
+          >
+            {{ showApiKey ? '🙈' : '👁️' }}
+          </button>
+          <button
+            class="api-key-save"
+            @click="handleSaveApiKey"
+          >
+            保存
+          </button>
+        </div>
+        <div v-if="settingStore.hasApiKey()" class="api-key-status">
+          <span class="status-text">已配置</span>
+          <button
+            class="clear-key-button"
+            @click="handleClearApiKey"
+          >
+            清除
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 高级设置 -->
+    <section class="settings-section">
+      <button
+        class="section-toggle"
+        @click="showAdvanced = !showAdvanced"
+      >
+        <h2 class="section-title">高级设置</h2>
+        <span class="toggle-arrow">{{ showAdvanced ? '▲' : '▼' }}</span>
+      </button>
+      
+      <transition name="fade">
+        <div v-if="showAdvanced" class="advanced-settings">
+          <!-- Temperature -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span class="label-text">Temperature</span>
+              <span class="label-desc">控制生成的随机性 (0-2)</span>
+            </div>
+            <input
+              type="number"
+              v-model.number="formData.temperature"
+              class="setting-input"
+              min="0"
+              max="2"
+              step="0.1"
+              @blur="handleSaveLLMConfig('temperature', formData.temperature)"
+            >
+          </div>
+          
+          <!-- Max Tokens -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span class="label-text">Max Tokens</span>
+              <span class="label-desc">最大生成token数</span>
+            </div>
+            <input
+              type="number"
+              v-model.number="formData.maxTokens"
+              class="setting-input"
+              min="50"
+              max="500"
+              @blur="handleSaveLLMConfig('maxTokens', formData.maxTokens)"
+            >
+          </div>
+          
+          <!-- 请求超时 -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span class="label-text">请求超时</span>
+              <span class="label-desc">API请求超时时间(毫秒)</span>
+            </div>
+            <input
+              type="number"
+              v-model.number="formData.timeoutMs"
+              class="setting-input"
+              min="5000"
+              max="30000"
+              step="1000"
+              @blur="handleSaveLLMConfig('timeoutMs', formData.timeoutMs)"
+            >
+          </div>
+          
+          <!-- 最大重试次数 -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span class="label-text">最大重试次数</span>
+              <span class="label-desc">API请求失败后的重试次数</span>
+            </div>
+            <input
+              type="number"
+              v-model.number="formData.maxRetries"
+              class="setting-input"
+              min="0"
+              max="5"
+              @blur="handleSaveLLMConfig('maxRetries', formData.maxRetries)"
+            >
+          </div>
+        </div>
+      </transition>
+    </section>
+    
+    <!-- 数据管理 -->
+    <section class="settings-section">
+      <h2 class="section-title">数据管理</h2>
+      
+      <div class="data-actions">
+        <button
+          class="action-button"
+          @click="showClearDialog('history')"
+        >
+          清空历史记录
+        </button>
+        
+        <button
+          class="action-button"
+          @click="showClearDialog('favorites')"
+        >
+          清空收藏
+        </button>
+        
+        <button
+          class="action-button"
+          @click="showClearDialog('apiKey')"
+        >
+          清除API Key
+        </button>
+        
+        <button
+          class="action-button danger"
+          @click="handleResetSettings"
+        >
+          恢复默认设置
+        </button>
+      </div>
+    </section>
+    
+    <!-- 清空确认对话框 -->
+    <teleport to="body">
+      <div v-if="showClearConfirm" class="modal-overlay">
+        <div class="modal-content">
+          <h3 class="modal-title">确认清空</h3>
+          <p class="modal-text">
+            确定要清空{{ clearType === 'history' ? '历史记录' : clearType === 'favorites' ? '收藏' : clearType === 'apiKey' ? 'API Key' : '所有数据' }}吗？此操作不可恢复。
+          </p>
+          <div class="modal-actions">
+            <button
+              class="modal-button cancel"
+              @click="showClearConfirm = false"
+            >
+              取消
+            </button>
+            <button
+              class="modal-button confirm"
+              @click="handleClearData"
+            >
+              确认清空
+            </button>
+          </div>
+        </div>
+      </div>
+    </teleport>
+  </div>
+</template>
+
+<style scoped>
+.settings-page {
+  padding: var(--spacing-lg);
+  min-height: 100%;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.settings-section {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border-light);
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.toggle-arrow {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.label-text {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.label-desc {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.setting-select,
+.setting-input {
+  width: 120px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+.setting-input {
+  width: 160px;
+}
+
+.setting-select:focus,
+.setting-input:focus {
+  border-color: var(--color-accent-primary);
+  outline: none;
+}
+
+.setting-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.setting-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-border);
+  transition: var(--duration-normal);
+  border-radius: var(--radius-full);
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: var(--duration-normal);
+  border-radius: 50%;
+}
+
+input:checked + .switch-slider {
+  background-color: var(--color-accent-primary);
+}
+
+input:checked + .switch-slider:before {
+  transform: translateX(20px);
+}
+
+.api-key-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  max-width: 280px;
+}
+
+.api-key-input-group .setting-input {
+  flex: 1;
+  width: auto;
+}
+
+.api-key-toggle,
+.api-key-save {
+  padding: var(--spacing-sm);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.api-key-save {
+  background-color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  color: white;
+}
+
+.api-key-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.status-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
+.clear-key-button {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.advanced-settings {
+  margin-top: var(--spacing-lg);
+}
+
+.data-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.action-button {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  transition: all var(--duration-fast) ease;
+}
+
+.action-button:active {
+  transform: scale(0.98);
+  background-color: var(--color-border-light);
+}
+
+.action-button.danger {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.action-button.danger:active {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* 模态框样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-lg);
+}
+
+.modal-content {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  max-width: 320px;
+  width: 100%;
+}
+
+.modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.modal-button {
+  flex: 1;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all var(--duration-fast) ease;
+}
+
+.modal-button.cancel {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.modal-button.confirm {
+  background-color: var(--color-error);
+  border: 1px solid var(--color-error);
+  color: white;
+}
+
+.modal-button:active {
+  transform: scale(0.98);
+}
+</style>
