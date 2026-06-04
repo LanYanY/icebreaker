@@ -34,7 +34,7 @@ export class LLMService {
     
     // 分类生成方向映射
     const categoryGuides: Record<string, string> = {
-      'random': 'Light, random, low-pressure questions for easy and natural conversation starters',
+      'random': 'General everyday conversation starters — about hobbies, preferences, opinions, daily life, fun facts, food, music, movies, etc. NOT hypothetical, NOT two-choice. Just simple open-ended questions anyone can answer naturally.',
       'if_you_could': 'Hypothetical questions in an "If you could..." style, imaginative, light, and easy to expand on',
       'would_you_rather': 'Clear two-choice "Would you rather..." questions, light, fun, low-pressure, and suitable for groups',
       'experiences': 'Questions about experiences, memories, stories, travel, growth moments, and meaningful small events',
@@ -69,7 +69,8 @@ rules:
 12. Keep the question suitable for casual real-life conversation.
 13. Do not make the question sound like therapy, an interview, or a personality test.
 14. For "if_you_could", prefer an "If you could..." style question.
-15. For "would_you_rather", use a clear "Would you rather..." two-choice structure.`
+15. For "would_you_rather", use a clear "Would you rather..." two-choice structure.
+16. For "random", do NOT use "If you could...", "Would you rather...", or "What if..." structures. Use simple direct questions like "What...", "Do you...", "Have you ever...", "What's your favorite...", "Do you prefer..." etc.`
 
     // 添加最近历史用于去重（非空时才添加）
     if (recentQuestions && recentQuestions.length > 0) {

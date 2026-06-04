@@ -20,9 +20,6 @@ const showHideConfirm = ref(false)
 const questionToHide = ref<Question | null>(null)
 
 onMounted(async () => {
-  // 初始化分类
-  categoryStore.setCurrentCategory(settingStore.userSetting.defaultCategory)
-  
   // 加载离线题库
   await questionStore.loadOfflineQuestions()
 })
