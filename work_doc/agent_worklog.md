@@ -139,3 +139,27 @@
 - Verification: npm run build 成功，生成了dist目录
 - Decisions: 使用moduleResolution: "bundler"配置路径别名
 - Next: 配置Capacitor进行Android打包
+
+## 2026-06-04 17:45 CST - pi
+
+- Context: 实现LLM服务和去重服务
+- Changes: 创建了llmService.ts、dedupService.ts、storageService.ts、questionService.ts
+- Verification: 所有服务已创建，TypeScript类型定义完整
+- Decisions: 使用fetch调用LLM API，使用字符n-gram进行去重
+- Next: 配置Capacitor进行Android打包
+
+## 2026-06-04 17:50 CST - pi
+
+- Context: 配置Capacitor进行Android打包
+- Changes: 安装了Capacitor和插件，创建了capacitor.config.ts，初始化了Android项目
+- Verification: npx cap add android 成功，Android项目已创建
+- Decisions: 使用Capacitor 8.x，配置了Android项目
+- Next: 构建APK
+
+## 2026-06-04 17:55 CST - pi
+
+- Context: 构建APK失败
+- Changes: 尝试配置Gradle镜像源，修改了多个build.gradle文件
+- Verification: ./gradlew assembleDebug 失败，网络连接超时
+- Decisions: 需要解决Gradle依赖下载问题
+- Next: 继续解决Gradle构建问题或跳过Android打包，先完成Web功能
