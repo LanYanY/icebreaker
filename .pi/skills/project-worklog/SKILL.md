@@ -1,6 +1,6 @@
 ---
 name: project-worklog
-description: 维护项目工作日志，记录Android开发进展、决策、变更和协作信息。适用于pi在仓库中的任务开始、变更、审查、交接、恢复或协调工作时使用。
+description: 维护项目工作日志，记录开发进展、决策、变更和协作信息。适用于所有软件开发项目，在任务开始、变更、审查、交接、恢复或协调工作时使用。
 ---
 
 # 项目工作日志
@@ -10,6 +10,7 @@ description: 维护项目工作日志，记录Android开发进展、决策、变
 ## 默认文件
 
 - 主工作日志：`work_doc/agent_worklog.md`
+- 归档目录：`work_doc/archive/`
 - 技能文件：`.pi/skills/project-worklog/SKILL.md`
 
 如果仓库已有等效的协作日志，请改用该文件，并在最终响应中说明路径。
@@ -40,42 +41,62 @@ description: 维护项目工作日志，记录Android开发进展、决策、变
 
 除非用户指定更具体的代理名称，否则使用 `pi` 作为角色。
 
-## Android 开发相关
+## Worklog 压缩机制
 
-在Android项目中，记录以下内容：
+**当项目进入新阶段时，对worklog进行压缩，避免文件过长。**
 
-### 构建相关
-- Gradle构建命令：`./gradlew clean`、`./gradlew assembleDebug`、`./gradlew installDebug`
-- 构建结果：成功/失败，错误信息
-- 依赖变更：新增或更新的库
+### 压缩触发条件
+- 项目里程碑完成（如v1.0发布、功能模块完成）
+- 用户明确要求压缩或归档
+- worklog超过50个条目
+- 项目方向发生重大变化
 
-### 设备相关
-- ADB命令：`adb devices`、`adb install`、`adb logcat`
-- 设备连接状态
-- 安装和测试结果
+### 压缩流程
 
-### 项目结构
-- 代码文件：Java/Kotlin源文件、布局文件、资源文件
-- 配置文件：build.gradle、AndroidManifest.xml、settings.gradle
-- 版本控制：Git提交、分支状态
+1. **创建归档**：
+   ```bash
+   mkdir -p work_doc/archive
+   cp work_doc/agent_worklog.md work_doc/archive/worklog_YYYY-MM-DD_phase.md
+   ```
 
-### 环境状态
-- SDK版本：Android SDK、Build Tools、Platform Tools
-- Java版本：JDK版本和JAVA_HOME配置
-- 代理配置：Gradle代理设置
+2. **生成摘要**：在归档文件顶部添加阶段摘要：
+   ```markdown
+   # Worklog 归档：[阶段名称]
+   - 时间范围：YYYY-MM-DD 至 YYYY-MM-DD
+   - 主要成果：<简述完成的工作>
+   - 关键决策：<重要决策列表>
+   - 当前状态：<项目状态>
+   - 后续方向：<下一步计划>
+   ```
 
-## 安装说明
+3. **压缩主文件**：保留最近10-15个条目，将更早的条目替换为摘要链接：
+   ```markdown
+   ## 历史记录
 
-此技能安装在：
-- `.pi/skills/project-worklog/SKILL.md`（项目本地）
-- 在pi中使用 `/skill:project-worklog` 手动调用
+   此阶段的工作记录已归档至：[work_doc/archive/worklog_YYYY-MM-DD_phase.md]
+
+   **阶段摘要**：
+   - 时间：YYYY-MM-DD 至 YYYY-MM-DD
+   - 成果：<简述>
+   - 关键决策：<简述>
+
+   ---
+
+   ## 最近工作记录
+
+   （保留最近的条目）
+   ```
+
+### 归档文件命名规范
+- 格式：`worklog_YYYY-MM-DD_phase.md`
+- 示例：`worklog_2026-06-04_initial-setup.md`
+- 示例：`worklog_2026-06-10_v1.0-release.md`
 
 ## 质量规则
 
 - **条目长度**：每个条目控制在12行以内，除非失败需要确切细节。
 - **使用路径**：优先使用链接或路径，而不是大型差异的文本摘要。
-- **记录阻塞点**：明确记录阻塞点，特别是缺失的硬件引脚、不可用的工具、失败的构建或未验证的时序。
-- **构建信息**：对于Android开发，包含目标设备和构建命令。
+- **记录阻塞点**：明确记录阻塞点，特别是缺失的依赖、不可用的工具、失败的构建或未验证的时序。
 - **多代理工作**：记录每个代理拥有的文件或子系统。
 - **安全规范**：不要在工作日志中存储密钥、私钥、令牌、序列号或个人数据。
 
@@ -93,31 +114,42 @@ description: 维护项目工作日志，记录Android开发进展、决策、变
 ```markdown
 ## 2026-06-04 17:00 CST - pi
 
-- Context: 开始Android项目初始化任务
+- Context: 开始用户认证模块开发
 - Changes: none
-- Verification: 环境检查完成（Java 17、ADB 37.0.0、SDK 34）
-- Decisions: 使用Gradle 8.5、Android SDK 34、API 24作为最低版本
-- Next: 创建项目结构并配置Gradle
+- Verification: 环境检查完成（Node.js 18、npm 9、数据库连接正常）
+- Decisions: 使用JWT进行身份验证，bcrypt进行密码加密
+- Next: 设计数据库用户表结构
 ```
 
-### 构建完成
+### 代码变更
 ```markdown
 ## 2026-06-04 17:15 CST - pi
 
-- Context: 完成项目结构创建和Git初始化
-- Changes: 创建了12个文件，包括build.gradle、MainActivity.java、布局文件等
-- Verification: ./gradlew --version 成功，git status显示所有文件已提交
-- Decisions: 使用ConstraintLayout作为主布局，配置了Gradle代理
-- Next: 执行首次构建测试
+- Context: 实现用户注册功能
+- Changes: 创建了src/models/user.js、src/routes/auth.js、src/controllers/authController.js
+- Verification: npm test 通过，API测试返回201状态码
+- Decisions: 使用MongoDB存储用户数据，添加了邮箱唯一性约束
+- Next: 实现登录功能和JWT生成
 ```
 
 ### 问题记录
 ```markdown
 ## 2026-06-04 17:30 CST - pi
 
-- Context: 构建失败，依赖下载超时
-- Changes: none（构建配置未变更）
-- Verification: ./gradlew assembleDebug 失败，网络连接超时
-- Decisions: 需要配置Gradle代理以加速依赖下载
-- Next: 配置Gradle代理并重试构建
+- Context: 构建失败，依赖安装超时
+- Changes: none（配置未变更）
+- Verification: npm install 失败，网络连接超时
+- Decisions: 需要配置npm镜像源以加速依赖下载
+- Next: 配置淘宝镜像源并重试安装
+```
+
+### 里程碑完成
+```markdown
+## 2026-06-10 15:00 CST - pi
+
+- Context: v1.0用户认证模块完成
+- Changes: 完成了注册、登录、JWT验证、密码重置功能
+- Verification: 所有单元测试通过，集成测试通过
+- Decisions: 将此阶段worklog归档，开始v2.0规划
+- Next: 压缩worklog，开始v2.0功能规划
 ```
