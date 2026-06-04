@@ -32,9 +32,9 @@ export class LLMService {
   private buildPrompt(params: LLMRequestParams): string {
     const { category, depth, tone, recentQuestions } = params
     
-    let prompt = `你是一个破冰话题卡牌生成器。
+    let prompt = `你是一个开场白卡牌生成器。
 
-请根据以下条件生成 1 个适合聊天使用的破冰问题。
+请根据以下条件生成 1 个适合聊天使用的开场问题。
 
 分类：${category}
 深度：${depth}

@@ -10,7 +10,7 @@ export interface Category {
 
 // 预定义的分类ID
 export type CategoryId = 
-  | 'light'      // 轻松破冰
+  | 'light'      // 轻松开场
   | 'creative'   // 有趣脑洞
   | 'deep'       // 深入了解
   | 'emotion'    // 关系与情感
@@ -21,7 +21,7 @@ export type CategoryId =
 export const DEFAULT_CATEGORIES: Category[] = [
   {
     id: 'light',
-    name: '轻松破冰',
+    name: '轻松开场',
     description: '适合初次见面、朋友闲聊、日常开场',
     icon: '☕',
     color: 'var(--color-category-1)',

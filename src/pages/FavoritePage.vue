@@ -58,7 +58,7 @@ async function handleShare(text: string) {
   if (navigator.share) {
     try {
       await navigator.share({
-        title: '破冰话题',
+        title: '开场白',
         text: text
       })
     } catch {

@@ -88,8 +88,8 @@ function handleToastClose() {
   <div class="home-page">
     <!-- 顶部标题 -->
     <header class="page-header">
-      <h1 class="app-title">🧊 冰破话题</h1>
-      <p class="app-subtitle">抽一张卡，开启对话</p>
+      <h1 class="app-title">开场白</h1>
+      <p class="app-subtitle">一张卡，打开一个话题</p>
     </header>
     
     <!-- 分类选择器 -->

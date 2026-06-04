@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'com.example.icebreaker',
-  appName: '冰破话题',
+  appName: '开场白',
   webDir: 'dist',
   server: {
     androidScheme: 'https'

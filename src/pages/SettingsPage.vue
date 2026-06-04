@@ -91,7 +91,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
     <!-- 页面标题 -->
     <header class="page-header">
       <h1 class="page-title">设置</h1>
-      <p class="page-subtitle">配置你的破冰卡牌</p>
+      <p class="page-subtitle">配置你的开场白卡牌</p>
     </header>
     
     <!-- 普通设置 -->

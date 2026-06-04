@@ -14,7 +14,7 @@ const db = new Dexie('IceCardDB') as IceCardDB
 
 // 定义表结构
 db.version(1).stores({
-  questions: 'id, category, hash, createdAt, favorite, hidden',
+  questions: 'id, category, hash, createdAt, favorite',
   favorites: 'id, category, hash, createdAt',
   hiddenQuestions: 'hash, createdAt',
   settings: 'key'
@@ -24,7 +24,8 @@ export default db
 
 // 数据库操作函数
 export async function addQuestion(question: Question): Promise<string> {
-  return await db.questions.add(question) as string
+  const result = await db.questions.add(question)
+  return result as string
 }
 
 export async function getQuestionById(id: string): Promise<Question | undefined> {
@@ -56,7 +57,9 @@ export async function getAllQuestions(): Promise<Question[]> {
 }
 
 export async function getFavoriteQuestions(): Promise<Question[]> {
-  return await db.questions.where('favorite').equals(1).reverse().sortBy('createdAt') as Question[]
+  // IndexedDB stores booleans as booleans, not numbers
+  const all = await db.questions.toArray() as Question[]
+  return all.filter(q => q.favorite === true).sort((a, b) => b.createdAt - a.createdAt)
 }
 
 export async function toggleFavorite(id: string): Promise<boolean> {
@@ -90,7 +93,11 @@ export async function clearAllQuestions(): Promise<void> {
 }
 
 export async function clearAllFavorites(): Promise<void> {
-  await db.questions.where('favorite').equals(1).modify({ favorite: false })
+  const all = await db.questions.toArray() as Question[]
+  const favoriteIds = all.filter(q => q.favorite === true).map(q => q.id)
+  for (const id of favoriteIds) {
+    await db.questions.update(id, { favorite: false })
+  }
 }
 
 export async function clearAllHistory(): Promise<void> {

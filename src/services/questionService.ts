@@ -57,7 +57,7 @@ export class QuestionService {
           return question
         }
       } catch (err) {
-        console.error('LLM生成失败，切换到离线题库:', err)
+        console.warn('LLM生成失败，切换到离线题库:', err)
       }
     }
 
@@ -160,7 +160,7 @@ export class QuestionService {
         category: offlineQ.category,
         depth: offlineQ.depth,
         tone: offlineQ.tone,
-        tags: offlineQ.tags,
+        tags: [...offlineQ.tags],
         source: 'offline',
         hash: hash,
         createdAt: Date.now(),
@@ -229,7 +229,7 @@ export class QuestionService {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: '破冰话题',
+          title: '开场白',
           text: text
         })
         return true

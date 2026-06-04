@@ -45,8 +45,9 @@ export const useSettingStore = defineStore('setting', () => {
       if (savedTimeoutMs) llmConfig.value.timeoutMs = parseInt(savedTimeoutMs)
       if (savedMaxRetries) llmConfig.value.maxRetries = parseInt(savedMaxRetries)
       
-      // API Key应该从安全存储加载
-      // 暂时留空
+      // 从数据库加载API Key
+      const savedApiKey = await db.getSetting('apiKey')
+      if (savedApiKey) apiKey.value = savedApiKey
       
     } catch (err) {
       console.error('加载设置失败:', err)

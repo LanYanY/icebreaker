@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Question } from '@/types/question'
 import { QuestionService, createQuestionService } from '@/services/questionService'
+import { useSettingStore } from './settingStore'
 
 export const useQuestionStore = defineStore('question', () => {
   // 状态
@@ -9,13 +10,17 @@ export const useQuestionStore = defineStore('question', () => {
   const isLoading = ref(false)
   const error = ref<string | null>(null)
   const questionService = ref<QuestionService | null>(null)
+  const serviceInitialized = ref(false)
 
   // 计算属性
   const hasQuestion = computed(() => currentQuestion.value !== null)
 
-  // 初始化服务
-  function initService() {
+  // 初始化服务（确保设置已加载）
+  async function ensureService() {
+    const settingStore = useSettingStore()
+    await settingStore.initSettings()
     questionService.value = createQuestionService()
+    serviceInitialized.value = true
   }
 
   // 方法
@@ -24,10 +29,7 @@ export const useQuestionStore = defineStore('question', () => {
     error.value = null
 
     try {
-      // 确保服务已初始化
-      if (!questionService.value) {
-        initService()
-      }
+      await ensureService()
 
       // 确保离线题库已加载
       await questionService.value!.loadOfflineQuestions()
@@ -50,9 +52,7 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   async function toggleFavorite(questionId: string): Promise<boolean> {
-    if (!questionService.value) {
-      initService()
-    }
+    await ensureService()
 
     const result = await questionService.value!.toggleFavorite(questionId)
 
@@ -65,9 +65,7 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   async function hideQuestion(question: Question): Promise<void> {
-    if (!questionService.value) {
-      initService()
-    }
+    await ensureService()
 
     await questionService.value!.hideQuestion(question.hash)
 
@@ -78,17 +76,13 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   async function copyQuestion(text: string): Promise<boolean> {
-    if (!questionService.value) {
-      initService()
-    }
+    await ensureService()
 
     return await questionService.value!.copyQuestion(text)
   }
 
   async function shareQuestion(text: string): Promise<boolean> {
-    if (!questionService.value) {
-      initService()
-    }
+    await ensureService()
 
     return await questionService.value!.shareQuestion(text)
   }
@@ -98,9 +92,7 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   async function loadOfflineQuestions() {
-    if (!questionService.value) {
-      initService()
-    }
+    await ensureService()
     await questionService.value!.loadOfflineQuestions()
   }
 
@@ -115,7 +107,7 @@ export const useQuestionStore = defineStore('question', () => {
     copyQuestion,
     shareQuestion,
     clearError,
-    initService,
+    ensureService,
     loadOfflineQuestions
   }
 })
