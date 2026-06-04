@@ -162,3 +162,33 @@
   - IndexedDB存储布尔值时使用布尔类型，不是数字类型
   - Dexie.js的.where().equals()对布尔值查询需要使用布尔值，不是数字
 - Next: 重新构建APK并测试
+
+## 2026-06-04 21:30 CST
+
+- Status: ✅ 完成
+- Summary: DeepSeek V4 API兼容性修复、去重调优、按钮点击修复
+- Changes:
+  - 更新DeepSeek API baseUrl为 `https://api.deepseek.com`（去掉 `/v1`）
+  - 更新模型名为 `deepseek-v4-flash`/`deepseek-v4-pro`（旧名称将于2026/07/24弃用）
+  - 添加 `thinking: {type: 'disabled'}` 参数防止思考模式消耗过多token
+  - 添加设置迁移逻辑，自动更新旧的DeepSeek配置
+  - 实现LLM提供商预设系统（DeepSeek、智谱、通义、OpenAI、自定义）
+  - 修复抽一张按钮z-index问题，防止底部导航栏拦截点击事件
+  - 将去重相似度阈值从0.6提高到0.85，减少误判
+  - 展开tags数组修复IndexedDB的DataCloneError
+  - 添加Store和DedupService的调试日志
+- Testing:
+  - ✅ DeepSeek V4 Flash API调用成功
+  - ✅ 连续抽卡每次生成不同问题
+  - ✅ 去重功能正常工作
+  - ✅ 按钮点击不再被底部导航栏拦截
+  - ✅ 设置页面正确显示提供商选择
+- Decisions:
+  - 禁用DeepSeek思考模式以节省token（生成短文本不需要深度推理）
+  - 提高去重阈值到0.85以适应中文短文本的相似度特点
+  - 使用z-index:101确保抽卡按钮在底部导航栏之上
+- Lessons Learned:
+  - DeepSeek V4 Flash默认启用思考模式，会消耗大量token导致输出截断
+  - 中文短文本的bigram相似度普遍较高，0.6阈值过于严格
+  - BottomNav使用position:fixed+z-index:100会拦截同区域的点击事件
+- Next: 重新构建APK并测试
