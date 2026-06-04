@@ -162,4 +162,52 @@
 - Changes: 尝试配置Gradle镜像源，修改了多个build.gradle文件
 - Verification: ./gradlew assembleDebug 失败，网络连接超时
 - Decisions: 需要解决Gradle依赖下载问题
-- Next: 继续解决Gradle构建问题或跳过Android打包，先完成Web功能
+- Next: 继续解决Gradle构建问题
+
+## 2026-06-04 18:00 CST - pi
+
+- Context: 搜索解决方案
+- Changes: 搜索了中国国内Gradle镜像源配置方法
+- Verification: 找到了阿里云、华为云、腾讯云等国内镜像源
+- Decisions: 使用国内镜像源解决网络问题
+- Next: 配置国内镜像源
+
+## 2026-06-04 18:05 CST - pi
+
+- Context: 配置国内镜像源
+- Changes: 修改了android/build.gradle、gradle-wrapper.properties，创建了全局init.gradle
+- Verification: Gradle下载成功，但Build Tools版本不匹配
+- Decisions: 使用腾讯云镜像下载Gradle，使用阿里云镜像下载依赖
+- Next: 解决Build Tools版本问题
+
+## 2026-06-04 18:10 CST - pi
+
+- Context: 解决Build Tools版本问题
+- Changes: 降低了AGP版本到8.2.0，降低了依赖库版本
+- Verification: 构建失败，Java版本不兼容
+- Decisions: 使用AGP 8.2.0，使用compileSdk 34
+- Next: 解决Java版本问题
+
+## 2026-06-04 18:15 CST - pi
+
+- Context: 解决Java版本问题
+- Changes: 修改了Capacitor Android模块的Java版本为17
+- Verification: 构建失败，Capacitor使用了Android 15 API
+- Decisions: 降低Capacitor版本到6.x
+- Next: 重新配置Capacitor
+
+## 2026-06-04 18:20 CST - pi
+
+- Context: 重新配置Capacitor
+- Changes: 降低了Capacitor版本到6.x，重新配置了Android项目
+- Verification: 构建成功，生成了APK文件
+- Decisions: 使用Capacitor 6.x，使用AGP 8.2.0，使用compileSdk 34
+- Next: 测试APK
+
+## 2026-06-04 18:25 CST - pi
+
+- Context: APK构建成功
+- Changes: 生成了android/app/build/outputs/apk/debug/app-debug.apk
+- Verification: APK文件大小为3.7MB
+- Decisions: 使用debug模式构建，后续可以构建release版本
+- Next: 测试APK功能
