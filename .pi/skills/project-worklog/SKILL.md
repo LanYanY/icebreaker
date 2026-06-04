@@ -41,6 +41,120 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
 
 除非用户指定更具体的代理名称，否则使用 `pi` 作为角色。
 
+## 特殊条目类型
+
+### 1. 问题解决记录
+
+当遇到并解决问题时，使用以下格式：
+
+```markdown
+## YYYY-MM-DD HH:MM TZ - pi
+
+- Context: <问题描述>
+- Problem: <具体错误信息或现象>
+- Root Cause: <根本原因分析>
+- Solution: <解决方案>
+- Verification: <验证结果>
+- Lessons Learned: <经验总结>
+- Next: <下一步操作>
+```
+
+**示例**：
+```markdown
+## 2026-06-04 18:00 CST - pi
+
+- Context: Gradle构建失败，无法下载依赖
+- Problem: Could not GET 'https://dl.google.com/dl/android/maven2/...' - Connection timed out
+- Root Cause: 中国网络环境无法直接访问Google Maven仓库
+- Solution: 配置国内镜像源（阿里云、华为云、腾讯云）
+- Verification: ./gradlew assembleDebug 成功，生成APK文件
+- Lessons Learned: 在中国开发Android应用，必须配置国内镜像源
+- Next: 记录镜像源配置到skill中
+```
+
+### 2. 网络搜索记录
+
+当使用网络搜索解决问题时，使用以下格式：
+
+```markdown
+## YYYY-MM-DD HH:MM TZ - pi
+
+- Context: <问题描述>
+- Search Query: <搜索关键词>
+- Search Results: <搜索结果摘要>
+- Solution Found: <找到的解决方案>
+- Implementation: <实施步骤>
+- Verification: <验证结果>
+- Next: <下一步操作>
+```
+
+**示例**：
+```markdown
+## 2026-06-04 18:05 CST - pi
+
+- Context: 搜索中国国内Gradle镜像源配置方法
+- Search Query: "中国国内 Gradle 构建 网络问题 解决方案 镜像源"
+- Search Results: 找到阿里云、华为云、腾讯云等国内镜像源配置方法
+- Solution Found: 使用国内镜像源替代Google Maven仓库
+- Implementation: 修改build.gradle和gradle-wrapper.properties
+- Verification: Gradle下载成功，构建通过
+- Next: 记录配置到skill中
+```
+
+### 3. 方案验证记录
+
+当验证解决方案时，使用以下格式：
+
+```markdown
+## YYYY-MM-DD HH:MM TZ - pi
+
+- Context: <验证目的>
+- Solution: <待验证的解决方案>
+- Test Steps: <测试步骤>
+- Results: <测试结果>
+- Conclusion: <结论>
+- Next: <下一步操作>
+```
+
+**示例**：
+```markdown
+## 2026-06-04 18:10 CST - pi
+
+- Context: 验证Capacitor 6.x是否兼容compileSdk 34
+- Solution: 降低Capacitor版本到6.x
+- Test Steps: 1) 卸载Capacitor 8.x 2) 安装Capacitor 6.x 3) 重新构建
+- Results: 构建成功，生成3.7MB APK文件
+- Conclusion: Capacitor 6.x完全兼容compileSdk 34，推荐使用
+- Next: 更新skill文档
+```
+
+### 4. 经验总结记录
+
+当总结经验教训时，使用以下格式：
+
+```markdown
+## YYYY-MM-DD HH:MM TZ - pi
+
+- Context: <经验总结的背景>
+- Experience: <经验内容>
+- Applicable Scenarios: <适用场景>
+- Key Points: <关键要点>
+- References: <参考资料>
+- Next: <下一步操作>
+```
+
+**示例**：
+```markdown
+## 2026-06-04 18:15 CST - pi
+
+- Context: 总结Android开发网络问题解决经验
+- Experience: 在中国开发Android应用，必须配置国内镜像源
+- Applicable Scenarios: Gradle下载超时、Maven仓库访问失败、SDK下载失败
+- Key Points: 1) 使用腾讯云镜像下载Gradle 2) 使用阿里云镜像下载依赖 3) 配置全局init.gradle
+- References: https://maven.aliyun.com/repository/public
+- Next: 更新android-dev skill
+```
+
 ## Worklog 压缩机制
 
 **当项目进入新阶段时，对worklog进行压缩，避免文件过长。**
@@ -48,7 +162,7 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
 ### 压缩触发条件
 - 项目里程碑完成（如v1.0发布、功能模块完成）
 - 用户明确要求压缩或归档
-- worklog超过50个条目
+- worklog超过15个条目
 - 项目方向发生重大变化
 
 ### 压缩流程
@@ -65,6 +179,8 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
    - 时间范围：YYYY-MM-DD 至 YYYY-MM-DD
    - 主要成果：<简述完成的工作>
    - 关键决策：<重要决策列表>
+   - 问题解决：<解决的主要问题>
+   - 经验总结：<重要经验教训>
    - 当前状态：<项目状态>
    - 后续方向：<下一步计划>
    ```
@@ -79,6 +195,8 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
    - 时间：YYYY-MM-DD 至 YYYY-MM-DD
    - 成果：<简述>
    - 关键决策：<简述>
+   - 问题解决：<简述>
+   - 经验总结：<简述>
 
    ---
 
@@ -99,6 +217,8 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
 - **记录阻塞点**：明确记录阻塞点，特别是缺失的依赖、不可用的工具、失败的构建或未验证的时序。
 - **多代理工作**：记录每个代理拥有的文件或子系统。
 - **安全规范**：不要在工作日志中存储密钥、私钥、令牌、序列号或个人数据。
+- **问题解决**：详细记录问题解决过程，包括搜索关键词、解决方案来源、验证结果。
+- **经验总结**：定期总结经验教训，便于后续参考。
 
 ## 最终响应检查清单
 
@@ -107,6 +227,8 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
 - [ ] 确认工作日志已更新，或说明未更新的原因。
 - [ ] 提及任何无法进行的验证。
 - [ ] 识别项目的下一个具体里程碑。
+- [ ] 记录任何问题解决过程（如果适用）。
+- [ ] 总结经验教训（如果适用）。
 
 ## 示例条目
 
@@ -132,15 +254,30 @@ description: 维护项目工作日志，记录开发进展、决策、变更和�
 - Next: 实现登录功能和JWT生成
 ```
 
-### 问题记录
+### 问题解决
 ```markdown
 ## 2026-06-04 17:30 CST - pi
 
 - Context: 构建失败，依赖安装超时
-- Changes: none（配置未变更）
-- Verification: npm install 失败，网络连接超时
-- Decisions: 需要配置npm镜像源以加速依赖下载
-- Next: 配置淘宝镜像源并重试安装
+- Problem: npm install 失败，网络连接超时
+- Root Cause: 中国网络环境无法直接访问npm官方源
+- Solution: 配置淘宝镜像源
+- Verification: npm install 成功，所有依赖安装完成
+- Lessons Learned: 在中国开发Node.js应用，必须配置国内镜像源
+- Next: 继续开发
+```
+
+### 网络搜索
+```markdown
+## 2026-06-04 17:45 CST - pi
+
+- Context: 搜索Gradle镜像源配置方法
+- Search Query: "Gradle 国内镜像源 配置"
+- Search Results: 找到阿里云、华为云、腾讯云镜像源
+- Solution Found: 使用阿里云镜像源
+- Implementation: 修改build.gradle添加镜像源配置
+- Verification: Gradle下载成功
+- Next: 记录配置到skill
 ```
 
 ### 里程碑完成
