@@ -192,3 +192,40 @@
   - 中文短文本的bigram相似度普遍较高，0.6阈值过于严格
   - BottomNav使用position:fixed+z-index:100会拦截同区域的点击事件
 - Next: 重新构建APK并测试
+
+## 2026-06-04 22:00 CST
+
+- Status: ✅ 完成
+- Summary: 分类体系重构 - 从中文分类替换为6个英文分类
+- Changes:
+  - 替换6个中文分类为6个英文分类：Random, If You Could, Would You Rather, Experiences, Life, Deep
+  - 新分类ID: random, if_you_could, would_you_rather, experiences, life, deep
+  - 更新分类类型定义和默认配置
+  - 重新生成离线题库，120个英文问题（每个分类20条）
+  - 更新LLM Prompt使用英文分类名和生成方向
+  - 更新所有UI文本为英文（首页/分类/收藏/历史/设置）
+  - 更新BottomNav标签为英文
+  - 修复离线题库字段名问题
+  - 添加hash和ngram工具函数的null安全检查
+  - 默认分类从'light'改为'random'
+  - 默认语气从'轻松'改为'light'
+- Testing:
+  - ✅ 构建成功
+  - ✅ 首页显示新分类选择器（Random, If You Could, Would You Rather, Experiences, Life, Deep）
+  - ✅ 分类页面显示6个英文分类卡片
+  - ✅ 收藏页筛选按钮显示英文分类
+  - ✅ 历史页筛选按钮显示英文分类图标
+  - ✅ 设置页默认分类下拉框显示新分类
+  - ✅ 离线题库抽卡成功
+  - ✅ 连续抽卡去重正常工作
+- Decisions:
+  - 分类顺序：Random → If You Could → Would You Rather → Experiences → Life → Deep（从轻松到深入）
+  - 每个分类保留中文描述用于LLM生成方向
+  - UI文本全部使用英文
+  - 离线题库使用英文问题
+  - 旧历史数据保留原样，不迁移
+- Lessons Learned:
+  - 浏览器缓存可能导致旧代码继续运行，需要硬刷新或关闭浏览器重新打开
+  - Math.random()在短时间内可能产生相同的随机序列
+  - Dexie.js查询需要处理空结果的情况
+- Next: 配置API Key测试AI生成
