@@ -5,11 +5,11 @@ const router = useRouter()
 const route = useRoute()
 
 const navItems = [
-  { path: '/', icon: '🎴', label: '首页' },
-  { path: '/categories', icon: '📂', label: '分类' },
-  { path: '/favorites', icon: '❤️', label: '收藏' },
-  { path: '/history', icon: '📝', label: '历史' },
-  { path: '/settings', icon: '⚙️', label: '设置' }
+  { path: '/', icon: '🎴', label: 'Home' },
+  { path: '/categories', icon: '📂', label: 'Categories' },
+  { path: '/favorites', icon: '❤️', label: 'Favorites' },
+  { path: '/history', icon: '📝', label: 'History' },
+  { path: '/settings', icon: '⚙️', label: 'Settings' }
 ]
 
 function isActive(path: string): boolean {

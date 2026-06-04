@@ -98,8 +98,8 @@ function formatDate(timestamp: number): string {
   <div class="history-page">
     <!-- 页面标题 -->
     <header class="page-header">
-      <h1 class="page-title">历史记录</h1>
-      <p class="page-subtitle">查看已出现过的问题</p>
+      <h1 class="page-title">History</h1>
+      <p class="page-subtitle">Questions you have drawn</p>
     </header>
     
     <!-- 操作栏 -->
@@ -110,7 +110,7 @@ function formatDate(timestamp: number): string {
           :class="{ active: selectedCategory === 'all' }"
           @click="handleFilterByCategory('all')"
         >
-          全部
+          All
         </button>
         <button
           v-for="category in categoryStore.sortedCategories"
@@ -128,7 +128,7 @@ function formatDate(timestamp: number): string {
         class="clear-button"
         @click="handleClearHistory"
       >
-        清空
+        Clear
       </button>
     </div>
     
@@ -143,8 +143,8 @@ function formatDate(timestamp: number): string {
       <!-- 空状态 -->
       <div v-else-if="filteredHistory.length === 0" class="empty-state">
         <div class="empty-icon">📝</div>
-        <p class="empty-text">还没有抽过卡</p>
-        <p class="empty-hint">先去首页抽一张吧</p>
+        <p class="empty-text">No history yet</p>
+        <p class="empty-hint">Go to the home page to draw your first card</p>
       </div>
       
       <!-- 历史卡片列表 -->
@@ -189,7 +189,7 @@ function formatDate(timestamp: number): string {
           
           <!-- 来源标签 -->
           <div class="source-tag">
-            {{ question.source === 'llm' ? 'AI' : '离线' }}
+            {{ question.source === 'llm' ? 'AI' : 'Offline' }}
           </div>
         </div>
       </div>

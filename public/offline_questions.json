@@ -1,962 +1,127 @@
 [
-  {
-    "id": "offline_001",
-    "text": "如果今天可以免费吃一种食物，你会选什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["日常", "偏好"]
-  },
-  {
-    "id": "offline_002",
-    "text": "最近有没有一部电影或电视剧让你觉得还挺好看的？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["娱乐", "日常"]
-  },
-  {
-    "id": "offline_003",
-    "text": "如果周末突然多了一天假，你最想做什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["周末", "计划"]
-  },
-  {
-    "id": "offline_004",
-    "text": "你最近有没有发现什么好吃的餐厅或小店？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["美食", "发现"]
-  },
-  {
-    "id": "offline_005",
-    "text": "如果可以给自己的生活加一个游戏技能，你会选什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["游戏", "想象"]
-  },
-  {
-    "id": "offline_006",
-    "text": "你最近有没有学到什么新东西？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["学习", "成长"]
-  },
-  {
-    "id": "offline_007",
-    "text": "如果今天可以免费去一个地方玩，你会选哪里？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["旅行", "偏好"]
-  },
-  {
-    "id": "offline_008",
-    "text": "你最近有没有什么让你觉得开心的小事？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["心情", "日常"]
-  },
-  {
-    "id": "offline_009",
-    "text": "如果可以拥有一种超能力，但只能用在日常小事上，你会选什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["想象", "日常"]
-  },
-  {
-    "id": "offline_010",
-    "text": "你最近有没有什么推荐的歌单或播客？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["音乐", "推荐"]
-  },
-  {
-    "id": "offline_011",
-    "text": "如果可以马上学会一项技能，你最想学什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["技能", "学习"]
-  },
-  {
-    "id": "offline_012",
-    "text": "你最近有没有什么让你觉得惊喜的发现？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["发现", "惊喜"]
-  },
-  {
-    "id": "offline_013",
-    "text": "如果今天可以和任何一个人吃饭，你会选谁？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["社交", "想象"]
-  },
-  {
-    "id": "offline_014",
-    "text": "你最近有没有什么让你觉得好笑的事情？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["幽默", "日常"]
-  },
-  {
-    "id": "offline_015",
-    "text": "如果可以给自己的房间加一样东西，你会选什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["生活", "偏好"]
-  },
-  {
-    "id": "offline_016",
-    "text": "你最近有没有什么让你觉得放松的活动？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["放松", "活动"]
-  },
-  {
-    "id": "offline_017",
-    "text": "如果今天可以免费看一场演出，你会选什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["娱乐", "偏好"]
-  },
-  {
-    "id": "offline_018",
-    "text": "你最近有没有什么让你觉得温暖的瞬间？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["温暖", "感受"]
-  },
-  {
-    "id": "offline_019",
-    "text": "如果可以给自己的宠物取一个有趣的名字，你会取什么？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["宠物", "想象"]
-  },
-  {
-    "id": "offline_020",
-    "text": "你最近有没有什么让你觉得有趣的朋友圈或动态？",
-    "category": "light",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["社交", "日常"]
-  },
-  {
-    "id": "offline_021",
-    "text": "如果可以给自己的人生加一个存档点，你会设在哪里？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["游戏", "人生"]
-  },
-  {
-    "id": "offline_022",
-    "text": "如果你可以给自己的人生加一个游戏技能，你会选什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["游戏", "技能"]
-  },
-  {
-    "id": "offline_023",
-    "text": "如果动物会说话，你觉得哪种动物会是最话痨的？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["动物", "想象"]
-  },
-  {
-    "id": "offline_024",
-    "text": "如果你可以给任何食物加上一种味道，你会怎么组合？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["美食", "创意"]
-  },
-  {
-    "id": "offline_025",
-    "text": "如果你可以给任何物品加上生命，你会选什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["想象", "创意"]
-  },
-  {
-    "id": "offline_026",
-    "text": "如果你可以给任何电影改结局，你会改哪部？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["电影", "创意"]
-  },
-  {
-    "id": "offline_027",
-    "text": "如果你可以给任何游戏加一个新角色，你会设计什么样的？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["游戏", "设计"]
-  },
-  {
-    "id": "offline_028",
-    "text": "如果你可以给任何城市加一个特色建筑，你会设计什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["城市", "建筑"]
-  },
-  {
-    "id": "offline_029",
-    "text": "如果你可以给任何节日加一个传统活动，你会设计什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["节日", "传统"]
-  },
-  {
-    "id": "offline_030",
-    "text": "如果你可以给任何职业加一个超能力，你会怎么搭配？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["职业", "超能力"]
-  },
-  {
-    "id": "offline_031",
-    "text": "如果你可以给任何科目加一个有趣的教学方式，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["教育", "创意"]
-  },
-  {
-    "id": "offline_032",
-    "text": "如果你可以给任何运动加一个有趣的规则，你会加什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["运动", "规则"]
-  },
-  {
-    "id": "offline_033",
-    "text": "如果你可以给任何乐器加一种新的演奏方式，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["音乐", "创意"]
-  },
-  {
-    "id": "offline_034",
-    "text": "如果你可以给任何交通工具加一个有趣的功能，你会加什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["交通", "创意"]
-  },
-  {
-    "id": "offline_035",
-    "text": "如果你可以给任何家具加一个智能功能，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["家具", "智能"]
-  },
-  {
-    "id": "offline_036",
-    "text": "如果你可以给任何天气加一种有趣的自然现象，你会设计什么？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["天气", "自然"]
-  },
-  {
-    "id": "offline_037",
-    "text": "如果你可以给任何颜色加一种有趣的效果，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["颜色", "效果"]
-  },
-  {
-    "id": "offline_038",
-    "text": "如果你可以给任何声音加一种有趣的来源，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["声音", "创意"]
-  },
-  {
-    "id": "offline_039",
-    "text": "如果你可以给任何味道加一种有趣的体验，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["味道", "体验"]
-  },
-  {
-    "id": "offline_040",
-    "text": "如果你可以给任何触感加一种有趣的反馈，你会怎么设计？",
-    "category": "creative",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["触感", "反馈"]
-  },
-  {
-    "id": "offline_041",
-    "text": "你觉得最近一年自己变化最大的地方是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["成长", "变化"]
-  },
-  {
-    "id": "offline_042",
-    "text": "你觉得自己最需要改进的地方是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["自我", "改进"]
-  },
-  {
-    "id": "offline_043",
-    "text": "你觉得自己最需要坚持的事情是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["坚持", "习惯"]
-  },
-  {
-    "id": "offline_044",
-    "text": "你觉得自己最需要学会放手的事情是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["放手", "释怀"]
-  },
-  {
-    "id": "offline_045",
-    "text": "你觉得自己最需要勇敢面对的事情是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["勇气", "面对"]
-  },
-  {
-    "id": "offline_046",
-    "text": "你觉得自己最需要珍惜的人是谁？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["珍惜", "关系"]
-  },
-  {
-    "id": "offline_047",
-    "text": "你觉得自己最需要感恩的事情是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["感恩", "生活"]
-  },
-  {
-    "id": "offline_048",
-    "text": "你觉得自己最需要原谅的人是谁？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["原谅", "释怀"]
-  },
-  {
-    "id": "offline_049",
-    "text": "你觉得自己最需要道歉的人是谁？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["道歉", "关系"]
-  },
-  {
-    "id": "offline_050",
-    "text": "你觉得自己最需要表达爱意的人是谁？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["爱", "表达"]
-  },
-  {
-    "id": "offline_051",
-    "text": "你觉得自己最需要学会的技能是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["技能", "学习"]
-  },
-  {
-    "id": "offline_052",
-    "text": "你觉得自己最需要培养的习惯是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["习惯", "培养"]
-  },
-  {
-    "id": "offline_053",
-    "text": "你觉得自己最需要克服的恐惧是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["恐惧", "克服"]
-  },
-  {
-    "id": "offline_054",
-    "text": "你觉得自己最需要建立的自信是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["自信", "建立"]
-  },
-  {
-    "id": "offline_055",
-    "text": "你觉得自己最需要改善的关系是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["关系", "改善"]
-  },
-  {
-    "id": "offline_056",
-    "text": "你觉得自己最需要学会的沟通方式是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["沟通", "方式"]
-  },
-  {
-    "id": "offline_057",
-    "text": "你觉得自己最需要学会的情绪管理是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["情绪", "管理"]
-  },
-  {
-    "id": "offline_058",
-    "text": "你觉得自己最需要学会的时间管理是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["时间", "管理"]
-  },
-  {
-    "id": "offline_059",
-    "text": "你觉得自己最需要学会的金钱管理是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["金钱", "管理"]
-  },
-  {
-    "id": "offline_060",
-    "text": "你觉得自己最需要学会的健康管理是什么？",
-    "category": "deep",
-    "depth": 2,
-    "tone": "深入",
-    "tags": ["健康", "管理"]
-  },
-  {
-    "id": "offline_061",
-    "text": "你觉得怎样的相处会让你感到放松？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["相处", "放松"]
-  },
-  {
-    "id": "offline_062",
-    "text": "你觉得一个人让你感到安心，通常是因为什么？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["安心", "信任"]
-  },
-  {
-    "id": "offline_063",
-    "text": "你觉得什么样的陪伴是最舒服的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["陪伴", "舒适"]
-  },
-  {
-    "id": "offline_064",
-    "text": "你觉得什么样的关心是最贴心的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["关心", "贴心"]
-  },
-  {
-    "id": "offline_065",
-    "text": "你觉得什么样的理解是最难得的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["理解", "难得"]
-  },
-  {
-    "id": "offline_066",
-    "text": "你觉得什么样的支持是最有力的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["支持", "力量"]
-  },
-  {
-    "id": "offline_067",
-    "text": "你觉得什么样的信任是最珍贵的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["信任", "珍贵"]
-  },
-  {
-    "id": "offline_068",
-    "text": "你觉得什么样的包容是最温暖的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["包容", "温暖"]
-  },
-  {
-    "id": "offline_069",
-    "text": "你觉得什么样的鼓励是最有效的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["鼓励", "有效"]
-  },
-  {
-    "id": "offline_070",
-    "text": "你觉得什么样的道歉是最真诚的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["道歉", "真诚"]
-  },
-  {
-    "id": "offline_071",
-    "text": "你觉得什么样的原谅是最释怀的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["原谅", "释怀"]
-  },
-  {
-    "id": "offline_072",
-    "text": "你觉得什么样的告别是最体面的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["告别", "体面"]
-  },
-  {
-    "id": "offline_073",
-    "text": "你觉得什么样的重逢是最感动的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["重逢", "感动"]
-  },
-  {
-    "id": "offline_074",
-    "text": "你觉得什么样的承诺是最可靠的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["承诺", "可靠"]
-  },
-  {
-    "id": "offline_075",
-    "text": "你觉得什么样的回忆是最珍贵的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["回忆", "珍贵"]
-  },
-  {
-    "id": "offline_076",
-    "text": "你觉得什么样的期待是最美好的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["期待", "美好"]
-  },
-  {
-    "id": "offline_077",
-    "text": "你觉得什么样的默契是最难得的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["默契", "难得"]
-  },
-  {
-    "id": "offline_078",
-    "text": "你觉得什么样的分享是最快乐的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["分享", "快乐"]
-  },
-  {
-    "id": "offline_079",
-    "text": "你觉得什么样的分担是最贴心的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["分担", "贴心"]
-  },
-  {
-    "id": "offline_080",
-    "text": "你觉得什么样的成长是最同步的？",
-    "category": "emotion",
-    "depth": 2,
-    "tone": "温暖",
-    "tags": ["成长", "同步"]
-  },
-  {
-    "id": "offline_081",
-    "text": "如果周末完全属于你，你最想怎么安排？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["周末", "安排"]
-  },
-  {
-    "id": "offline_082",
-    "text": "你理想中的早晨是什么样的？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["早晨", "理想"]
-  },
-  {
-    "id": "offline_083",
-    "text": "你最喜欢在什么样的环境下工作或学习？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["环境", "工作"]
-  },
-  {
-    "id": "offline_084",
-    "text": "你最喜欢在什么样的氛围下吃饭？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["氛围", "吃饭"]
-  },
-  {
-    "id": "offline_085",
-    "text": "你最喜欢在什么样的天气出门？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["天气", "出门"]
-  },
-  {
-    "id": "offline_086",
-    "text": "你最喜欢在什么样的地方度假？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["度假", "地方"]
-  },
-  {
-    "id": "offline_087",
-    "text": "你最喜欢在什么样的环境下阅读？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["阅读", "环境"]
-  },
-  {
-    "id": "offline_088",
-    "text": "你最喜欢在什么样的环境下运动？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["运动", "环境"]
-  },
-  {
-    "id": "offline_089",
-    "text": "你最喜欢在什么样的环境下放松？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["放松", "环境"]
-  },
-  {
-    "id": "offline_090",
-    "text": "你最喜欢在什么样的环境下社交？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["社交", "环境"]
-  },
-  {
-    "id": "offline_091",
-    "text": "你最喜欢在什么样的环境下独处？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["独处", "环境"]
-  },
-  {
-    "id": "offline_092",
-    "text": "你最喜欢在什么样的环境下创作？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["创作", "环境"]
-  },
-  {
-    "id": "offline_093",
-    "text": "你最喜欢在什么样的环境下思考？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["思考", "环境"]
-  },
-  {
-    "id": "offline_094",
-    "text": "你最喜欢在什么样的环境下入睡？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["入睡", "环境"]
-  },
-  {
-    "id": "offline_095",
-    "text": "你最喜欢在什么样的环境下醒来？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["醒来", "环境"]
-  },
-  {
-    "id": "offline_096",
-    "text": "你最喜欢在什么样的环境下做饭？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["做饭", "环境"]
-  },
-  {
-    "id": "offline_097",
-    "text": "你最喜欢在什么样的环境下喝茶或咖啡？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["喝茶", "环境"]
-  },
-  {
-    "id": "offline_098",
-    "text": "你最喜欢在什么样的环境下看电影？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["电影", "环境"]
-  },
-  {
-    "id": "offline_099",
-    "text": "你最喜欢在什么样的环境下听音乐？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["音乐", "环境"]
-  },
-  {
-    "id": "offline_100",
-    "text": "你最喜欢在什么样的环境下拍照？",
-    "category": "lifestyle",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["拍照", "环境"]
-  },
-  {
-    "id": "offline_101",
-    "text": "如果让你给团队新增一个很有趣的传统，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["团队", "传统"]
-  },
-  {
-    "id": "offline_102",
-    "text": "你觉得一个理想的团队应该具备哪些特点？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["团队", "特点"]
-  },
-  {
-    "id": "offline_103",
-    "text": "如果让你给团队设计一个团建活动，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["团建", "活动"]
-  },
-  {
-    "id": "offline_104",
-    "text": "你觉得在团队中最重要的是什么？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["团队", "重要"]
-  },
-  {
-    "id": "offline_105",
-    "text": "如果让你给团队设计一个吉祥物，你会设计什么样的？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["吉祥物", "设计"]
-  },
-  {
-    "id": "offline_106",
-    "text": "你觉得在团队中如何平衡个人和集体的利益？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["平衡", "利益"]
-  },
-  {
-    "id": "offline_107",
-    "text": "如果让你给团队设计一个口号，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["口号", "设计"]
-  },
-  {
-    "id": "offline_108",
-    "text": "你觉得在团队中如何处理冲突？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["冲突", "处理"]
-  },
-  {
-    "id": "offline_109",
-    "text": "如果让你给团队设计一个奖励机制，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["奖励", "机制"]
-  },
-  {
-    "id": "offline_110",
-    "text": "你觉得在团队中如何建立信任？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["信任", "建立"]
-  },
-  {
-    "id": "offline_111",
-    "text": "如果让你给团队设计一个沟通方式，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["沟通", "方式"]
-  },
-  {
-    "id": "offline_112",
-    "text": "你觉得在团队中如何分配任务？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["任务", "分配"]
-  },
-  {
-    "id": "offline_113",
-    "text": "如果让你给团队设计一个庆祝方式，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["庆祝", "方式"]
-  },
-  {
-    "id": "offline_114",
-    "text": "你觉得在团队中如何激励成员？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["激励", "成员"]
-  },
-  {
-    "id": "offline_115",
-    "text": "如果让你给团队设计一个学习机制，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["学习", "机制"]
-  },
-  {
-    "id": "offline_116",
-    "text": "你觉得在团队中如何提高效率？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["效率", "提高"]
-  },
-  {
-    "id": "offline_117",
-    "text": "如果让你给团队设计一个创新机制，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["创新", "机制"]
-  },
-  {
-    "id": "offline_118",
-    "text": "你觉得在团队中如何保持士气？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["士气", "保持"]
-  },
-  {
-    "id": "offline_119",
-    "text": "如果让你给团队设计一个反馈机制，你会设计什么？",
-    "category": "team",
-    "depth": 1,
-    "tone": "轻松",
-    "tags": ["反馈", "机制"]
-  },
-  {
-    "id": "offline_120",
-    "text": "你觉得在团队中如何培养新人？",
-    "category": "team",
-    "depth": 2,
-    "tone": "正式",
-    "tags": ["新人", "培养"]
-  }
+  {"id":"offline_random_001","question":"What is something small that made you happy recently?","category":"random","depth":1,"tone":"light","tags":["daily","easy"]},
+  {"id":"offline_random_002","question":"What food could you eat anytime?","category":"random","depth":1,"tone":"light","tags":["food","easy"]},
+  {"id":"offline_random_003","question":"What is a random thing you are weirdly good at?","category":"random","depth":1,"tone":"light","tags":["fun","skill"]},
+  {"id":"offline_random_004","question":"What is your go-to comfort show or movie?","category":"random","depth":1,"tone":"light","tags":["entertainment","easy"]},
+  {"id":"offline_random_005","question":"What is something you always notice about a place?","category":"random","depth":1,"tone":"light","tags":["observation","daily"]},
+  {"id":"offline_random_006","question":"What is the best thing you have eaten this week?","category":"random","depth":1,"tone":"light","tags":["food","daily"]},
+  {"id":"offline_random_007","question":"What is a song you have been listening to a lot lately?","category":"random","depth":1,"tone":"light","tags":["music","daily"]},
+  {"id":"offline_random_008","question":"What is something you are looking forward to this month?","category":"random","depth":1,"tone":"light","tags":["future","easy"]},
+  {"id":"offline_random_009","question":"What is a hobby you picked up recently?","category":"random","depth":1,"tone":"light","tags":["hobby","daily"]},
+  {"id":"offline_random_010","question":"What is your favorite time of day?","category":"random","depth":1,"tone":"light","tags":["daily","easy"]},
+  {"id":"offline_random_011","question":"What is a drink you always order?","category":"random","depth":1,"tone":"light","tags":["food","easy"]},
+  {"id":"offline_random_012","question":"What is something you are good at but do not brag about?","category":"random","depth":1,"tone":"light","tags":["skill","fun"]},
+  {"id":"offline_random_013","question":"What is a place you keep going back to?","category":"random","depth":1,"tone":"light","tags":["place","daily"]},
+  {"id":"offline_random_014","question":"What is your favorite season and why?","category":"random","depth":1,"tone":"light","tags":["nature","easy"]},
+  {"id":"offline_random_015","question":"What is something you always pack when you travel?","category":"random","depth":1,"tone":"light","tags":["travel","daily"]},
+  {"id":"offline_random_016","question":"What is a word or phrase you use too much?","category":"random","depth":1,"tone":"light","tags":["fun","daily"]},
+  {"id":"offline_random_017","question":"What is the last thing you watched that you really enjoyed?","category":"random","depth":1,"tone":"light","tags":["entertainment","easy"]},
+  {"id":"offline_random_018","question":"What is something you have never tried but want to?","category":"random","depth":1,"tone":"light","tags":["curiosity","easy"]},
+  {"id":"offline_random_019","question":"What is your favorite thing to do on a lazy day?","category":"random","depth":1,"tone":"light","tags":["daily","relax"]},
+  {"id":"offline_random_020","question":"What is a snack you could not live without?","category":"random","depth":1,"tone":"light","tags":["food","fun"]},
+
+  {"id":"offline_if_you_could_001","question":"If you could instantly master one skill, what would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["imagination","skill"]},
+  {"id":"offline_if_you_could_002","question":"If you could live in any city for one year, where would you go?","category":"if_you_could","depth":1,"tone":"light","tags":["travel","imagination"]},
+  {"id":"offline_if_you_could_003","question":"If you could have dinner with any fictional character, who would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["fun","imagination"]},
+  {"id":"offline_if_you_could_004","question":"If you could pause one part of your life right now, what would you pause?","category":"if_you_could","depth":2,"tone":"light","tags":["life","imagination"]},
+  {"id":"offline_if_you_could_005","question":"If you could make one everyday task disappear, what would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["daily","fun"]},
+  {"id":"offline_if_you_could_006","question":"If you could relive one day from your past, which day would you choose?","category":"if_you_could","depth":2,"tone":"light","tags":["memory","imagination"]},
+  {"id":"offline_if_you_could_007","question":"If you could learn any language instantly, which one would you pick?","category":"if_you_could","depth":1,"tone":"light","tags":["language","skill"]},
+  {"id":"offline_if_you_could_008","question":"If you could have any animal as a pet, what would you choose?","category":"if_you_could","depth":1,"tone":"light","tags":["fun","animals"]},
+  {"id":"offline_if_you_could_009","question":"If you could time travel to any era, when would you go?","category":"if_you_could","depth":1,"tone":"light","tags":["history","imagination"]},
+  {"id":"offline_if_you_could_010","question":"If you could swap lives with someone for a week, who would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["fun","imagination"]},
+  {"id":"offline_if_you_could_011","question":"If you could instantly become an expert in one subject, what would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["knowledge","skill"]},
+  {"id":"offline_if_you_could_012","question":"If you could add one room to your home, what would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["home","imagination"]},
+  {"id":"offline_if_you_could_013","question":"If you could have any superpower for one day, what would you choose?","category":"if_you_could","depth":1,"tone":"light","tags":["fun","imagination"]},
+  {"id":"offline_if_you_could_014","question":"If you could live in any fictional world, where would you go?","category":"if_you_could","depth":1,"tone":"light","tags":["entertainment","imagination"]},
+  {"id":"offline_if_you_could_015","question":"If you could change one thing about your morning routine, what would it be?","category":"if_you_could","depth":1,"tone":"light","tags":["daily","improvement"]},
+  {"id":"offline_if_you_could_016","question":"If you could have a conversation with your younger self, what would you say?","category":"if_you_could","depth":2,"tone":"light","tags":["reflection","imagination"]},
+  {"id":"offline_if_you_could_017","question":"If you could design your perfect weekend, what would it look like?","category":"if_you_could","depth":1,"tone":"light","tags":["lifestyle","imagination"]},
+  {"id":"offline_if_you_could_018","question":"If you could eliminate one chore forever, which one would you pick?","category":"if_you_could","depth":1,"tone":"light","tags":["daily","fun"]},
+  {"id":"offline_if_you_could_019","question":"If you could be famous for one thing, what would you want it to be?","category":"if_you_could","depth":1,"tone":"light","tags":["dreams","imagination"]},
+  {"id":"offline_if_you_could_020","question":"If you could eat only one cuisine for the rest of your life, what would you choose?","category":"if_you_could","depth":1,"tone":"light","tags":["food","fun"]},
+
+  {"id":"offline_would_you_rather_001","question":"Would you rather always be early or always be exactly on time?","category":"would_you_rather","depth":1,"tone":"light","tags":["daily","choice"]},
+  {"id":"offline_would_you_rather_002","question":"Would you rather travel to the mountains or the beach?","category":"would_you_rather","depth":1,"tone":"light","tags":["travel","nature"]},
+  {"id":"offline_would_you_rather_003","question":"Would you rather have unlimited coffee or unlimited dessert?","category":"would_you_rather","depth":1,"tone":"light","tags":["food","fun"]},
+  {"id":"offline_would_you_rather_004","question":"Would you rather be great at cooking or great at dancing?","category":"would_you_rather","depth":1,"tone":"light","tags":["skill","fun"]},
+  {"id":"offline_would_you_rather_005","question":"Would you rather spend a weekend with no phone or no plans?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_006","question":"Would you rather live in a big city or a small town?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_007","question":"Would you rather read the book or watch the movie?","category":"would_you_rather","depth":1,"tone":"light","tags":["entertainment","choice"]},
+  {"id":"offline_would_you_rather_008","question":"Would you rather have more free time or more money?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_009","question":"Would you rather be able to fly or be able to read minds?","category":"would_you_rather","depth":1,"tone":"light","tags":["fun","imagination"]},
+  {"id":"offline_would_you_rather_010","question":"Would you rather always speak your mind or never speak at all?","category":"would_you_rather","depth":1,"tone":"light","tags":["personality","choice"]},
+  {"id":"offline_would_you_rather_011","question":"Would you rather have a personal chef or a personal trainer?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","fun"]},
+  {"id":"offline_would_you_rather_012","question":"Would you rather explore space or explore the deep ocean?","category":"would_you_rather","depth":1,"tone":"light","tags":["adventure","imagination"]},
+  {"id":"offline_would_you_rather_013","question":"Would you rather be the funniest person in the room or the smartest?","category":"would_you_rather","depth":1,"tone":"light","tags":["personality","choice"]},
+  {"id":"offline_would_you_rather_014","question":"Would you rather have a cozy night in or a big night out?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_015","question":"Would you rather have free Wi-Fi everywhere or free coffee everywhere?","category":"would_you_rather","depth":1,"tone":"light","tags":["daily","fun"]},
+  {"id":"offline_would_you_rather_016","question":"Would you rather live without music or without movies?","category":"would_you_rather","depth":1,"tone":"light","tags":["entertainment","choice"]},
+  {"id":"offline_would_you_rather_017","question":"Would you rather be a morning person or a night owl?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_018","question":"Would you rather have a bigger house or a bigger vacation budget?","category":"would_you_rather","depth":1,"tone":"light","tags":["lifestyle","choice"]},
+  {"id":"offline_would_you_rather_019","question":"Would you rather be able to speak every language or play every instrument?","category":"would_you_rather","depth":1,"tone":"light","tags":["skill","imagination"]},
+  {"id":"offline_would_you_rather_020","question":"Would you rather have a rewind button or a pause button for your life?","category":"would_you_rather","depth":1,"tone":"light","tags":["imagination","fun"]},
+
+  {"id":"offline_experiences_001","question":"What is a small moment you still remember clearly?","category":"experiences","depth":1,"tone":"warm","tags":["memory","story"]},
+  {"id":"offline_experiences_002","question":"What is a trip or place that stayed with you?","category":"experiences","depth":1,"tone":"warm","tags":["travel","memory"]},
+  {"id":"offline_experiences_003","question":"What is something you did once and would love to do again?","category":"experiences","depth":1,"tone":"warm","tags":["fun","memory"]},
+  {"id":"offline_experiences_004","question":"What is a memory that always makes you smile?","category":"experiences","depth":1,"tone":"warm","tags":["happy","memory"]},
+  {"id":"offline_experiences_005","question":"What is a story from your life that feels very you?","category":"experiences","depth":2,"tone":"warm","tags":["personal","story"]},
+  {"id":"offline_experiences_006","question":"What is the most spontaneous thing you have ever done?","category":"experiences","depth":1,"tone":"warm","tags":["adventure","story"]},
+  {"id":"offline_experiences_007","question":"What is a place that surprised you in a good way?","category":"experiences","depth":1,"tone":"warm","tags":["travel","surprise"]},
+  {"id":"offline_experiences_008","question":"What is a tradition you have or had with friends or family?","category":"experiences","depth":1,"tone":"warm","tags":["tradition","memory"]},
+  {"id":"offline_experiences_009","question":"What is a conversation that changed how you think about something?","category":"experiences","depth":2,"tone":"warm","tags":["growth","story"]},
+  {"id":"offline_experiences_010","question":"What is a time you tried something outside your comfort zone?","category":"experiences","depth":2,"tone":"warm","tags":["growth","story"]},
+  {"id":"offline_experiences_011","question":"What is a food or dish that reminds you of a specific time in your life?","category":"experiences","depth":1,"tone":"warm","tags":["food","memory"]},
+  {"id":"offline_experiences_012","question":"What is the best gift you have ever received?","category":"experiences","depth":1,"tone":"warm","tags":["memory","happy"]},
+  {"id":"offline_experiences_013","question":"What is a skill you learned that you are proud of?","category":"experiences","depth":1,"tone":"warm","tags":["skill","growth"]},
+  {"id":"offline_experiences_014","question":"What is a time you laughed so hard you could not stop?","category":"experiences","depth":1,"tone":"warm","tags":["funny","memory"]},
+  {"id":"offline_experiences_015","question":"What is something you did as a kid that you still remember fondly?","category":"experiences","depth":1,"tone":"warm","tags":["childhood","memory"]},
+  {"id":"offline_experiences_016","question":"What is a concert, event, or experience you will never forget?","category":"experiences","depth":1,"tone":"warm","tags":["entertainment","memory"]},
+  {"id":"offline_experiences_017","question":"What is a mistake that taught you something valuable?","category":"experiences","depth":2,"tone":"warm","tags":["growth","lesson"]},
+  {"id":"offline_experiences_018","question":"What is the most interesting person you have ever met?","category":"experiences","depth":1,"tone":"warm","tags":["people","story"]},
+  {"id":"offline_experiences_019","question":"What is a hobby or interest you got into because of someone else?","category":"experiences","depth":1,"tone":"warm","tags":["hobby","people"]},
+  {"id":"offline_experiences_020","question":"What is a moment when you felt really proud of yourself?","category":"experiences","depth":2,"tone":"warm","tags":["achievement","memory"]},
+
+  {"id":"offline_life_001","question":"What kind of life do you secretly hope to have in a few years?","category":"life","depth":2,"tone":"warm","tags":["future","dreams"]},
+  {"id":"offline_life_002","question":"What is something you care about more now than you used to?","category":"life","depth":2,"tone":"warm","tags":["growth","values"]},
+  {"id":"offline_life_003","question":"What does a good day look like to you?","category":"life","depth":1,"tone":"warm","tags":["lifestyle","daily"]},
+  {"id":"offline_life_004","question":"What is one thing you are trying to make more room for in your life?","category":"life","depth":2,"tone":"warm","tags":["goals","growth"]},
+  {"id":"offline_life_005","question":"What is a small thing that makes your life feel better?","category":"life","depth":1,"tone":"warm","tags":["daily","happiness"]},
+  {"id":"offline_life_006","question":"What does success mean to you right now?","category":"life","depth":2,"tone":"warm","tags":["values","reflection"]},
+  {"id":"offline_life_007","question":"What is a value you try to live by?","category":"life","depth":2,"tone":"warm","tags":["values","character"]},
+  {"id":"offline_life_008","question":"What is something you are grateful for that you did not expect?","category":"life","depth":2,"tone":"warm","tags":["gratitude","reflection"]},
+  {"id":"offline_life_009","question":"What does your ideal weekend look like?","category":"life","depth":1,"tone":"warm","tags":["lifestyle","daily"]},
+  {"id":"offline_life_010","question":"What is a habit that has made your life better?","category":"life","depth":1,"tone":"warm","tags":["habits","growth"]},
+  {"id":"offline_life_011","question":"What is something you have simplified in your life recently?","category":"life","depth":1,"tone":"warm","tags":["lifestyle","growth"]},
+  {"id":"offline_life_012","question":"What kind of friend do you try to be?","category":"life","depth":2,"tone":"warm","tags":["relationships","values"]},
+  {"id":"offline_life_013","question":"What is a belief you have changed your mind about?","category":"life","depth":2,"tone":"warm","tags":["growth","reflection"]},
+  {"id":"offline_life_014","question":"What is something you want to be remembered for?","category":"life","depth":2,"tone":"warm","tags":["values","legacy"]},
+  {"id":"offline_life_015","question":"What is a lesson life has taught you recently?","category":"life","depth":2,"tone":"warm","tags":["growth","lesson"]},
+  {"id":"offline_life_016","question":"What is the most important thing in your life right now?","category":"life","depth":2,"tone":"warm","tags":["values","priority"]},
+  {"id":"offline_life_017","question":"What does balance look like for you?","category":"life","depth":2,"tone":"warm","tags":["lifestyle","reflection"]},
+  {"id":"offline_life_018","question":"What is a boundary you have learned to set?","category":"life","depth":2,"tone":"warm","tags":["growth","self-care"]},
+  {"id":"offline_life_019","question":"What is something you are still figuring out about your life?","category":"life","depth":2,"tone":"warm","tags":["reflection","growth"]},
+  {"id":"offline_life_020","question":"What makes you feel at home?","category":"life","depth":1,"tone":"warm","tags":["comfort","values"]},
+
+  {"id":"offline_deep_001","question":"What is something you wish people understood about you more easily?","category":"deep","depth":3,"tone":"gentle","tags":["self","understanding"]},
+  {"id":"offline_deep_002","question":"What is a lesson you learned the hard way?","category":"deep","depth":3,"tone":"gentle","tags":["growth","lesson"]},
+  {"id":"offline_deep_003","question":"What is something you are still figuring out about yourself?","category":"deep","depth":3,"tone":"gentle","tags":["self","reflection"]},
+  {"id":"offline_deep_004","question":"When do you feel most like yourself?","category":"deep","depth":2,"tone":"gentle","tags":["self","authenticity"]},
+  {"id":"offline_deep_005","question":"What is a feeling you have become better at handling?","category":"deep","depth":2,"tone":"gentle","tags":["emotion","growth"]},
+  {"id":"offline_deep_006","question":"What is a fear you have that you do not talk about much?","category":"deep","depth":3,"tone":"gentle","tags":["fear","vulnerability"]},
+  {"id":"offline_deep_007","question":"What is something you are proud of but rarely mention?","category":"deep","depth":2,"tone":"gentle","tags":["pride","self"]},
+  {"id":"offline_deep_008","question":"What is a relationship that has shaped who you are?","category":"deep","depth":3,"tone":"gentle","tags":["relationships","growth"]},
+  {"id":"offline_deep_009","question":"What is a question you wish someone would ask you?","category":"deep","depth":3,"tone":"gentle","tags":["self","connection"]},
+  {"id":"offline_deep_010","question":"What is something you are trying to forgive yourself for?","category":"deep","depth":3,"tone":"gentle","tags":["growth","healing"]},
+  {"id":"offline_deep_011","question":"What is a moment that changed the way you see the world?","category":"deep","depth":3,"tone":"gentle","tags":["perspective","growth"]},
+  {"id":"offline_deep_012","question":"What is something you find hard to admit about yourself?","category":"deep","depth":3,"tone":"gentle","tags":["self","vulnerability"]},
+  {"id":"offline_deep_013","question":"What does emotional safety look like for you?","category":"deep","depth":3,"tone":"gentle","tags":["emotion","relationships"]},
+  {"id":"offline_deep_014","question":"What is a part of your past that still influences you today?","category":"deep","depth":3,"tone":"gentle","tags":["past","growth"]},
+  {"id":"offline_deep_015","question":"What is something you have been avoiding thinking about?","category":"deep","depth":3,"tone":"gentle","tags":["reflection","self"]},
+  {"id":"offline_deep_016","question":"What kind of person do you want to become?","category":"deep","depth":3,"tone":"gentle","tags":["growth","future"]},
+  {"id":"offline_deep_017","question":"What is a moment when you felt truly connected to someone?","category":"deep","depth":2,"tone":"gentle","tags":["connection","memory"]},
+  {"id":"offline_deep_018","question":"What is something you had to let go of to move forward?","category":"deep","depth":3,"tone":"gentle","tags":["growth","letting-go"]},
+  {"id":"offline_deep_019","question":"What is a question you are still searching for the answer to?","category":"deep","depth":3,"tone":"gentle","tags":["reflection","self"]},
+  {"id":"offline_deep_020","question":"What makes you feel understood?","category":"deep","depth":2,"tone":"gentle","tags":["connection","self"]}
 ]

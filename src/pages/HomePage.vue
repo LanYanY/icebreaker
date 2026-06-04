@@ -42,12 +42,12 @@ function handleSelectCategory(categoryId: string) {
 
 function handleFavorite(id: string) {
   questionStore.toggleFavorite(id)
-  showToastMessage('已添加到收藏', 'success')
+  showToastMessage('Added to favorites', 'success')
 }
 
 function handleCopy(text: string) {
   questionStore.copyQuestion(text)
-  showToastMessage('已复制到剪贴板', 'success')
+  showToastMessage('Copied to clipboard', 'success')
 }
 
 function handleShare(text: string) {
@@ -62,7 +62,7 @@ function handleHide(question: Question) {
 function confirmHide() {
   if (questionToHide.value) {
     questionStore.hideQuestion(questionToHide.value)
-    showToastMessage('已设置不再出现', 'info')
+    showToastMessage('Question hidden', 'info')
   }
   showHideConfirm.value = false
   questionToHide.value = null
@@ -179,10 +179,10 @@ function handleToastClose() {
     <!-- 确认对话框 -->
     <ConfirmDialog
       :show="showHideConfirm"
-      title="不再出现"
-      message="确定要让这个问题不再出现吗？你可以在历史记录中恢复它。"
-      confirm-text="确定"
-      cancel-text="取消"
+      title="Hide Question"
+      message="Are you sure you want to hide this question? You can restore it from history."
+      confirm-text="Hide"
+      cancel-text="Cancel"
       @confirm="confirmHide"
       @cancel="cancelHide"
     />

@@ -10,8 +10,13 @@
  * @returns n-gram集合
  */
 export function generateNgrams(text: string, n = 2): Set<string> {
-  const normalized = text.trim().toLowerCase()
   const ngrams = new Set<string>()
+  
+  if (!text) {
+    return ngrams
+  }
+  
+  const normalized = text.trim().toLowerCase()
   
   if (normalized.length < n) {
     ngrams.add(normalized)
@@ -54,6 +59,10 @@ export function jaccardSimilarity(set1: Set<string>, set2: Set<string>): number 
  * @returns 相似度（0-1）
  */
 export function calculateSimilarity(text1: string, text2: string, n = 2): number {
+  if (!text1 || !text2) {
+    return 0
+  }
+  
   const ngrams1 = generateNgrams(text1, n)
   const ngrams2 = generateNgrams(text2, n)
   
@@ -72,7 +81,12 @@ export function isTooSimilar(
   existingTexts: string[], 
   threshold = 0.6
 ): boolean {
+  if (!text || !existingTexts || existingTexts.length === 0) {
+    return false
+  }
+  
   for (const existingText of existingTexts) {
+    if (!existingText) continue
     const similarity = calculateSimilarity(text, existingText)
     if (similarity >= threshold) {
       return true

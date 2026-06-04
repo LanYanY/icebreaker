@@ -6,7 +6,7 @@ import { DEFAULT_CATEGORIES } from '@/types/category'
 export const useCategoryStore = defineStore('category', () => {
   // 状态
   const categories = ref<Category[]>(DEFAULT_CATEGORIES)
-  const currentCategoryId = ref<string>('light')
+  const currentCategoryId = ref<string>('random')
   
   // 计算属性
   const currentCategory = computed(() => 

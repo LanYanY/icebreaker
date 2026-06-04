@@ -79,7 +79,7 @@ async function handleClearData() {
 
 // 恢复默认设置
 async function handleResetSettings() {
-  if (confirm('确定要恢复默认设置吗？')) {
+  if (confirm('Are you sure you want to reset to default settings?')) {
     await settingStore.resetAllSettings()
     // 重置表单
     formData.value = {
@@ -109,19 +109,19 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
   <div class="settings-page">
     <!-- 页面标题 -->
     <header class="page-header">
-      <h1 class="page-title">设置</h1>
-      <p class="page-subtitle">配置你的开场白卡牌</p>
+      <h1 class="page-title">Settings</h1>
+      <p class="page-subtitle">Configure your icebreaker cards</p>
     </header>
     
     <!-- 普通设置 -->
     <section class="settings-section">
-      <h2 class="section-title">常规设置</h2>
+      <h2 class="section-title">General</h2>
       
       <!-- 默认分类 -->
       <div class="setting-item">
         <div class="setting-label">
-          <span class="label-text">默认分类</span>
-          <span class="label-desc">抽卡时默认使用的分类</span>
+          <span class="label-text">Default Category</span>
+          <span class="label-desc">Category used when drawing cards</span>
         </div>
         <select
           v-model="formData.defaultCategory"
@@ -141,43 +141,43 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       <!-- 默认深度 -->
       <div class="setting-item">
         <div class="setting-label">
-          <span class="label-text">默认深度</span>
-          <span class="label-desc">问题的深入程度</span>
+          <span class="label-text">Default Depth</span>
+          <span class="label-desc">How deep the questions should be</span>
         </div>
         <select
           v-model="formData.defaultDepth"
           class="setting-select"
           @change="handleSaveSetting('defaultDepth', formData.defaultDepth)"
         >
-          <option :value="1">轻松</option>
-          <option :value="2">适中</option>
-          <option :value="3">深入</option>
+          <option :value="1">Light</option>
+          <option :value="2">Medium</option>
+          <option :value="3">Deep</option>
         </select>
       </div>
       
       <!-- 默认语气 -->
       <div class="setting-item">
         <div class="setting-label">
-          <span class="label-text">默认语气</span>
-          <span class="label-desc">问题的表达风格</span>
+          <span class="label-text">Default Tone</span>
+          <span class="label-desc">The style of the questions</span>
         </div>
         <select
           v-model="formData.defaultTone"
           class="setting-select"
           @change="handleSaveSetting('defaultTone', formData.defaultTone)"
         >
-          <option value="轻松">轻松</option>
-          <option value="正式">正式</option>
-          <option value="幽默">幽默</option>
-          <option value="温暖">温暖</option>
+          <option value="light">Light</option>
+          <option value="formal">Formal</option>
+          <option value="humorous">Humorous</option>
+          <option value="warm">Warm</option>
         </select>
       </div>
       
       <!-- 优先使用离线题库 -->
       <div class="setting-item">
         <div class="setting-label">
-          <span class="label-text">优先使用离线题库</span>
-          <span class="label-desc">即使配置了API也优先使用本地题库</span>
+          <span class="label-text">Offline Mode First</span>
+          <span class="label-desc">Use local question bank even if API is configured</span>
         </div>
         <label class="setting-switch">
           <input
@@ -192,8 +192,8 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       <!-- 允许发送历史给LLM -->
       <div class="setting-item">
         <div class="setting-label">
-          <span class="label-text">允许发送历史给LLM</span>
-          <span class="label-desc">将最近历史问题发送给LLM用于去重</span>
+          <span class="label-text">Send History to LLM</span>
+          <span class="label-desc">Send recent questions to LLM for deduplication</span>
         </div>
         <label class="setting-switch">
           <input
@@ -208,7 +208,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
     
     <!-- AI 设置 -->
     <section class="settings-section">
-      <h2 class="section-title">🤖 AI 设置</h2>
+      <h2 class="section-title">🤖 AI Settings</h2>
       
       <!-- AI 提供商选择 -->
       <div class="provider-section">
@@ -235,7 +235,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
             target="_blank"
             class="api-key-link"
           >
-            获取 API Key →
+            Get API Key →
           </a>
         </div>
       </div>
@@ -243,8 +243,8 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       <!-- 模型选择（仅非自定义提供商显示） -->
       <div v-if="currentProvider !== 'custom' && currentPreset?.models.length" class="setting-item">
         <div class="setting-label">
-          <span class="label-text">模型选择</span>
-          <span class="label-desc">选择使用的AI模型</span>
+          <span class="label-text">Model</span>
+          <span class="label-desc">Select the AI model to use</span>
         </div>
         <select
           v-model="formData.model"
@@ -266,7 +266,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
         <div class="setting-item">
           <div class="setting-label">
             <span class="label-text">API Base URL</span>
-            <span class="label-desc">OpenAI兼容的API地址</span>
+            <span class="label-desc">OpenAI-compatible API endpoint</span>
           </div>
           <input
             type="text"
@@ -279,8 +279,8 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
         
         <div class="setting-item">
           <div class="setting-label">
-            <span class="label-text">模型名称</span>
-            <span class="label-desc">使用的模型ID</span>
+            <span class="label-text">Model Name</span>
+            <span class="label-desc">The model ID to use</span>
           </div>
           <input
             type="text"
@@ -296,7 +296,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       <div class="setting-item api-key-item">
         <div class="setting-label">
           <span class="label-text">API Key</span>
-          <span class="label-desc">{{ currentPreset?.apiKeyPlaceholder || '输入你的API密钥' }}</span>
+          <span class="label-desc">{{ currentPreset?.apiKeyPlaceholder || 'Enter your API key' }}</span>
         </div>
         <div class="api-key-input-group">
           <input
@@ -315,16 +315,16 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
             class="api-key-save"
             @click="handleSaveApiKey"
           >
-            保存
+            Save
           </button>
         </div>
         <div v-if="settingStore.hasApiKey()" class="api-key-status">
-          <span class="status-text">✓ 已配置</span>
+          <span class="status-text">✓ Configured</span>
           <button
             class="clear-key-button"
             @click="handleClearApiKey"
           >
-            清除
+            Clear
           </button>
         </div>
       </div>
@@ -336,7 +336,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
         class="section-toggle"
         @click="showAdvanced = !showAdvanced"
       >
-        <h2 class="section-title">高级设置</h2>
+        <h2 class="section-title">Advanced Settings</h2>
         <span class="toggle-arrow">{{ showAdvanced ? '▲' : '▼' }}</span>
       </button>
       
@@ -346,7 +346,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           <div class="setting-item">
             <div class="setting-label">
               <span class="label-text">Temperature</span>
-              <span class="label-desc">控制生成的随机性 (0-2)</span>
+              <span class="label-desc">Controls randomness (0-2)</span>
             </div>
             <input
               type="number"
@@ -363,7 +363,7 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           <div class="setting-item">
             <div class="setting-label">
               <span class="label-text">Max Tokens</span>
-              <span class="label-desc">最大生成token数</span>
+              <span class="label-desc">Maximum tokens to generate</span>
             </div>
             <input
               type="number"
@@ -378,8 +378,8 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           <!-- 请求超时 -->
           <div class="setting-item">
             <div class="setting-label">
-              <span class="label-text">请求超时</span>
-              <span class="label-desc">API请求超时时间(毫秒)</span>
+              <span class="label-text">Request Timeout</span>
+              <span class="label-desc">API request timeout in milliseconds</span>
             </div>
             <input
               type="number"
@@ -395,8 +395,8 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
           <!-- 最大重试次数 -->
           <div class="setting-item">
             <div class="setting-label">
-              <span class="label-text">最大重试次数</span>
-              <span class="label-desc">API请求失败后的重试次数</span>
+              <span class="label-text">Max Retries</span>
+              <span class="label-desc">Number of retries on API failure</span>
             </div>
             <input
               type="number"
@@ -413,35 +413,35 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
     
     <!-- 数据管理 -->
     <section class="settings-section">
-      <h2 class="section-title">数据管理</h2>
+      <h2 class="section-title">Data Management</h2>
       
       <div class="data-actions">
         <button
           class="action-button"
           @click="showClearDialog('history')"
         >
-          清空历史记录
+          Clear History
         </button>
         
         <button
           class="action-button"
           @click="showClearDialog('favorites')"
         >
-          清空收藏
+          Clear Favorites
         </button>
         
         <button
           class="action-button"
           @click="showClearDialog('apiKey')"
         >
-          清除API Key
+          Clear API Key
         </button>
         
         <button
           class="action-button danger"
           @click="handleResetSettings"
         >
-          恢复默认设置
+          Reset to Defaults
         </button>
       </div>
     </section>
@@ -452,20 +452,20 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
         <div class="modal-content">
           <h3 class="modal-title">确认清空</h3>
           <p class="modal-text">
-            确定要清空{{ clearType === 'history' ? '历史记录' : clearType === 'favorites' ? '收藏' : clearType === 'apiKey' ? 'API Key' : '所有数据' }}吗？此操作不可恢复。
+            Are you sure you want to clear {{ clearType === 'history' ? 'history' : clearType === 'favorites' ? 'favorites' : clearType === 'apiKey' ? 'API key' : 'all data' }}? This cannot be undone.
           </p>
           <div class="modal-actions">
             <button
               class="modal-button cancel"
               @click="showClearConfirm = false"
             >
-              取消
+              Cancel
             </button>
             <button
               class="modal-button confirm"
               @click="handleClearData"
             >
-              确认清空
+              Confirm
             </button>
           </div>
         </div>

@@ -76,8 +76,8 @@ function handleFilterByCategory(categoryId: string) {
   <div class="favorite-page">
     <!-- 页面标题 -->
     <header class="page-header">
-      <h1 class="page-title">我的收藏</h1>
-      <p class="page-subtitle">保存喜欢的问题</p>
+      <h1 class="page-title">Favorites</h1>
+      <p class="page-subtitle">Questions you have saved</p>
     </header>
     
     <!-- 分类筛选 -->
@@ -87,7 +87,7 @@ function handleFilterByCategory(categoryId: string) {
         :class="{ active: selectedCategory === 'all' }"
         @click="handleFilterByCategory('all')"
       >
-        全部
+        All
       </button>
       <button
         v-for="category in categoryStore.sortedCategories"
@@ -111,8 +111,8 @@ function handleFilterByCategory(categoryId: string) {
       <!-- 空状态 -->
       <div v-else-if="filteredFavorites.length === 0" class="empty-state">
         <div class="empty-icon">❤️</div>
-        <p class="empty-text">还没有收藏的问题</p>
-        <p class="empty-hint">遇到喜欢的问题，可以点一下小心心保存起来</p>
+        <p class="empty-text">No favorites yet</p>
+        <p class="empty-hint">Tap the heart icon to save questions you like</p>
       </div>
       
       <!-- 收藏卡片列表 -->
@@ -135,19 +135,19 @@ function handleFilterByCategory(categoryId: string) {
               class="action-btn"
               @click="handleToggleFavorite(question.id)"
             >
-              ❤️ 取消收藏
+              ❤️ Unfavorite
             </button>
             <button
               class="action-btn"
               @click="handleCopy(question.text)"
             >
-              📋 复制
+              📋 Copy
             </button>
             <button
               class="action-btn"
               @click="handleShare(question.text)"
             >
-              📤 分享
+              📤 Share
             </button>
           </div>
         </div>

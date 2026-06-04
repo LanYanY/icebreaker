@@ -27,11 +27,11 @@ const categoryColor = computed(() => {
 
 const depthLabel = computed(() => {
   const labels: Record<number, string> = {
-    1: '轻松',
-    2: '适中',
-    3: '深入'
+    1: 'Light',
+    2: 'Medium',
+    3: 'Deep'
   }
-  return labels[props.question.depth] || '轻松'
+  return labels[props.question.depth] || 'Light'
 })
 
 function handleFavorite() {
@@ -77,28 +77,28 @@ function handleHide() {
         @click="handleFavorite"
       >
         <span class="btn-icon">{{ question.favorite ? '❤️' : '🤍' }}</span>
-        <span class="btn-text">收藏</span>
+        <span class="btn-text">Favorite</span>
       </button>
       
       <button class="action-btn" @click="handleCopy">
         <span class="btn-icon">📋</span>
-        <span class="btn-text">复制</span>
+        <span class="btn-text">Copy</span>
       </button>
       
       <button class="action-btn" @click="handleShare">
         <span class="btn-icon">📤</span>
-        <span class="btn-text">分享</span>
+        <span class="btn-text">Share</span>
       </button>
       
       <button class="action-btn hide-btn" @click="handleHide">
         <span class="btn-icon">👁️</span>
-        <span class="btn-text">不再出现</span>
+        <span class="btn-text">Hide</span>
       </button>
     </div>
     
     <!-- 来源标签 -->
     <div class="source-tag">
-      {{ question.source === 'llm' ? 'AI 生成' : '离线题库' }}
+      {{ question.source === 'llm' ? 'AI' : 'Offline' }}
     </div>
   </div>
 </template>

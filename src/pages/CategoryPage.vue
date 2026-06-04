@@ -15,8 +15,8 @@ function handleSelectCategory(categoryId: string) {
   <div class="category-page">
     <!-- 页面标题 -->
     <header class="page-header">
-      <h1 class="page-title">话题分类</h1>
-      <p class="page-subtitle">选择适合当前场景的话题</p>
+      <h1 class="page-title">Categories</h1>
+      <p class="page-subtitle">Choose a category that fits the moment</p>
     </header>
     
     <!-- 分类列表 -->

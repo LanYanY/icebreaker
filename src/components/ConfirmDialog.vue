@@ -34,14 +34,14 @@ function handleCancel() {
               class="modal-button cancel"
               @click="handleCancel"
             >
-              {{ cancelText || '取消' }}
+              {{ cancelText || 'Cancel' }}
             </button>
             <button
               class="modal-button confirm"
               :class="{ danger }"
               @click="handleConfirm"
             >
-              {{ confirmText || '确认' }}
+              {{ confirmText || 'Confirm' }}
             </button>
           </div>
         </div>

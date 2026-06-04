@@ -33,7 +33,7 @@ export class QuestionService {
       const response = await fetch('/offline_questions.json')
       this.offlineQuestions = await response.json()
     } catch (err) {
-      console.error('加载离线题库失败:', err)
+      console.error('Failed to load offline questions:', err)
     }
   }
 
@@ -57,7 +57,7 @@ export class QuestionService {
           return question
         }
       } catch (err) {
-        console.warn('LLM生成失败，切换到离线题库:', err)
+        console.warn('LLM generation failed, switching to offline:', err)
       }
     }
 
@@ -118,11 +118,11 @@ export class QuestionService {
         return question
       } catch (err) {
         lastError = err instanceof Error ? err : new Error(String(err))
-        console.warn(`LLM请求失败 (${i + 1}/${maxRetries}):`, lastError.message)
+        console.warn(`LLM request failed (${i + 1}/${maxRetries}):`, lastError.message)
       }
     }
 
-    throw lastError || new Error('LLM生成失败')
+    throw lastError || new Error('LLM generation failed')
   }
 
   /**
@@ -146,17 +146,17 @@ export class QuestionService {
 
     // 尝试找到一个不重复的问题
     for (const offlineQ of shuffled) {
-      const hash = generateHash(offlineQ.text)
+      const hash = generateHash(offlineQ.question)
 
       // 检查是否在隐藏列表中
-      if (this.dedupService.isDuplicate(offlineQ.text)) {
+      if (this.dedupService.isDuplicate(offlineQ.question)) {
         continue
       }
 
       // 找到有效问题
       const question: Question = {
         id: generateId(),
-        text: offlineQ.text,
+        text: offlineQ.question,
         category: offlineQ.category,
         depth: offlineQ.depth,
         tone: offlineQ.tone,
@@ -229,7 +229,7 @@ export class QuestionService {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: '开场白',
+          title: 'Icebreaker',
           text: text
         })
         return true

@@ -42,7 +42,7 @@ export const useQuestionStore = defineStore('question', () => {
         currentQuestion.value = question
         return question
       } else {
-        error.value = '这个分类的问题快抽完了，可以换个分类试试'
+        error.value = 'Running out of questions in this category. Try another one.'
         return null
       }
     } catch (err) {

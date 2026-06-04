@@ -3,6 +3,10 @@
  * 用于在生成hash和计算相似度前统一文本格式
  */
 export function normalizeText(text: string): string {
+  if (!text) {
+    return ''
+  }
+  
   return text
     .trim()                          // 去掉首尾空格
     .replace(/\s+/g, ' ')           // 合并多余空格
@@ -19,6 +23,10 @@ export function normalizeText(text: string): string {
  * 使用DJB2算法
  */
 export function generateHash(text: string): string {
+  if (!text) {
+    return '0'
+  }
+  
   const normalized = normalizeText(text)
   let hash = 5381
   

@@ -10,9 +10,9 @@ export interface UserSetting {
 
 // 默认用户设置
 export const DEFAULT_USER_SETTING: UserSetting = {
-  defaultCategory: 'light',
+  defaultCategory: 'random',
   defaultDepth: 1,
-  defaultTone: '轻松',
+  defaultTone: 'light',
   useOfflineFirst: false,
   allowHistoryForDedup: true,
   theme: 'light'

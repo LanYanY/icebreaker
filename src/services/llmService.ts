@@ -32,31 +32,46 @@ export class LLMService {
   private buildPrompt(params: LLMRequestParams): string {
     const { category, depth, tone, recentQuestions } = params
     
-    let prompt = `你是一个开场白卡牌生成器。
+    // 分类生成方向映射
+    const categoryGuides: Record<string, string> = {
+      'random': '轻松、随机、低压力、适合自然开场的问题',
+      'if_you_could': '以\"If you could...\"开头或类似结构的假设类问题，轻松、有想象空间，适合发散聊天',
+      'would_you_rather': '\"Would you rather...\"结构的二选一偏好题，适合多人玩、快速回答、轻松互动。问题应轻松、有趣、没有压力',
+      'experiences': '围绕经历、回忆、故事、旅行、成长片段和难忘瞬间的问题，鼓励分享故事，但不要触碰创伤或过度隐私',
+      'life': '围绕人生、价值观、生活状态、自我理解和未来期待的问题，有一定深度但不要太沉重',
+      'deep': '更深入的问题，围绕内心感受、自我认知、关系、成长和选择展开，适合熟一点之后聊，但不要像审问'
+    }
+    
+    const categoryGuide = categoryGuides[category] || '适合聊天使用的开场问题'
+    
+    let prompt = `You are an icebreaker question card generator.
 
-请根据以下条件生成 1 个适合聊天使用的开场问题。
+Generate one conversation-starter question based on the following criteria.
 
-分类：${category}
-深度：${depth}
-语气：${tone}
+category: ${category}
+depth: ${depth}
+tone: ${tone}
 
-要求：
-1. 问题必须简短自然，适合直接说出口；
-2. 不要太正式；
-3. 不要涉及隐私、收入、政治、宗教、疾病、性经历等敏感内容；
-4. 不要生成攻击性、冒犯性或让人尴尬的问题；
-5. 只返回 JSON，不要输出解释文字。`
+generation direction: ${categoryGuide}
+
+rules:
+1. The question should be short, natural, and easy to say out loud.
+2. Do not make it too formal or stiff.
+3. Avoid topics like politics, religion, income, illness, sexual experiences, or family trauma.
+4. Do not generate anything offensive, embarrassing, or overly personal.
+5. Return ONLY valid JSON, no explanation.
+6. The question should be in English.
+7. The "category" field in the JSON must be the category id: ${category}`
 
     // 添加最近历史用于去重
     if (recentQuestions && recentQuestions.length > 0) {
-      prompt += `\n\n最近已出现的问题（请避免生成相似的问题）：
-${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
+      prompt += `\n\nrecent questions (avoid generating similar ones):\n${recentQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
     }
 
-    prompt += `\n\n返回格式：
+    prompt += `\n\nreturn format:
 {
   "question": "...",
-  "category": "...",
+  "category": "${category}",
   "depth": ${depth},
   "tone": "...",
   "tags": ["...", "..."]
