@@ -22,7 +22,7 @@
 <div align="center">
   <img src="docs/screenshot_home.png" width="240" alt="Home" />
   <img src="docs/screenshot_card.png" width="240" alt="Card" />
-  <img src="docs/screenshot_dark.png" width="240" alt="Dark Mode" />
+  <img src="docs/screenshot_intimacy.png" width="240" alt="Intimacy Mode" />
 </div>
 
 ## 🛠️ 技术栈
