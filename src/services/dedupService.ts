@@ -1,5 +1,7 @@
 import { normalizeText, generateHash } from '@/utils/hash'
 import { calculateSimilarity, isTooSimilar } from '@/utils/ngram'
+import { getQuestionText } from '@/types/question'
+import type { Question } from '@/types/question'
 
 /**
  * 去重服务
@@ -53,8 +55,11 @@ export class DedupService {
   /**
    * 更新最近问题列表
    */
-  updateRecentQuestions(questions: string[]) {
-    this.recentQuestions = questions
+  updateRecentQuestions(questions: (string | Question)[]) {
+    this.recentQuestions = questions.map(q => {
+      if (typeof q === 'string') return q
+      return getQuestionText(q, 'en')
+    })
   }
 
   /**

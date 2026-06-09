@@ -29,15 +29,16 @@ onMounted(async () => {
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   max-width: 430px;
   margin: 0 auto;
   background-color: var(--color-bg-primary);
+  overflow: hidden;
 }
 
 .app-main {
   flex: 1;
-  padding-bottom: 76px; /* 底部导航高度 */
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 </style>

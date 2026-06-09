@@ -1,5 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie'
 import type { Question } from '@/types/question'
+import { getQuestionText } from '@/types/question'
 
 // 定义数据库结构
 interface IceCardDB extends Dexie {
@@ -42,14 +43,18 @@ export async function getQuestionsByCategory(category: string, limit = 50): Prom
   return questions.slice(0, limit) as Question[]
 }
 
-export async function getRecentQuestions(category: string, limit = 50): Promise<string[]> {
+export async function getRecentQuestions(mode: string, category: string, limit = 50): Promise<string[]> {
   const questions = await db.questions
     .where('category')
     .equals(category)
     .reverse()
     .sortBy('createdAt')
   
-  return (questions as Question[]).slice(0, limit).map(q => q.text)
+  // Filter by mode (backward compatible with old data)
+  return (questions as Question[])
+    .filter(q => (q.mode || 'icebreaker') === mode)
+    .slice(0, limit)
+    .map(q => getQuestionText(q, 'en'))
 }
 
 export async function getAllQuestions(): Promise<Question[]> {

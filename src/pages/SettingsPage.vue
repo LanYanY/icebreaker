@@ -450,6 +450,15 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       </transition>
     </section>
     
+    <!-- 关于页面入口 -->
+    <section class="settings-section">
+      <router-link to="/about" class="about-link">
+        <span class="about-link-icon">ℹ️</span>
+        <span class="about-link-text">关于开场白</span>
+        <span class="about-link-arrow">›</span>
+      </router-link>
+    </section>
+    
     <!-- 数据管理 -->
     <section class="settings-section">
       <h2 class="section-title">Data Management</h2>
@@ -834,6 +843,37 @@ input:checked + .switch-slider:before {
 
 .action-button.danger:active {
   background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* 关于页面入口 */
+.about-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  text-decoration: none;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  transition: background-color var(--duration-fast) ease;
+}
+
+.about-link:active {
+  background-color: var(--color-bg-primary);
+}
+
+.about-link-icon {
+  font-size: 20px;
+}
+
+.about-link-text {
+  flex: 1;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.about-link-arrow {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-tertiary);
 }
 
 /* 主题切换器 */

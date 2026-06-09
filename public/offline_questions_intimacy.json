@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "offline_intimacy_random_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something small that always makes your day better?",
+      "zh": "有没有什么小事，总能让你的一天变得更好？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "small things",
+      "daily joy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a simple pleasure you never get tired of?",
+      "zh": "有没有一种简单的快乐，你永远不会厌倦？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "simple pleasure",
+      "comfort"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is the coziest place you have ever been?",
+      "zh": "你去过的最舒适的地方是哪里？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "comfort",
+      "place"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a sound that instantly calms you down?",
+      "zh": "什么声音能立刻让你放松下来？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "calm",
+      "sound"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small ritual that you enjoy every day?",
+      "zh": "你每天享受的一个小仪式是什么？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "ritual",
+      "daily"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What makes you feel instantly at home somewhere?",
+      "zh": "什么会让你立刻在一个地方有家的感觉？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "home",
+      "comfort"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a song that always lifts your mood?",
+      "zh": "什么歌总能让你心情变好？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "music",
+      "mood"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is your favorite way to unwind after a long day?",
+      "zh": "忙碌一天后你最喜欢怎么放松？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "relax",
+      "evening"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small gesture that someone did for you that you still remember?",
+      "zh": "别人为你做过什么小事，你到现在还记得？"
+    },
+    "category": "intimacy_random",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "gesture",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is the most comforting food to you?",
+      "zh": "对你来说最治愈的食物是什么？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "food",
+      "comfort"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small thing that made you smile today?",
+      "zh": "今天有什么小事让你笑了？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "smile",
+      "daily"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a compliment that you received that you still think about?",
+      "zh": "别人夸过你什么，你到现在还记得？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "compliment",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a scent that brings back warm memories for you?",
+      "zh": "什么气味会让你想起温暖的回忆？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "scent",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a movie or book that touched your heart?",
+      "zh": "有没有哪部电影或书触动了你的心？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "movie",
+      "book"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you are genuinely grateful for right now?",
+      "zh": "此刻你真心感恩的是什么？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "grateful",
+      "present"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is the best advice you have ever received?",
+      "zh": "你收到过的最好的建议是什么？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "advice",
+      "wisdom"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a tradition or custom that you love?",
+      "zh": "你喜欢什么传统或习俗？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "tradition",
+      "custom"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a recent discovery that made you happy?",
+      "zh": "最近有没有什么发现让你很开心？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "discovery",
+      "happy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is your favorite thing about this time of year?",
+      "zh": "你喜欢这个季节的什么？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "season",
+      "favorite"
+    ]
+  },
+  {
+    "id": "offline_intimacy_random_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small luxury that you treat yourself to?",
+      "zh": "你会给自己买什么小奢侈品？"
+    },
+    "category": "intimacy_random",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "luxury",
+      "treat"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small memory from your past that still makes you smile?",
+      "zh": "过去有没有一个小小的回忆，到现在想起来还是会让你笑？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "memory",
+      "smile"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you loved doing as a child that you still enjoy?",
+      "zh": "小时候喜欢做的事情，你现在还喜欢吗？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "childhood",
+      "hobby"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment from your school days that you still think about?",
+      "zh": "学生时代有没有哪个瞬间你到现在还在想？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "school",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "Who was someone who made a positive difference in your early life?",
+      "zh": "在你早年生活中，谁对你产生过积极的影响？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "influence",
+      "person"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a holiday or celebration that you always look forward to?",
+      "zh": "有没有哪个节日或庆祝活动是你一直期待的？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "holiday",
+      "celebration"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a place from your past that holds special meaning for you?",
+      "zh": "过去有没有哪个地方对你有特别的意义？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "place",
+      "meaning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a skill you learned that you are proud of?",
+      "zh": "你学过的什么技能让你感到骄傲？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "skill",
+      "proud"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a concert, trip, or event that you will always remember?",
+      "zh": "有没有哪次演唱会、旅行或活动你会永远记住？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "event",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What was your favorite game or activity growing up?",
+      "zh": "你小时候最喜欢的游戏或活动是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "game",
+      "growing up"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a lesson from the past that has shaped who you are today?",
+      "zh": "过去的什么经历塑造了今天的你？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "lesson",
+      "growth"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a family tradition from your childhood that you cherish?",
+      "zh": "你珍惜的童年家庭传统是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "family",
+      "tradition"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment when you felt truly free and happy?",
+      "zh": "有没有哪个瞬间你感到真正的自由和快乐？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "freedom",
+      "happiness"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What was the first thing you ever saved up money to buy?",
+      "zh": "你攒钱买的第一件东西是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "saving",
+      "purchase"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a book or story from your childhood that you still remember?",
+      "zh": "你小时候读过的故事或书，现在还记得的有哪些？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "book",
+      "story"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a trip or journey that changed your perspective?",
+      "zh": "有没有哪次旅行改变了你的看法？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "trip",
+      "perspective"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you used to be afraid of but have since overcome?",
+      "zh": "以前害怕但现在克服了的事情是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "fear",
+      "overcome"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a special object you have kept from your past?",
+      "zh": "你保留下来的过去的一件特别的物品是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "object",
+      "keepsake"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a conversation you had years ago that you still think about?",
+      "zh": "几年前的一次对话，你到现在还在想的是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "conversation",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a hobby or interest you picked up early in life?",
+      "zh": "你很早就培养的兴趣爱好是什么？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "hobby",
+      "early"
+    ]
+  },
+  {
+    "id": "offline_intimacy_past_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a kind thing someone did for you that you have never forgotten?",
+      "zh": "别人为你做过的什么好事，你从未忘记？"
+    },
+    "category": "past",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "kindness",
+      "memory"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something about you that most people do not know?",
+      "zh": "大多数人不知道的关于你的一件事是什么？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "unknown",
+      "personal"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a quality in yourself that you have learned to appreciate?",
+      "zh": "你学会欣赏自己的什么品质？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "quality",
+      "appreciation"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does a perfect lazy Sunday look like for you?",
+      "zh": "对你来说，完美的慵懒周日是什么样的？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "lazy",
+      "sunday"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that always makes you laugh?",
+      "zh": "什么事情总能让你笑？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "laugh",
+      "humor"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What are three words that your closest friends would use to describe you?",
+      "zh": "你最亲密的朋友会用哪三个词来形容你？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "describe",
+      "friends"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you are curious about right now?",
+      "zh": "你现在对什么事情感到好奇？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "curious",
+      "present"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is your favorite way to spend time alone?",
+      "zh": "你最喜欢的独处方式是什么？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "alone",
+      "favorite"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a value that is very important to you in relationships?",
+      "zh": "在关系中你非常看重的一个价值观是什么？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "value",
+      "relationship"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that always puts you in a good mood?",
+      "zh": "什么总能让你心情变好？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "mood",
+      "happy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a talent or skill you wish you had?",
+      "zh": "你希望自己拥有什么天赋或技能？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "talent",
+      "wish"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a type of weather that matches your personality?",
+      "zh": "什么天气最像你的性格？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "weather",
+      "personality"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you have changed your mind about over the years?",
+      "zh": "这些年来你的什么想法改变了？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "change",
+      "growth"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment when you felt most like yourself?",
+      "zh": "有没有哪个瞬间你感觉最像真正的自己？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "self",
+      "moment"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a cause or issue that you care about deeply?",
+      "zh": "你深深关心的一个事业或议题是什么？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "cause",
+      "care"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that makes you feel proud of yourself?",
+      "zh": "什么事会让你为自己感到骄傲？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "proud",
+      "self"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small habit that makes you happy?",
+      "zh": "什么小习惯能让你开心？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "habit",
+      "happy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What kind of environment helps you feel most at peace?",
+      "zh": "什么样的环境让你感到最平静？"
+    },
+    "category": "about_you",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "environment",
+      "peace"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a personal goal that you are working toward?",
+      "zh": "你正在努力的个人目标是什么？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "goal",
+      "working"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you find beautiful that others might overlook?",
+      "zh": "你觉得什么美好但别人可能会忽略的东西？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "beauty",
+      "overlook"
+    ]
+  },
+  {
+    "id": "offline_intimacy_about_you_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a quote or saying that resonates with you?",
+      "zh": "什么名言或说法让你有共鸣？"
+    },
+    "category": "about_you",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "quote",
+      "resonate"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does a fulfilling life look like to you?",
+      "zh": "对你来说，充实的生活是什么样的？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "fulfilling",
+      "life"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you hope to accomplish this year?",
+      "zh": "你希望今年完成什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "hope",
+      "year"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a dream you have not shared with many people?",
+      "zh": "有没有什么梦想你还没跟很多人说过？"
+    },
+    "category": "intimacy_life",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "dream",
+      "share"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a daily routine that you genuinely enjoy?",
+      "zh": "你真心享受的日常习惯是什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "routine",
+      "enjoy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a place you dream of visiting someday?",
+      "zh": "你梦想有一天能去的地方是哪里？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "travel",
+      "dream"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does feeling \"at home\" mean to you beyond just a place?",
+      "zh": "对你来说，\"家\"的感觉意味着什么，不仅仅是某个地方？"
+    },
+    "category": "intimacy_life",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "home",
+      "meaning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a life lesson that took you a long time to learn?",
+      "zh": "花了你很长时间才学到的人生教训是什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "lesson",
+      "learning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you want to be remembered for?",
+      "zh": "你希望别人记住你什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "remember",
+      "legacy"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small change that made a big difference in your life?",
+      "zh": "什么小小的改变给你的生活带来了大变化？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "change",
+      "difference"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you are looking forward to?",
+      "zh": "你在期待什么事情？"
+    },
+    "category": "intimacy_life",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "forward",
+      "excitement"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a value you try to live by every day?",
+      "zh": "你每天努力践行的价值观是什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "value",
+      "daily"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a fear about the future that you have?",
+      "zh": "你对未来的什么感到担忧？"
+    },
+    "category": "intimacy_life",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "fear",
+      "future"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What makes you feel most alive?",
+      "zh": "什么让你感觉最有活力？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "alive",
+      "vibrant"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you want to learn or improve in the near future?",
+      "zh": "近期你想学或改进什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "learn",
+      "improve"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does success mean to you personally?",
+      "zh": "对你个人来说，成功意味着什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "success",
+      "personal"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a relationship in your life that has helped you grow?",
+      "zh": "你生命中什么关系帮助你成长了？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "relationship",
+      "growth"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a simple pleasure that you think everyone should experience?",
+      "zh": "你觉得每个人都应该体验的简单快乐是什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 1,
+    "tone": "warm",
+    "tags": [
+      "pleasure",
+      "share"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you would like to do more of in your life?",
+      "zh": "你希望在生活中多做什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "more",
+      "desire"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment from this year that you are grateful for?",
+      "zh": "今年有没有什么让你感恩的瞬间？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "grateful",
+      "moment"
+    ]
+  },
+  {
+    "id": "offline_intimacy_life_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is one thing you would tell your younger self?",
+      "zh": "你最想告诉你年轻时的自己什么？"
+    },
+    "category": "intimacy_life",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "younger self",
+      "wisdom"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What makes you feel most appreciated by someone?",
+      "zh": "别人做什么会让你感到最被重视？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "appreciated",
+      "care"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small thing a friend or partner does that means a lot to you?",
+      "zh": "朋友或伴侣做的什么小事对你意义重大？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "small thing",
+      "meaning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "How do you like to show someone that you care about them?",
+      "zh": "你喜欢怎么表达对别人的关心？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "show care",
+      "expression"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that builds trust between two people?",
+      "zh": "什么能在两个人之间建立信任？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "trust",
+      "build"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is the best way to comfort someone who is feeling down?",
+      "zh": "安慰一个心情不好的人最好的方式是什么？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "comfort",
+      "support"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a quality you look for in the people closest to you?",
+      "zh": "你最亲近的人身上你看重什么品质？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "quality",
+      "close"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way that you feel most connected to someone?",
+      "zh": "你觉得和一个人最亲近的方式是什么？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "connect",
+      "close"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is an act of kindness you witnessed recently that touched you?",
+      "zh": "你最近看到的什么善意行为让你感动？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "kindness",
+      "touch"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way that you feel heard and understood?",
+      "zh": "你觉得被倾听和被理解的方式是什么？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "heard",
+      "understood"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you admire about the people in your life?",
+      "zh": "你欣赏你生命中的人什么？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "admire",
+      "people"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a memory with someone that always warms your heart?",
+      "zh": "和某个人的什么回忆总是让你心里暖暖的？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "memory",
+      "warm"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is the most meaningful gift you have ever given or received?",
+      "zh": "你送出或收到的最有意义的礼物是什么？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "gift",
+      "meaningful"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way that you recharge after spending time with others?",
+      "zh": "和别人相处后你怎么恢复精力？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "recharge",
+      "alone"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a friendship that has lasted a long time and why?",
+      "zh": "有没有哪段长久的友谊，你觉得为什么能维持这么久？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "friendship",
+      "longevity"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you have learned about love from watching others?",
+      "zh": "从观察别人身上你学到了什么关于爱的事？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "love",
+      "learn"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What makes a relationship feel safe and comfortable?",
+      "zh": "什么让一段关系感到安全和舒适？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "safe",
+      "comfort"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way you like to celebrate special moments with people you love?",
+      "zh": "你喜欢怎么和你爱的人庆祝特别的时刻？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "celebrate",
+      "love"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you think makes a bond between people stronger?",
+      "zh": "你觉得什么能让人之间的联系更牢固？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "bond",
+      "stronger"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a tradition you share with people close to you?",
+      "zh": "你和亲近的人之间有什么共同的传统？"
+    },
+    "category": "relationship",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "tradition",
+      "close"
+    ]
+  },
+  {
+    "id": "offline_intimacy_relationship_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you would like to tell someone you care about but have not yet?",
+      "zh": "有没有什么你想对在乎的人说但还没说的话？"
+    },
+    "category": "relationship",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "tell",
+      "care"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_001",
+    "mode": "intimacy",
+    "question": {
+      "en": "What makes you feel truly safe with someone?",
+      "zh": "什么会让你真正感到和某个人在一起是安全的？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "safe",
+      "trust"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_002",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment when you felt deeply understood by someone?",
+      "zh": "有没有哪个瞬间你感到被某个人深深地理解了？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "understood",
+      "deep"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_003",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that helps you open up to others?",
+      "zh": "什么能帮助你向别人敞开心扉？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "open up",
+      "vulnerability"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_004",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does feeling \"seen\" by someone mean to you?",
+      "zh": "被某个人\"看见\"对你来说意味着什么？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "seen",
+      "meaning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_005",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way you feel closest to someone emotionally?",
+      "zh": "你觉得和一个人在情感上最亲近的方式是什么？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "close",
+      "emotional"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_006",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you appreciate when someone is vulnerable with you?",
+      "zh": "当别人向你展示脆弱时，你欣赏什么？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "vulnerable",
+      "appreciate"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_007",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a memory that makes you feel warm inside?",
+      "zh": "什么回忆会让你内心感到温暖？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "memory",
+      "warmth"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_008",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way you like to receive affection?",
+      "zh": "你喜欢怎样被表达关爱？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "affection",
+      "receive"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_009",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that you find emotionally comforting?",
+      "zh": "什么在情感上让你感到安慰？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "comfort",
+      "emotional"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_010",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a moment of kindness that touched you deeply?",
+      "zh": "什么善意的举动让你深深地感动了？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "kindness",
+      "deeply"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_011",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does \"being there for someone\" mean to you?",
+      "zh": "\"陪伴某个人\"对你来说意味着什么？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "being there",
+      "meaning"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_012",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way that you feel emotionally recharged by someone?",
+      "zh": "什么方式能让你因某个人而在情感上恢复？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "recharge",
+      "emotional"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_013",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a small act of love that means the most to you?",
+      "zh": "什么小小的爱的举动对你来说最有意义？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "love",
+      "small act"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_014",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a time when someone remembered something small about you and it made a difference?",
+      "zh": "别人记得关于你的什么小事，让你很感动？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "remember",
+      "difference"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_015",
+    "mode": "intimacy",
+    "question": {
+      "en": "What does it feel like when someone truly listens to you?",
+      "zh": "当一个人真正倾听你的时候，是什么感觉？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "listen",
+      "feel"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_016",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a way you feel closest during a quiet moment with someone?",
+      "zh": "在和某个人安静相处时，你觉得最亲近的时刻是什么？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "quiet",
+      "close"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_017",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something you would like to feel more of in your relationships?",
+      "zh": "你希望在关系中更多感受到什么？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "feel",
+      "relationship"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_018",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a comfort that you find in familiar people?",
+      "zh": "在熟悉的人身上你找到什么安慰？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "comfort",
+      "familiar"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_019",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is something that you associate with feeling loved?",
+      "zh": "什么和被爱的感觉联系在一起？"
+    },
+    "category": "intimacy",
+    "depth": 2,
+    "tone": "warm",
+    "tags": [
+      "loved",
+      "association"
+    ]
+  },
+  {
+    "id": "offline_intimacy_intimacy_020",
+    "mode": "intimacy",
+    "question": {
+      "en": "What is a gentle question you would like someone to ask you?",
+      "zh": "你希望有人温柔地问你什么问题？"
+    },
+    "category": "intimacy",
+    "depth": 3,
+    "tone": "warm",
+    "tags": [
+      "gentle",
+      "question"
+    ]
+  }
+]

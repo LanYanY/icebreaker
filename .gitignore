@@ -36,6 +36,14 @@ out/
 build/
 app/build/
 local.properties
+
+# Signing keys
+*.jks
+*.keystore
+
+# Dev docs
+work_doc/
+.pi/
 .navigation/
 captures/
 *.iml

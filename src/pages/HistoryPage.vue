@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import type { Question } from '@/types/question'
+import { getQuestionText, hasChineseText } from '@/types/question'
+import { getQuestionMode } from '@/types/mode'
 import { useCategoryStore } from '@/stores/categoryStore'
 import * as db from '@/db'
 
@@ -9,12 +11,16 @@ const categoryStore = useCategoryStore()
 const history = ref<Question[]>([])
 const selectedCategory = ref<string>('all')
 const isLoading = ref(false)
+const displayLangMap = ref<Record<string, 'en' | 'zh'>>({})
 
+// 按当前模式过滤
 const filteredHistory = computed(() => {
+  const mode = categoryStore.currentMode
+  const modeHistory = history.value.filter((q: Question) => getQuestionMode(q) === mode)
   if (selectedCategory.value === 'all') {
-    return history.value
+    return modeHistory
   }
-  return history.value.filter((q: Question) => q.category === selectedCategory.value)
+  return modeHistory.filter((q: Question) => q.category === selectedCategory.value)
 })
 
 onMounted(async () => {
@@ -32,6 +38,24 @@ async function loadHistory() {
   }
 }
 
+function getText(question: Question): string {
+  const lang = displayLangMap.value[question.id] || 'en'
+  return getQuestionText(question, lang)
+}
+
+function toggleLang(id: string) {
+  const current = displayLangMap.value[id] || 'en'
+  displayLangMap.value[id] = current === 'en' ? 'zh' : 'en'
+}
+
+function getLang(id: string): 'en' | 'zh' {
+  return displayLangMap.value[id] || 'en'
+}
+
+function canTranslate(question: Question): boolean {
+  return hasChineseText(question)
+}
+
 async function handleToggleFavorite(id: string) {
   await db.toggleFavorite(id)
   await loadHistory()
@@ -43,7 +67,7 @@ async function handleDeleteQuestion(id: string) {
 }
 
 async function handleClearHistory() {
-  if (confirm('确定要清空所有历史记录吗？此操作不可恢复。')) {
+  if (confirm('Are you sure you want to clear all history? This cannot be undone.')) {
     await db.clearAllHistory()
     await loadHistory()
   }
@@ -52,9 +76,7 @@ async function handleClearHistory() {
 async function handleCopy(text: string) {
   try {
     await navigator.clipboard.writeText(text)
-    // TODO: 显示Toast提示
   } catch {
-    // 降级方案
     const textarea = document.createElement('textarea')
     textarea.value = text
     textarea.style.position = 'fixed'
@@ -75,121 +97,112 @@ function formatDate(timestamp: number): string {
   const now = new Date()
   const diff = now.getTime() - date.getTime()
   
-  // 今天内
   if (diff < 24 * 60 * 60 * 1000 && date.getDate() === now.getDate()) {
-    return `今天 ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+    return `Today ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
   }
   
-  // 昨天
   const yesterday = new Date(now)
   yesterday.setDate(yesterday.getDate() - 1)
   if (date.getDate() === yesterday.getDate() && 
       date.getMonth() === yesterday.getMonth() && 
       date.getFullYear() === yesterday.getFullYear()) {
-    return `昨天 ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+    return `Yesterday ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
   }
   
-  // 更早
-  return `${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+  return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
 }
 </script>
 
 <template>
   <div class="history-page">
-    <!-- 页面标题 -->
     <header class="page-header">
       <h1 class="page-title">History</h1>
-      <p class="page-subtitle">Questions you have drawn</p>
+      <p class="page-subtitle">All your drawn questions</p>
     </header>
     
     <!-- 操作栏 -->
     <div class="action-bar">
       <div class="category-filter">
-        <button
+        <button 
           class="filter-button"
           :class="{ active: selectedCategory === 'all' }"
           @click="handleFilterByCategory('all')"
         >
           All
         </button>
-        <button
+        <button 
           v-for="category in categoryStore.sortedCategories"
           :key="category.id"
           class="filter-button"
           :class="{ active: selectedCategory === category.id }"
           @click="handleFilterByCategory(category.id)"
         >
-          {{ category.icon }}
+          {{ category.icon }} {{ category.name }}
         </button>
       </div>
       
-      <button
+      <button 
         v-if="history.length > 0"
         class="clear-button"
         @click="handleClearHistory"
       >
-        Clear
+        Clear All
       </button>
     </div>
     
     <!-- 历史列表 -->
     <div class="history-list">
-      <!-- 加载状态 -->
       <div v-if="isLoading" class="loading-state">
         <div class="loading-spinner"></div>
-        <p class="loading-text">加载中...</p>
+        <p class="loading-text">Loading...</p>
       </div>
       
-      <!-- 空状态 -->
       <div v-else-if="filteredHistory.length === 0" class="empty-state">
         <div class="empty-icon">📝</div>
         <p class="empty-text">No history yet</p>
-        <p class="empty-hint">Go to the home page to draw your first card</p>
+        <p class="empty-hint">Draw some question cards to see them here</p>
       </div>
       
-      <!-- 历史卡片列表 -->
       <div v-else class="history-grid">
-        <div
+        <div 
           v-for="question in filteredHistory"
           :key="question.id"
           class="history-card"
         >
           <div class="card-header">
-            <span class="category-tag">
-              {{ categoryStore.getCategoryName(question.category) }}
-            </span>
-            <span class="time-tag">
-              {{ formatDate(question.createdAt) }}
-            </span>
+            <span class="category-tag">{{ categoryStore.getCategoryName(question.category) }}</span>
+            <div class="header-right">
+              <span class="source-tag" v-if="question.source === 'llm'">AI</span>
+              <span class="time-tag">{{ formatDate(question.createdAt) }}</span>
+            </div>
           </div>
           
-          <p class="question-text">{{ question.text }}</p>
+          <p class="question-text">{{ getText(question) }}</p>
           
           <div class="card-footer">
             <button
-              class="action-btn"
-              :class="{ active: question.favorite }"
-              @click="handleToggleFavorite(question.id)"
+              v-if="canTranslate(question)"
+              class="translate-btn"
+              :class="{ active: getLang(question.id) === 'zh' }"
+              @click="toggleLang(question.id)"
             >
-              {{ question.favorite ? '❤️' : '🤍' }}
+              {{ getLang(question.id) === 'en' ? '译' : 'EN' }}
             </button>
-            <button
-              class="action-btn"
-              @click="handleCopy(question.text)"
-            >
-              📋
-            </button>
-            <button
-              class="action-btn delete-btn"
-              @click="handleDeleteQuestion(question.id)"
-            >
-              🗑️
-            </button>
-          </div>
-          
-          <!-- 来源标签 -->
-          <div class="source-tag">
-            {{ question.source === 'llm' ? 'AI' : 'Offline' }}
+            <div class="action-buttons">
+              <button 
+                class="action-btn"
+                :class="{ active: question.favorite }"
+                @click="handleToggleFavorite(question.id)"
+              >
+                {{ question.favorite ? '❤️' : '🤍' }}
+              </button>
+              <button class="action-btn" @click="handleCopy(getText(question))">
+                📋
+              </button>
+              <button class="action-btn delete-btn" @click="handleDeleteQuestion(question.id)">
+                🗑️
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -227,6 +240,8 @@ function formatDate(timestamp: number): string {
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid var(--color-border-light);
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .category-filter {
@@ -243,6 +258,7 @@ function formatDate(timestamp: number): string {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   transition: all var(--duration-fast) ease;
+  white-space: nowrap;
 }
 
 .filter-button:active {
@@ -290,14 +306,12 @@ function formatDate(timestamp: number): string {
   border: 3px solid var(--color-border);
   border-top-color: var(--color-accent-primary);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
   margin-bottom: var(--spacing-md);
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .loading-text {
@@ -343,11 +357,25 @@ function formatDate(timestamp: number): string {
   margin-bottom: var(--spacing-md);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
 .category-tag {
   font-size: var(--font-size-sm);
   color: var(--color-accent-primary);
   background-color: rgba(232, 160, 191, 0.1);
   padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.source-tag {
+  font-size: var(--font-size-xs);
+  color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.1);
+  padding: 2px 8px;
   border-radius: var(--radius-full);
 }
 
@@ -364,6 +392,33 @@ function formatDate(timestamp: number): string {
 }
 
 .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.translate-btn {
+  padding: 6px 14px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  transition: all var(--duration-fast) ease;
+}
+
+.translate-btn:active {
+  transform: scale(0.95);
+}
+
+.translate-btn.active {
+  background-color: rgba(169, 199, 232, 0.15);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+}
+
+.action-buttons {
   display: flex;
   gap: var(--spacing-sm);
 }
@@ -394,18 +449,7 @@ function formatDate(timestamp: number): string {
   opacity: 0.6;
 }
 
-.delete-btn:hover {
+.delete-btn:active {
   opacity: 1;
-}
-
-.source-tag {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  background-color: var(--color-border-light);
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
 }
 </style>

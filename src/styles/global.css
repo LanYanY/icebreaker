@@ -2,6 +2,13 @@
 
 /* 设计变量 - 颜色 */
 :root {
+  /* 模式主题色（默认 Icebreaker 浅蓝） */
+  --mode-primary: #8DBDEB;
+  --mode-secondary: #D8EAFB;
+  --mode-background: #F4F9FF;
+  --mode-card: #FFFFFF;
+  --mode-accent: #A9C7E8;
+
   /* 主背景色 */
   --color-bg-primary: #F8F5F0;
   --color-bg-secondary: #FFFFFF;
@@ -120,6 +127,61 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
     --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ===== Mode主题色覆盖 ===== */
+
+/* Icebreaker模式 - 浅蓝 */
+[data-mode="icebreaker"] {
+  --mode-primary: #8DBDEB;
+  --mode-secondary: #D8EAFB;
+  --mode-background: #F4F9FF;
+  --mode-card: #FFFFFF;
+  --mode-accent: #A9C7E8;
+}
+
+/* Intimacy模式 - 粉色 */
+[data-mode="intimacy"] {
+  --mode-primary: #E8A0BF;
+  --mode-secondary: #F8D8E8;
+  --mode-background: #FFF6FA;
+  --mode-card: #FFFFFF;
+  --mode-accent: #F2B8C6;
+}
+
+/* 暗色 + Intimacy模式 */
+[data-theme="dark"][data-mode="intimacy"] {
+  --mode-primary: #C47DA0;
+  --mode-secondary: #3D2A35;
+  --mode-background: #1A0F18;
+  --mode-card: #2A1A25;
+  --mode-accent: #B08090;
+}
+
+/* 暗色 + Icebreaker模式 */
+[data-theme="dark"][data-mode="icebreaker"] {
+  --mode-primary: #6A9DC8;
+  --mode-secondary: #1E2A3A;
+  --mode-background: #0F1520;
+  --mode-card: #1A2535;
+  --mode-accent: #7AADC8;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"][data-mode="intimacy"] {
+    --mode-primary: #C47DA0;
+    --mode-secondary: #3D2A35;
+    --mode-background: #1A0F18;
+    --mode-card: #2A1A25;
+    --mode-accent: #B08090;
+  }
+  [data-theme="auto"][data-mode="icebreaker"] {
+    --mode-primary: #6A9DC8;
+    --mode-secondary: #1E2A3A;
+    --mode-background: #0F1520;
+    --mode-card: #1A2535;
+    --mode-accent: #7AADC8;
   }
 }
 

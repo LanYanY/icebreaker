@@ -23,8 +23,8 @@ export class StorageService {
   /**
    * 获取最近问题
    */
-  async getRecentQuestions(category: string, limit = 50): Promise<string[]> {
-    return await db.getRecentQuestions(category, limit)
+  async getRecentQuestions(mode: string, category: string, limit = 50): Promise<string[]> {
+    return await db.getRecentQuestions(mode, category, limit)
   }
 
   /**

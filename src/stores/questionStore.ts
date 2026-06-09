@@ -24,7 +24,7 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   // 方法
-  async function drawQuestion(category: string, useOffline = false): Promise<Question | null> {
+  async function drawQuestion(category: string, useOffline = false, depth?: number, tone?: string): Promise<Question | null> {
     isLoading.value = true
     error.value = null
 
@@ -34,11 +34,17 @@ export const useQuestionStore = defineStore('question', () => {
       // 确保离线题库已加载
       await questionService.value!.loadOfflineQuestions()
 
-      console.log('[Store] 开始抽卡, category:', category, 'useOffline:', useOffline)
-      const question = await questionService.value!.generateQuestion(category, useOffline)
+      // 获取当前模式
+      const settingStore = useSettingStore()
+      const mode = settingStore.userSetting.currentMode || 'icebreaker'
+      const finalDepth = depth ?? settingStore.userSetting.defaultDepth ?? 1
+      const finalTone = tone ?? settingStore.userSetting.defaultTone ?? 'light'
+
+      console.log('[Store] 开始抽卡, mode:', mode, 'category:', category, 'depth:', finalDepth, 'tone:', finalTone, 'useOffline:', useOffline)
+      const question = await questionService.value!.generateQuestion(mode, category, useOffline, finalDepth, finalTone)
 
       if (question) {
-        console.log('[Store] 抽到问题:', question.text, 'source:', question.source)
+        console.log('[Store] 抽到问题:', question.text, 'source:', question.source, 'mode:', question.mode)
         currentQuestion.value = question
         return question
       } else {

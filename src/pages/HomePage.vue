@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useCategoryStore } from '@/stores/categoryStore'
 import { useSettingStore } from '@/stores/settingStore'
+import { APP_MODES, isValidMode } from '@/types/mode'
+import type { ModeId } from '@/types/mode'
 import QuestionCard from '@/components/QuestionCard.vue'
 import Toast from '@/components/Toast.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
@@ -19,17 +21,43 @@ const toastType = ref<'success' | 'error' | 'info'>('success')
 const showHideConfirm = ref(false)
 const questionToHide = ref<Question | null>(null)
 
+// 应用模式主题
+function applyMode(mode: string) {
+  const validMode = isValidMode(mode) ? mode : 'icebreaker'
+  document.documentElement.setAttribute('data-mode', validMode)
+}
+
 onMounted(async () => {
   // 加载离线题库
   await questionStore.loadOfflineQuestions()
+  // 应用当前模式主题
+  applyMode(settingStore.userSetting.currentMode)
 })
+
+// 监听模式变化
+watch(() => settingStore.userSetting.currentMode, (newMode) => {
+  applyMode(newMode)
+})
+
+// 切换模式
+function handleSwitchMode(mode: ModeId) {
+  if (mode === categoryStore.currentMode) return
+  settingStore.saveUserSetting({ currentMode: mode })
+  categoryStore.switchMode(mode)
+}
 
 async function handleDrawQuestion() {
   const useOffline = settingStore.userSetting.useOfflineFirst || !settingStore.hasApiKey()
   await questionStore.drawQuestion(
     categoryStore.currentCategoryId,
-    useOffline
+    useOffline,
+    settingStore.userSetting.defaultDepth,
+    settingStore.userSetting.defaultTone
   )
+  // 循环模式：抽卡成功后自动推进到下一个分类
+  if (questionStore.currentQuestion) {
+    categoryStore.advanceCategory()
+  }
 }
 
 function handleSelectCategory(categoryId: string) {
@@ -79,26 +107,56 @@ function showToastMessage(message: string, type: 'success' | 'error' | 'info' = 
 function handleToastClose() {
   showToast.value = false
 }
+
+
 </script>
 
 <template>
   <div class="home-page">
-    <!-- 顶部标题 -->
+    <!-- 顶部标题 + 模式切换 -->
     <header class="page-header">
       <h1 class="app-title">开场白</h1>
       <p class="app-subtitle">一张卡，打开一个话题</p>
+      
+      <!-- 模式切换器 -->
+      <div class="mode-switcher">
+        <button
+          v-for="mode in APP_MODES"
+          :key="mode.id"
+          class="mode-tab"
+          :class="{ active: categoryStore.currentMode === mode.id }"
+          @click="handleSwitchMode(mode.id)"
+        >
+          <span class="mode-icon">{{ mode.icon }}</span>
+          <span class="mode-name">{{ mode.name }}</span>
+        </button>
+      </div>
     </header>
     
-    <!-- 分类选择器 -->
+    <!-- 分类选择器 + 循环模式 -->
     <div class="category-selector">
-      <button 
-        class="category-button"
-        @click="showCategoryPicker = !showCategoryPicker"
-      >
-        <span class="category-icon">{{ categoryStore.currentCategory?.icon }}</span>
-        <span class="category-name">{{ categoryStore.currentCategory?.name }}</span>
-        <span class="category-arrow">▼</span>
-      </button>
+      <div class="category-row">
+        <button 
+          class="category-button"
+          @click="showCategoryPicker = !showCategoryPicker"
+        >
+          <span class="category-icon">{{ categoryStore.currentCategory?.icon }}</span>
+          <span class="category-name">{{ categoryStore.currentCategory?.name }}</span>
+          <span class="category-arrow">▼</span>
+        </button>
+        <button
+          class="cycle-toggle"
+          :class="{ active: categoryStore.cycleMode }"
+          :aria-label="categoryStore.cycleMode ? 'Category cycle mode on' : 'Category cycle mode off'"
+          @click="categoryStore.toggleCycleMode()"
+        >
+          🔁
+        </button>
+      </div>
+      <!-- 循环模式提示 -->
+      <p v-if="categoryStore.cycleMode" class="cycle-hint">
+        Next: {{ categoryStore.getCategoryName(categoryStore.nextCategoryId) }}
+      </p>
       
       <!-- 分类下拉菜单 -->
       <transition name="fade">
@@ -189,9 +247,9 @@ function handleToastClose() {
 <style scoped>
 .home-page {
   padding: var(--spacing-lg);
-  min-height: 100%;
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-lg);
 }
 
 .page-header {
@@ -211,9 +269,55 @@ function handleToastClose() {
   color: var(--color-text-tertiary);
 }
 
+/* 模式切换器 */
+.mode-switcher {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+.mode-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  background-color: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  transition: all var(--duration-fast) ease;
+}
+
+.mode-tab:active {
+  transform: scale(0.95);
+}
+
+.mode-tab.active {
+  border-color: var(--mode-primary);
+  background-color: var(--mode-secondary);
+  color: var(--color-text-primary);
+}
+
+.mode-icon {
+  font-size: 16px;
+}
+
+.mode-name {
+  font-size: var(--font-size-sm);
+}
+
 .category-selector {
   position: relative;
   margin-bottom: var(--spacing-xl);
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .category-button {
@@ -221,12 +325,41 @@ function handleToastClose() {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  width: 100%;
+  flex: 1;
   padding: var(--spacing-md);
   background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   transition: all var(--duration-fast) ease;
+}
+
+.cycle-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-tertiary);
+  transition: all var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.cycle-toggle.active {
+  background-color: var(--mode-secondary);
+  border-color: var(--mode-primary);
+  color: var(--mode-primary);
+}
+
+.cycle-hint {
+  font-size: var(--font-size-xs);
+  color: var(--mode-primary);
+  text-align: center;
+  margin-top: var(--spacing-xs);
+  opacity: 0.8;
 }
 
 .category-button:active {
@@ -259,7 +392,7 @@ function handleToastClose() {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  z-index: 110; /* 高于抽一张按钮的 z-index: 101 */
+  z-index: 110;
   overflow: hidden;
 }
 
@@ -278,7 +411,7 @@ function handleToastClose() {
 }
 
 .category-option.active {
-  background-color: rgba(232, 160, 191, 0.1);
+  background-color: var(--mode-secondary);
 }
 
 .option-icon {
@@ -303,11 +436,9 @@ function handleToastClose() {
 }
 
 .card-area {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--spacing-xl);
 }
 
 .loading-state,
@@ -326,7 +457,7 @@ function handleToastClose() {
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-accent-primary);
+  border-top-color: var(--mode-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -349,7 +480,7 @@ function handleToastClose() {
 
 .retry-button {
   padding: var(--spacing-sm) var(--spacing-lg);
-  background-color: var(--color-accent-primary);
+  background-color: var(--mode-primary);
   color: white;
   border-radius: var(--radius-full);
   font-size: var(--font-size-base);
@@ -373,9 +504,7 @@ function handleToastClose() {
 .draw-button-area {
   display: flex;
   justify-content: center;
-  padding-bottom: calc(76px + var(--spacing-lg)); /* 底部导航高度 + 额外间距 */
-  position: relative;
-  z-index: 101; /* 高于 BottomNav 的 z-index: 100 */
+  padding-bottom: var(--spacing-lg);
 }
 
 .draw-button {
@@ -386,18 +515,17 @@ function handleToastClose() {
   width: 100%;
   max-width: 300px;
   height: 56px;
-  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  background: linear-gradient(135deg, var(--mode-primary), var(--mode-secondary));
   color: white;
   border-radius: var(--radius-full);
   font-size: var(--font-size-lg);
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(232, 160, 191, 0.4);
+  box-shadow: 0 4px 15px rgba(141, 189, 235, 0.4);
   transition: all var(--duration-fast) ease;
 }
 
 .draw-button:active:not(:disabled) {
   transform: scale(0.98);
-  box-shadow: 0 2px 10px rgba(232, 160, 191, 0.4);
 }
 
 .draw-button:disabled {

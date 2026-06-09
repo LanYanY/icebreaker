@@ -38,10 +38,7 @@ function navigateTo(path: string) {
 
 <style scoped>
 .bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink: 0;
   width: 100%;
   max-width: 430px;
   height: 76px;
@@ -51,7 +48,6 @@ function navigateTo(path: string) {
   align-items: center;
   justify-content: space-around;
   padding: 0 16px;
-  z-index: 100;
   /* 适配全面屏安全区域 */
   padding-bottom: env(safe-area-inset-bottom);
 }

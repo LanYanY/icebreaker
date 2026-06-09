@@ -16,6 +16,7 @@ export const useSettingStore = defineStore('setting', () => {
   async function initSettings() {
     try {
       // 从数据库加载用户设置
+      const savedMode = await db.getSetting('currentMode')
       const savedCategory = await db.getSetting('defaultCategory')
       const savedDepth = await db.getSetting('defaultDepth')
       const savedTone = await db.getSetting('defaultTone')
@@ -23,6 +24,7 @@ export const useSettingStore = defineStore('setting', () => {
       const savedAllowHistory = await db.getSetting('allowHistoryForDedup')
       const savedTheme = await db.getSetting('theme')
       
+      if (savedMode) userSetting.value.currentMode = savedMode as UserSetting['currentMode']
       if (savedCategory) userSetting.value.defaultCategory = savedCategory
       if (savedDepth) userSetting.value.defaultDepth = parseInt(savedDepth)
       if (savedTone) userSetting.value.defaultTone = savedTone
@@ -133,6 +135,7 @@ export const useSettingStore = defineStore('setting', () => {
     apiKey.value = ''
     
     // 清除数据库中的设置
+    await db.deleteSetting('currentMode')
     await db.deleteSetting('defaultCategory')
     await db.deleteSetting('defaultDepth')
     await db.deleteSetting('defaultTone')

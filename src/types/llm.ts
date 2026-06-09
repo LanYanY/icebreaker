@@ -110,8 +110,11 @@ export const DEFAULT_LLM_CONFIG: LLMConfig = {
   maxRetries: 2
 }
 
+import type { ModeId } from './mode'
+
 // LLM请求参数
 export interface LLMRequestParams {
+  mode: ModeId
   category: string
   depth: number
   tone: string
@@ -120,7 +123,11 @@ export interface LLMRequestParams {
 
 // LLM响应格式
 export interface LLMResponse {
-  question: string
+  mode?: ModeId
+  question: {
+    en: string
+    zh: string
+  } | string
   category: string
   depth: number
   tone: string
