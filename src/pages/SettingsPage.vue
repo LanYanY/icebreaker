@@ -22,6 +22,20 @@ onMounted(() => {
   applyTheme(settingStore.userSetting.theme)
 })
 
+// 响应式同步 formData —— 当 store 数据从数据库加载完成后更新表单
+watch(() => settingStore.userSetting.defaultCategory, (val) => {
+  formData.value.defaultCategory = val
+})
+watch(() => settingStore.userSetting.defaultDepth, (val) => {
+  formData.value.defaultDepth = val
+})
+watch(() => settingStore.userSetting.defaultTone, (val) => {
+  formData.value.defaultTone = val
+})
+watch(() => settingStore.userSetting.theme, (val) => {
+  formData.value.theme = val
+})
+
 const showAdvanced = ref(false)
 const showClearConfirm = ref(false)
 const clearType = ref<'history' | 'favorites' | 'apiKey' | 'all'>('all')

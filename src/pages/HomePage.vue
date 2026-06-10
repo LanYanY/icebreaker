@@ -32,6 +32,11 @@ onMounted(async () => {
   await questionStore.loadOfflineQuestions()
   // 应用当前模式主题
   applyMode(settingStore.userSetting.currentMode)
+  // 同步 defaultCategory 到 categoryStore
+  const savedCategory = settingStore.userSetting.defaultCategory
+  if (savedCategory) {
+    categoryStore.setCurrentCategory(savedCategory)
+  }
 })
 
 // 监听模式变化
