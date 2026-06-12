@@ -1,18 +1,64 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { App } from '@capacitor/app'
+import { Browser } from '@capacitor/browser'
+import { useUpdateStore } from '@/stores/updateStore'
+import UpdateDialog from '@/components/UpdateDialog.vue'
 
+const updateStore = useUpdateStore()
 const appVersion = ref('1.0.0')
+const showUpdateDialog = ref(false)
+const toastMessage = ref('')
+const showToast = ref(false)
 
 onMounted(async () => {
   try {
     const info = await App.getInfo()
     appVersion.value = info.version || '1.0.0'
+    updateStore.setCurrentVersion(appVersion.value)
+    // 加载持久化状态
+    await updateStore.loadState()
   } catch {
     // web fallback
     appVersion.value = '1.0.0'
   }
 })
+
+/** 检查更新 */
+async function handleCheckUpdate() {
+  await updateStore.checkUpdate(false)
+
+  if (updateStore.hasUpdate && updateStore.updateInfo) {
+    showUpdateDialog.value = true
+  } else {
+    showToastMsg('已是最新版本 ✓')
+  }
+}
+
+/** 下载更新 */
+async function handleDownload() {
+  if (!updateStore.updateInfo?.downloadUrl) return
+
+  try {
+    await Browser.open({ url: updateStore.updateInfo.downloadUrl })
+    showUpdateDialog.value = false
+  } catch (err) {
+    console.warn('[About] Failed to open browser:', err)
+    showToastMsg('无法打开下载链接')
+  }
+}
+
+/** 忽略更新 */
+async function handleDismiss() {
+  await updateStore.dismissUpdate()
+  showUpdateDialog.value = false
+}
+
+function showToastMsg(msg: string) {
+  toastMessage.value = msg
+  showToast.value = true
+  setTimeout(() => { showToast.value = false }, 2000)
+}
 </script>
 
 <template>
@@ -27,7 +73,24 @@ onMounted(async () => {
         <div class="app-icon">🎴</div>
         <h2 class="app-name">开场白</h2>
         <p class="app-slogan">一张卡，打开一个话题</p>
-        <span class="app-version">v{{ appVersion }}</span>
+        <div class="version-row">
+          <span class="app-version">v{{ appVersion }}</span>
+          <span class="version-dot">·</span>
+          <button
+            class="update-btn"
+            :class="{ 'has-update': updateStore.hasUpdate }"
+            :disabled="updateStore.isChecking"
+            @click="handleCheckUpdate"
+          >
+            <span v-if="updateStore.isChecking" class="update-spinner"></span>
+            <template v-else-if="updateStore.hasUpdate && updateStore.updateInfo">
+              🆕 v{{ updateStore.updateInfo.version }}
+            </template>
+            <template v-else>
+              检查更新
+            </template>
+          </button>
+        </div>
       </div>
 
       <!-- Description -->
@@ -49,6 +112,7 @@ onMounted(async () => {
           <li>🔄 分类循环模式，自动轮换话题</li>
           <li>📤 分享精美卡片图片</li>
           <li>🌙 深色模式支持</li>
+          <li>🔔 版本更新检测</li>
         </ul>
       </div>
 
@@ -81,6 +145,23 @@ onMounted(async () => {
         <p class="copyright-sub">Personal Use Only · Made with ❤️</p>
       </div>
     </div>
+
+    <!-- 更新对话框 -->
+    <UpdateDialog
+      :show="showUpdateDialog"
+      :update-info="updateStore.updateInfo"
+      :current-version="appVersion"
+      @download="handleDownload"
+      @dismiss="handleDismiss"
+      @close="showUpdateDialog = false"
+    />
+
+    <!-- Toast -->
+    <teleport to="body">
+      <transition name="fade">
+        <div v-if="showToast" class="toast-message">{{ toastMessage }}</div>
+      </transition>
+    </teleport>
   </div>
 </template>
 
@@ -137,13 +218,69 @@ onMounted(async () => {
   margin-bottom: var(--spacing-md);
 }
 
+.version-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
 .app-version {
-  display: inline-block;
   font-size: var(--font-size-xs);
   color: var(--color-accent-primary);
   background-color: rgba(232, 160, 191, 0.1);
   padding: 4px 12px;
   border-radius: var(--radius-full);
+}
+
+.version-dot {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+/* 更新按钮 */
+.update-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) ease;
+}
+
+.update-btn:active {
+  transform: scale(0.96);
+}
+
+.update-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.update-btn.has-update {
+  color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.1);
+  font-weight: 600;
+}
+
+/* 加载动画 */
+.update-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .card-title {
@@ -205,5 +342,20 @@ onMounted(async () => {
   font-size: var(--font-size-xs) !important;
   margin-top: var(--spacing-xs);
   opacity: 0.6;
+}
+
+/* Toast */
+.toast-message {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-full);
+  z-index: 1001;
+  box-shadow: var(--shadow-lg);
 }
 </style>
