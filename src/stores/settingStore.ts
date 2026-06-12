@@ -20,15 +20,13 @@ export const useSettingStore = defineStore('setting', () => {
       const savedCategory = await db.getSetting('defaultCategory')
       const savedDepth = await db.getSetting('defaultDepth')
       const savedTone = await db.getSetting('defaultTone')
-      const savedUseOffline = await db.getSetting('useOfflineFirst')
       const savedAllowHistory = await db.getSetting('allowHistoryForDedup')
       const savedTheme = await db.getSetting('theme')
-      
+
       if (savedMode) userSetting.value.currentMode = savedMode as UserSetting['currentMode']
       if (savedCategory) userSetting.value.defaultCategory = savedCategory
       if (savedDepth) userSetting.value.defaultDepth = parseInt(savedDepth)
       if (savedTone) userSetting.value.defaultTone = savedTone
-      if (savedUseOffline) userSetting.value.useOfflineFirst = savedUseOffline === 'true'
       if (savedAllowHistory) userSetting.value.allowHistoryForDedup = savedAllowHistory === 'true'
       if (savedTheme) userSetting.value.theme = savedTheme as UserSetting['theme']
       
@@ -139,7 +137,6 @@ export const useSettingStore = defineStore('setting', () => {
     await db.deleteSetting('defaultCategory')
     await db.deleteSetting('defaultDepth')
     await db.deleteSetting('defaultTone')
-    await db.deleteSetting('useOfflineFirst')
     await db.deleteSetting('allowHistoryForDedup')
     await db.deleteSetting('theme')
     await db.deleteSetting('llm_provider')

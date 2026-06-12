@@ -28,8 +28,6 @@ function applyMode(mode: string) {
 }
 
 onMounted(async () => {
-  // 加载离线题库
-  await questionStore.loadOfflineQuestions()
   // 应用当前模式主题
   applyMode(settingStore.userSetting.currentMode)
   // 同步 defaultCategory 到 categoryStore
@@ -52,10 +50,8 @@ function handleSwitchMode(mode: ModeId) {
 }
 
 async function handleDrawQuestion() {
-  const useOffline = settingStore.userSetting.useOfflineFirst || !settingStore.hasApiKey()
   await questionStore.drawQuestion(
     categoryStore.currentCategoryId,
-    useOffline,
     settingStore.userSetting.defaultDepth,
     settingStore.userSetting.defaultTone
   )

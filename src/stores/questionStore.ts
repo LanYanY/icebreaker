@@ -24,15 +24,12 @@ export const useQuestionStore = defineStore('question', () => {
   }
 
   // 方法
-  async function drawQuestion(category: string, useOffline = false, depth?: number, tone?: string): Promise<Question | null> {
+  async function drawQuestion(category: string, depth?: number, tone?: string): Promise<Question | null> {
     isLoading.value = true
     error.value = null
 
     try {
       await ensureService()
-
-      // 确保离线题库已加载
-      await questionService.value!.loadOfflineQuestions()
 
       // 获取当前模式
       const settingStore = useSettingStore()
@@ -40,8 +37,8 @@ export const useQuestionStore = defineStore('question', () => {
       const finalDepth = depth ?? settingStore.userSetting.defaultDepth ?? 1
       const finalTone = tone ?? settingStore.userSetting.defaultTone ?? 'light'
 
-      console.log('[Store] 开始抽卡, mode:', mode, 'category:', category, 'depth:', finalDepth, 'tone:', finalTone, 'useOffline:', useOffline)
-      const question = await questionService.value!.generateQuestion(mode, category, useOffline, finalDepth, finalTone)
+      console.log('[Store] 开始抽卡, mode:', mode, 'category:', category, 'depth:', finalDepth, 'tone:', finalTone)
+      const question = await questionService.value!.generateQuestion(mode, category, finalDepth, finalTone)
 
       if (question) {
         console.log('[Store] 抽到问题:', question.text, 'source:', question.source, 'mode:', question.mode)
@@ -99,11 +96,6 @@ export const useQuestionStore = defineStore('question', () => {
     error.value = null
   }
 
-  async function loadOfflineQuestions() {
-    await ensureService()
-    await questionService.value!.loadOfflineQuestions()
-  }
-
   return {
     currentQuestion,
     isLoading,
@@ -116,6 +108,5 @@ export const useQuestionStore = defineStore('question', () => {
     shareQuestion,
     clearError,
     ensureService,
-    loadOfflineQuestions
   }
 })

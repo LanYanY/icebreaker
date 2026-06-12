@@ -6,7 +6,6 @@ export interface UserSetting {
   defaultCategory: string
   defaultDepth: number
   defaultTone: string
-  useOfflineFirst: boolean
   allowHistoryForDedup: boolean
   theme: 'light' | 'dark' | 'auto'
 }
@@ -17,7 +16,6 @@ export const DEFAULT_USER_SETTING: UserSetting = {
   defaultCategory: 'random',
   defaultDepth: 1,
   defaultTone: 'light',
-  useOfflineFirst: false,
   allowHistoryForDedup: true,
   theme: 'auto'
 }

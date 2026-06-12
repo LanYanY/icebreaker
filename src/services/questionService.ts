@@ -10,13 +10,12 @@ import { generateId, generateHash } from '@/utils/hash'
 
 /**
  * 问题服务
- * 负责问题生成主流程
+ * 负责问题生成主流程（仅 LLM）
  */
 export class QuestionService {
   private llmService: LLMService | null
   private dedupService: DedupService
   private storageService: StorageService
-  private offlineQuestions: any[] = []
 
   constructor(
     llmService: LLMService | null,
@@ -29,61 +28,34 @@ export class QuestionService {
   }
 
   /**
-   * 加载离线题库
-   */
-  async loadOfflineQuestions(): Promise<void> {
-    try {
-      // 加载 icebreaker 离线题库
-      const response = await fetch('/offline_questions.json')
-      const icebreakerQuestions = await response.json()
-      
-      // 加载 intimacy 离线题库（如果存在）
-      let intimacyQuestions: any[] = []
-      try {
-        const intResponse = await fetch('/offline_questions_intimacy.json')
-        intimacyQuestions = await intResponse.json()
-      } catch {
-        // intimacy 题库不存在，忽略
-      }
-      
-      // 合并所有离线题库
-      this.offlineQuestions = [...icebreakerQuestions, ...intimacyQuestions]
-    } catch (err) {
-      console.error('Failed to load offline questions:', err)
-    }
-  }
-
-  /**
-   * 生成问题
+   * 生成问题（仅 LLM）
    */
   async generateQuestion(
     mode: ModeId,
     category: string,
-    useOffline = false,
     depth = 1,
     tone = 'light'
   ): Promise<Question | null> {
     // 更新去重服务
     await this.updateDedupService(mode, category)
 
-    // 尝试从LLM生成
-    if (!useOffline && this.llmService) {
+    // 从 LLM 生成
+    if (this.llmService) {
       try {
         const question = await this.generateFromLLM(mode, category, depth, tone)
         if (question) {
           return question
         }
       } catch (err) {
-        console.warn('LLM generation failed, switching to offline:', err)
+        console.warn('LLM generation failed:', err)
       }
     }
 
-    // 使用离线题库
-    return await this.generateFromOffline(mode, category)
+    return null
   }
 
   /**
-   * 从LLM生成问题
+   * 从 LLM 生成问题
    */
   private async generateFromLLM(
     mode: ModeId,
@@ -153,63 +125,6 @@ export class QuestionService {
   }
 
   /**
-   * 从离线题库生成问题
-   */
-  private async generateFromOffline(
-    mode: ModeId,
-    category: string
-  ): Promise<Question | null> {
-    // 筛选当前模式和分类的离线问题
-    const categoryQuestions = this.offlineQuestions.filter(q => {
-      const qMode = isValidMode(q.mode) ? q.mode : 'icebreaker'
-      return qMode === mode && q.category === category
-    })
-
-    if (categoryQuestions.length === 0) {
-      console.warn(`No offline questions for mode:${mode} category:${category}`)
-      return null
-    }
-
-    // 随机打乱顺序
-    const shuffled = [...categoryQuestions].sort(() => Math.random() - 0.5)
-
-    // 尝试找到一个不重复的问题
-    for (const offlineQ of shuffled) {
-      // 标准化为 QuestionText 格式
-      const questionText: QuestionText = normalizeQuestionText(offlineQ.question)
-      const enText = questionText.en
-      const hash = generateHash(enText)
-
-      // 用英文文本去重
-      if (this.dedupService.isDuplicate(enText)) {
-        continue
-      }
-
-      // 找到有效问题
-      const question: Question = {
-        id: generateId(),
-        mode: isValidMode(offlineQ.mode) ? offlineQ.mode : 'icebreaker',
-        text: { ...questionText },
-        category: offlineQ.category,
-        depth: offlineQ.depth,
-        tone: offlineQ.tone,
-        tags: [...offlineQ.tags],
-        source: 'offline',
-        hash: hash,
-        createdAt: Date.now(),
-        favorite: false
-      }
-
-      // 保存到数据库
-      await this.storageService.saveQuestion(question)
-
-      return question
-    }
-
-    return null
-  }
-
-  /**
    * 更新去重服务
    */
   private async updateDedupService(mode: ModeId, category: string): Promise<void> {
@@ -242,7 +157,6 @@ export class QuestionService {
       await navigator.clipboard.writeText(text)
       return true
     } catch {
-      // 降级方案
       const textarea = document.createElement('textarea')
       textarea.value = text
       textarea.style.position = 'fixed'

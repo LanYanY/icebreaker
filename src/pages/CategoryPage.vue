@@ -182,8 +182,7 @@ function handleFilterByCategory(categoryId: string) {
           <div class="card-header">
             <span class="category-tag">{{ categoryStore.getCategoryName(question.category) }}</span>
             <div class="header-right">
-              <span v-if="question.source === 'llm'" class="source-tag ai">AI</span>
-              <span v-else class="source-tag offline">离线</span>
+              <span class="source-tag ai">AI</span>
             </div>
           </div>
 

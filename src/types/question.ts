@@ -1,7 +1,7 @@
 import type { ModeId } from './mode'
 
 // 问题来源类型
-export type QuestionSource = 'llm' | 'offline'
+export type QuestionSource = 'llm'
 
 // 双语问题文本
 export type QuestionText = {

@@ -45,7 +45,6 @@ const formData = ref({
   defaultCategory: settingStore.userSetting.defaultCategory,
   defaultDepth: settingStore.userSetting.defaultDepth,
   defaultTone: settingStore.userSetting.defaultTone,
-  useOfflineFirst: settingStore.userSetting.useOfflineFirst,
   allowHistoryForDedup: settingStore.userSetting.allowHistoryForDedup,
   theme: settingStore.userSetting.theme,
   baseUrl: settingStore.llmConfig.baseUrl,
@@ -114,7 +113,6 @@ async function handleResetSettings() {
       defaultCategory: settingStore.userSetting.defaultCategory,
       defaultDepth: settingStore.userSetting.defaultDepth,
       defaultTone: settingStore.userSetting.defaultTone,
-      useOfflineFirst: settingStore.userSetting.useOfflineFirst,
       allowHistoryForDedup: settingStore.userSetting.allowHistoryForDedup,
       theme: settingStore.userSetting.theme,
       baseUrl: settingStore.llmConfig.baseUrl,
@@ -450,22 +448,6 @@ function showClearDialog(type: 'history' | 'favorites' | 'apiKey' | 'all') {
       </div>
 
       <div class="card-body">
-        <!-- 优先使用离线题库 -->
-        <div class="setting-row">
-          <div class="setting-info">
-            <span class="setting-name">Offline Mode First</span>
-            <span class="setting-desc">Use local question bank even if API is configured</span>
-          </div>
-          <label class="setting-switch">
-            <input
-              type="checkbox"
-              v-model="formData.useOfflineFirst"
-              @change="handleSaveSetting('useOfflineFirst', formData.useOfflineFirst)"
-            >
-            <span class="switch-slider"></span>
-          </label>
-        </div>
-
         <!-- 允许发送历史给LLM -->
         <div class="setting-row">
           <div class="setting-info">
