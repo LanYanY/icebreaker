@@ -39,13 +39,14 @@ async function handleCheckUpdate() {
 
 /** 下载并安装更新 */
 async function handleDownload() {
-  if (!updateStore.updateInfo?.downloadUrl) return
+  if (!updateStore.updateInfo?.downloadUrls?.length) return
 
   isDownloading.value = true
   downloadProgress.value = 0
 
   try {
-    await downloadAndInstallApk(updateStore.updateInfo.downloadUrl, (status) => {
+    // 传入多个 URL，自动回退（Gitee → GitHub）
+    await downloadAndInstallApk(updateStore.updateInfo.downloadUrls, (status) => {
       if (status.type === 'downloading') {
         downloadProgress.value = status.progress || 0
       } else if (status.type === 'installing') {

@@ -3,9 +3,9 @@ export interface UpdateInfo {
   version: string
   /** Release Notes (markdown) */
   releaseNotes: string
-  /** APK 下载地址 */
-  downloadUrl: string
-  /** 来源平台 */
+  /** APK 下载地址列表（按优先级排序：Gitee → GitHub） */
+  downloadUrls: string[]
+  /** 主要来源平台 */
   source: 'gitee' | 'github'
   /** 发布时间 ISO string */
   publishedAt: string

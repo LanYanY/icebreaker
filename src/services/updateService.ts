@@ -30,24 +30,72 @@ function extractApkUrl(assets: any[]): string | null {
 
 /**
  * 检查是否有新版本可用
- * 优先从 Gitee 获取，失败则从 GitHub 获取
+ * 同时从 Gitee 和 GitHub 获取，合并下载地址（Gitee 优先）
  */
 export async function checkForUpdate(currentVersion: string): Promise<UpdateInfo | null> {
-  // 尝试 Gitee（使用 /releases 列表接口，因为 /releases/latest 不返回 attach_files）
-  const giteeResult = await fetchGiteeRelease(currentVersion)
-  if (giteeResult) return giteeResult
+  const current = currentVersion || '0.0.0'
 
-  // 回退到 GitHub
-  const githubResult = await fetchGitHubRelease(currentVersion)
-  if (githubResult) return githubResult
+  // 并行获取两个平台的 release 信息
+  const [giteeInfo, githubInfo] = await Promise.all([
+    fetchGiteeRelease(),
+    fetchGitHubRelease()
+  ])
 
-  return null
+  // 取版本号更大的那个
+  let latestVersion = ''
+  let releaseNotes = ''
+  let publishedAt = ''
+  let source: 'gitee' | 'github' = 'gitee'
+
+  if (giteeInfo && githubInfo) {
+    if (compareVersions(giteeInfo.version, githubInfo.version) >= 0) {
+      latestVersion = giteeInfo.version
+      releaseNotes = giteeInfo.releaseNotes
+      publishedAt = giteeInfo.publishedAt
+      source = 'gitee'
+    } else {
+      latestVersion = githubInfo.version
+      releaseNotes = githubInfo.releaseNotes
+      publishedAt = githubInfo.publishedAt
+      source = 'github'
+    }
+  } else if (giteeInfo) {
+    latestVersion = giteeInfo.version
+    releaseNotes = giteeInfo.releaseNotes
+    publishedAt = giteeInfo.publishedAt
+    source = 'gitee'
+  } else if (githubInfo) {
+    latestVersion = githubInfo.version
+    releaseNotes = githubInfo.releaseNotes
+    publishedAt = githubInfo.publishedAt
+    source = 'github'
+  } else {
+    return null
+  }
+
+  // 比较版本
+  if (compareVersions(latestVersion, current) <= 0) return null
+
+  // 合并下载地址（Gitee 优先，GitHub 备用）
+  const downloadUrls: string[] = []
+  if (giteeInfo?.downloadUrl) downloadUrls.push(giteeInfo.downloadUrl)
+  if (githubInfo?.downloadUrl) downloadUrls.push(githubInfo.downloadUrl)
+
+  if (downloadUrls.length === 0) {
+    console.warn('[UpdateService] No APK download URLs found')
+    return null
+  }
+
+  return {
+    version: latestVersion,
+    releaseNotes,
+    downloadUrls,
+    source,
+    publishedAt
+  }
 }
 
-/**
- * Gitee: 使用 /releases 列表接口取第一条（包含 attach_files）
- */
-async function fetchGiteeRelease(currentVersion: string): Promise<UpdateInfo | null> {
+async function fetchGiteeRelease(): Promise<{ version: string; releaseNotes: string; downloadUrl: string; publishedAt: string } | null> {
   try {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 8000)
@@ -67,41 +115,27 @@ async function fetchGiteeRelease(currentVersion: string): Promise<UpdateInfo | n
     const data = releases.sort((a: any, b: any) => {
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     })[0]
+
     const tagName: string = data.tag_name || ''
-    const latestVersion = tagName.replace(/^v/, '')
-
-    if (!latestVersion) return null
-
-    const current = currentVersion || '0.0.0'
-    if (compareVersions(latestVersion, current) <= 0) return null
+    const version = tagName.replace(/^v/, '')
+    if (!version) return null
 
     const downloadUrl = extractApkUrl(data.assets)
-    if (!downloadUrl) {
-      console.warn('[UpdateService] No APK asset found in Gitee release')
-      return null
-    }
+    if (!downloadUrl) return null
 
     return {
-      version: latestVersion,
+      version,
       releaseNotes: data.body || '',
       downloadUrl,
-      source: 'gitee',
       publishedAt: data.created_at || ''
     }
   } catch (err: any) {
-    if (err?.name === 'AbortError') {
-      console.warn('[UpdateService] Gitee request timeout')
-    } else {
-      console.warn('[UpdateService] Gitee fetch failed:', err?.message || err)
-    }
+    console.warn('[UpdateService] Gitee fetch failed:', err?.message || err)
     return null
   }
 }
 
-/**
- * GitHub: 使用 /releases/latest 接口
- */
-async function fetchGitHubRelease(currentVersion: string): Promise<UpdateInfo | null> {
+async function fetchGitHubRelease(): Promise<{ version: string; releaseNotes: string; downloadUrl: string; publishedAt: string } | null> {
   try {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 8000)
@@ -116,32 +150,20 @@ async function fetchGitHubRelease(currentVersion: string): Promise<UpdateInfo | 
 
     const data = await response.json()
     const tagName: string = data.tag_name || ''
-    const latestVersion = tagName.replace(/^v/, '')
-
-    if (!latestVersion) return null
-
-    const current = currentVersion || '0.0.0'
-    if (compareVersions(latestVersion, current) <= 0) return null
+    const version = tagName.replace(/^v/, '')
+    if (!version) return null
 
     const downloadUrl = extractApkUrl(data.assets)
-    if (!downloadUrl) {
-      console.warn('[UpdateService] No APK asset found in GitHub release')
-      return null
-    }
+    if (!downloadUrl) return null
 
     return {
-      version: latestVersion,
+      version,
       releaseNotes: data.body || '',
       downloadUrl,
-      source: 'github',
       publishedAt: data.published_at || ''
     }
   } catch (err: any) {
-    if (err?.name === 'AbortError') {
-      console.warn('[UpdateService] GitHub request timeout')
-    } else {
-      console.warn('[UpdateService] GitHub fetch failed:', err?.message || err)
-    }
+    console.warn('[UpdateService] GitHub fetch failed:', err?.message || err)
     return null
   }
 }
