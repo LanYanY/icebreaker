@@ -1,147 +1,241 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useCategoryStore } from '@/stores/categoryStore'
-import { useQuestionStore } from '@/stores/questionStore'
-import { useSettingStore } from '@/stores/settingStore'
-import QuestionCard from '@/components/QuestionCard.vue'
+import { ref, onMounted, computed } from 'vue'
 import type { Question } from '@/types/question'
+import { getQuestionText, hasChineseText } from '@/types/question'
+import { getQuestionMode } from '@/types/mode'
+import { useCategoryStore } from '@/stores/categoryStore'
+import * as db from '@/db'
 
 const categoryStore = useCategoryStore()
-const questionStore = useQuestionStore()
-const settingStore = useSettingStore()
 
-// 离线题库计数
-const offlineCounts = ref<Record<string, number>>({})
+const questions = ref<Question[]>([])
+const selectedCategory = ref<string>('all')
+const isLoading = ref(false)
+const displayLangMap = ref<Record<string, 'en' | 'zh'>>({})
+const showDeleteConfirm = ref(false)
+const questionToDelete = ref<Question | null>(null)
 
-// 当前抽到的问题
-const drawnQuestion = ref<Question | null>(null)
-const isDrawing = ref(false)
-
-onMounted(async () => {
-  await loadOfflineCounts()
+// 按当前模式过滤，再按分类过滤
+const filteredQuestions = computed(() => {
+  const mode = categoryStore.currentMode
+  const modeQuestions = questions.value.filter((q: Question) => getQuestionMode(q) === mode)
+  if (selectedCategory.value === 'all') {
+    return modeQuestions
+  }
+  return modeQuestions.filter((q: Question) => q.category === selectedCategory.value)
 })
 
-/** 加载离线题库统计 */
-async function loadOfflineCounts() {
-  try {
-    const counts: Record<string, number> = {}
-
-    // 加载 icebreaker 题库
-    const ibRes = await fetch('/offline_questions.json')
-    const ibQuestions = await ibRes.json()
-    ibQuestions.forEach((q: any) => {
-      const cat = q.category || 'random'
-      counts[cat] = (counts[cat] || 0) + 1
-    })
-
-    // 加载 intimacy 题库
-    try {
-      const intRes = await fetch('/offline_questions_intimacy.json')
-      const intQuestions = await intRes.json()
-      intQuestions.forEach((q: any) => {
-        const cat = q.category || 'intimacy_random'
-        counts[cat] = (counts[cat] || 0) + 1
-      })
-    } catch {
-      // intimacy 题库不存在
-    }
-
-    offlineCounts.value = counts
-  } catch {
-    // 静默失败
+// 各分类的题目数量（当前模式下）
+const categoryCounts = computed(() => {
+  const mode = categoryStore.currentMode
+  const modeQuestions = questions.value.filter((q: Question) => getQuestionMode(q) === mode)
+  const counts: Record<string, number> = { all: modeQuestions.length }
+  for (const q of modeQuestions) {
+    counts[q.category] = (counts[q.category] || 0) + 1
   }
-}
+  return counts
+})
 
-/** 获取分类的离线题数 */
-function getOfflineCount(categoryId: string): number {
-  return offlineCounts.value[categoryId] || 0
-}
+onMounted(async () => {
+  await loadQuestions()
+})
 
-/** 直接从分类抽卡 */
-async function handleDrawFromCategory(categoryId: string) {
-  if (isDrawing.value) return
-
-  isDrawing.value = true
-  drawnQuestion.value = null
-
+async function loadQuestions() {
+  isLoading.value = true
   try {
-    // 设置当前分类
-    categoryStore.setCurrentCategory(categoryId)
-
-    const useOffline = settingStore.userSetting.useOfflineFirst || !settingStore.hasApiKey()
-    const question = await questionStore.drawQuestion(
-      categoryId,
-      useOffline,
-      settingStore.userSetting.defaultDepth,
-      settingStore.userSetting.defaultTone
-    )
-
-    if (question) {
-      drawnQuestion.value = question
-    }
+    questions.value = await db.getAllQuestions()
+  } catch (err) {
+    console.error('加载题库失败:', err)
   } finally {
-    isDrawing.value = false
+    isLoading.value = false
   }
 }
 
-/** 关闭问题卡片 */
-function handleCloseCard() {
-  drawnQuestion.value = null
+function getText(question: Question): string {
+  const lang = displayLangMap.value[question.id] || 'en'
+  return getQuestionText(question, lang)
+}
+
+function toggleLang(id: string) {
+  const current = displayLangMap.value[id] || 'en'
+  displayLangMap.value[id] = current === 'en' ? 'zh' : 'en'
+}
+
+function getLang(id: string): 'en' | 'zh' {
+  return displayLangMap.value[id] || 'en'
+}
+
+function canTranslate(question: Question): boolean {
+  return hasChineseText(question)
+}
+
+async function handleToggleFavorite(id: string) {
+  await db.toggleFavorite(id)
+  await loadQuestions()
+}
+
+async function handleCopy(text: string) {
+  try {
+    await navigator.clipboard.writeText(text)
+  } catch {
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.style.position = 'fixed'
+    textarea.style.opacity = '0'
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textarea)
+  }
+}
+
+async function handleShare(text: string) {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: '开场白', text })
+    } catch {
+      // 用户取消
+    }
+  }
+}
+
+function confirmDelete(question: Question) {
+  questionToDelete.value = question
+  showDeleteConfirm.value = true
+}
+
+async function handleDelete() {
+  if (questionToDelete.value) {
+    await db.deleteQuestion(questionToDelete.value.id)
+    await loadQuestions()
+  }
+  showDeleteConfirm.value = false
+  questionToDelete.value = null
+}
+
+function cancelDelete() {
+  showDeleteConfirm.value = false
+  questionToDelete.value = null
+}
+
+function handleFilterByCategory(categoryId: string) {
+  selectedCategory.value = categoryId
 }
 </script>
 
 <template>
-  <div class="category-page">
-    <!-- 页面标题 -->
+  <div class="bank-page">
     <header class="page-header">
-      <h1 class="page-title">Categories</h1>
-      <p class="page-subtitle">Choose a category and draw a question</p>
+      <h1 class="page-title">题库</h1>
+      <p class="page-subtitle">
+        <template v-if="!isLoading">
+          {{ filteredQuestions.length }} 个问题
+        </template>
+        <template v-else>加载中...</template>
+      </p>
     </header>
 
-    <!-- 分类列表 -->
-    <div class="category-grid">
-      <div
+    <!-- 分类过滤 -->
+    <div class="category-filter">
+      <button
+        class="filter-pill"
+        :class="{ active: selectedCategory === 'all' }"
+        @click="handleFilterByCategory('all')"
+      >
+        全部 <span class="pill-count">{{ categoryCounts.all || 0 }}</span>
+      </button>
+      <button
         v-for="category in categoryStore.sortedCategories"
         :key="category.id"
-        class="category-card"
-        :class="{ active: categoryStore.currentCategoryId === category.id }"
+        class="filter-pill"
+        :class="{ active: selectedCategory === category.id }"
+        @click="handleFilterByCategory(category.id)"
       >
-        <!-- 左侧：图标 + 信息 -->
-        <div class="card-main">
-          <div class="card-icon" :style="{ backgroundColor: category.color + '20' }">
-            {{ category.icon }}
-          </div>
-          <div class="card-content">
-            <div class="card-title-row">
-              <h3 class="card-title">{{ category.name }}</h3>
-              <span v-if="categoryStore.currentCategoryId === category.id" class="current-badge">当前</span>
+        {{ category.icon }} {{ category.name }}
+        <span class="pill-count">{{ categoryCounts[category.id] || 0 }}</span>
+      </button>
+    </div>
+
+    <!-- 问题列表 -->
+    <div class="question-list">
+      <!-- 加载 -->
+      <div v-if="isLoading" class="state-box">
+        <div class="loading-spinner"></div>
+        <p class="state-text">加载中...</p>
+      </div>
+
+      <!-- 空状态 -->
+      <div v-else-if="filteredQuestions.length === 0" class="state-box">
+        <div class="empty-icon">📚</div>
+        <p class="state-title">暂无问题</p>
+        <p class="state-hint">抽卡后的问题会自动出现在这里</p>
+      </div>
+
+      <!-- 问题卡片 -->
+      <div v-else class="question-grid">
+        <div
+          v-for="question in filteredQuestions"
+          :key="question.id"
+          class="question-card"
+        >
+          <!-- 头部：分类 + 来源 -->
+          <div class="card-header">
+            <span class="category-tag">{{ categoryStore.getCategoryName(question.category) }}</span>
+            <div class="header-right">
+              <span v-if="question.source === 'llm'" class="source-tag ai">AI</span>
+              <span v-else class="source-tag offline">离线</span>
             </div>
-            <p class="card-desc">{{ category.description }}</p>
-            <span class="card-count">{{ getOfflineCount(category.id) }} 题可用</span>
+          </div>
+
+          <!-- 问题文本 -->
+          <p class="question-text">{{ getText(question) }}</p>
+
+          <!-- 底部：翻译 + 操作 -->
+          <div class="card-footer">
+            <button
+              v-if="canTranslate(question)"
+              class="translate-btn"
+              :class="{ active: getLang(question.id) === 'zh' }"
+              @click="toggleLang(question.id)"
+            >
+              {{ getLang(question.id) === 'en' ? '译' : 'EN' }}
+            </button>
+            <div v-else></div>
+
+            <div class="action-buttons">
+              <button
+                class="action-btn"
+                :class="{ favorited: question.favorite }"
+                @click="handleToggleFavorite(question.id)"
+              >
+                {{ question.favorite ? '❤️' : '🤍' }}
+              </button>
+              <button class="action-btn" @click="handleCopy(getText(question))">
+                📋
+              </button>
+              <button class="action-btn" @click="handleShare(getText(question))">
+                📤
+              </button>
+              <button class="action-btn delete-btn" @click="confirmDelete(question)">
+                🗑️
+              </button>
+            </div>
           </div>
         </div>
-
-        <!-- 右侧：抽卡按钮 -->
-        <button
-          class="draw-btn"
-          :disabled="isDrawing"
-          @click="handleDrawFromCategory(category.id)"
-        >
-          <span v-if="isDrawing && categoryStore.currentCategoryId === category.id" class="draw-spinner"></span>
-          <span v-else>🎲</span>
-        </button>
       </div>
     </div>
 
-    <!-- 问题卡片浮层 -->
+    <!-- 删除确认对话框 -->
     <Teleport to="body">
       <transition name="modal">
-        <div v-if="drawnQuestion" class="question-overlay" @click.self="handleCloseCard">
-          <div class="question-modal">
-            <QuestionCard
-              :question="drawnQuestion"
-              @close="handleCloseCard"
-            />
+        <div v-if="showDeleteConfirm" class="modal-overlay" @click.self="cancelDelete">
+          <div class="modal-content">
+            <h3 class="modal-title">确认删除</h3>
+            <p class="modal-text">确定要删除这个问题吗？此操作无法撤销。</p>
+            <div class="modal-actions">
+              <button class="modal-button cancel" @click="cancelDelete">取消</button>
+              <button class="modal-button confirm" @click="handleDelete">删除</button>
+            </div>
           </div>
         </div>
       </transition>
@@ -150,7 +244,7 @@ function handleCloseCard() {
 </template>
 
 <style scoped>
-.category-page {
+.bank-page {
   padding: var(--spacing-lg);
   min-height: 100%;
 }
@@ -172,132 +266,221 @@ function handleCloseCard() {
   color: var(--color-text-tertiary);
 }
 
-.category-grid {
+/* 分类过滤 */
+.category-filter {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: all var(--duration-fast) ease;
+}
+
+.filter-pill:active {
+  transform: scale(0.95);
+}
+
+.filter-pill.active {
+  background-color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  color: white;
+}
+
+.pill-count {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* 问题列表 */
+.question-list {
+  min-height: 300px;
+}
+
+.state-box {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.category-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-lg);
-  background-color: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  transition: all var(--duration-fast) ease;
-}
-
-.category-card.active {
-  border-color: var(--color-accent-primary);
-  background-color: rgba(232, 160, 191, 0.05);
-}
-
-.card-main {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  flex: 1;
-  min-width: 0;
-}
-
-.card-icon {
-  font-size: 28px;
-  width: 48px;
-  height: 48px;
-  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
-  flex-shrink: 0;
+  padding: var(--spacing-2xl);
+  text-align: center;
 }
 
-.card-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.card-title-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: 2px;
-}
-
-.card-title {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.current-badge {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--color-accent-primary);
-  background-color: rgba(232, 160, 191, 0.15);
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-}
-
-.card-desc {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  margin-bottom: 4px;
-}
-
-.card-count {
-  font-size: 11px;
-  color: var(--color-text-tertiary);
-}
-
-/* 抽卡按钮 */
-.draw-btn {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  flex-shrink: 0;
-  transition: all var(--duration-fast) ease;
-}
-
-.draw-btn:active:not(:disabled) {
-  transform: scale(0.92);
-  background-color: var(--color-accent-primary);
-}
-
-.draw-btn:disabled {
-  opacity: 0.5;
-}
-
-/* 加载动画 */
-.draw-spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--color-border);
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
   border-top-color: var(--color-accent-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  margin-bottom: var(--spacing-md);
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* 问题卡片浮层 */
-.question-overlay {
+.state-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: var(--spacing-md);
+}
+
+.state-title {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.state-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.question-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.question-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.category-tag {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.1);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.source-tag {
+  font-size: var(--font-size-xs);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.source-tag.ai {
+  color: var(--color-accent-primary);
+  background-color: rgba(232, 160, 191, 0.1);
+}
+
+.source-tag.offline {
+  color: var(--color-accent-secondary);
+  background-color: rgba(169, 199, 232, 0.1);
+}
+
+.question-text {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.translate-btn {
+  padding: 6px 14px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  transition: all var(--duration-fast) ease;
+}
+
+.translate-btn:active {
+  transform: scale(0.95);
+}
+
+.translate-btn.active {
+  background-color: rgba(169, 199, 232, 0.15);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.action-btn {
+  padding: var(--spacing-sm);
+  background-color: var(--color-border-light);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  transition: all var(--duration-fast) ease;
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+  background-color: var(--color-border);
+}
+
+.action-btn.favorited {
+  color: var(--color-accent-primary);
+}
+
+.delete-btn {
+  opacity: 0.6;
+}
+
+.delete-btn:active {
+  opacity: 1;
+}
+
+/* 模态框 */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -311,12 +494,59 @@ function handleCloseCard() {
   padding: var(--spacing-lg);
 }
 
-.question-modal {
+.modal-content {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  max-width: 320px;
   width: 100%;
-  max-width: 400px;
+  box-shadow: var(--shadow-xl);
 }
 
-/* 过渡动画 */
+.modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.modal-button {
+  flex: 1;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all var(--duration-fast) ease;
+}
+
+.modal-button.cancel {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.modal-button.confirm {
+  background-color: var(--color-error);
+  border: 1px solid var(--color-error);
+  color: white;
+}
+
+.modal-button:active {
+  transform: scale(0.98);
+}
+
 .modal-enter-active,
 .modal-leave-active {
   transition: all var(--duration-normal) ease;

@@ -15,7 +15,7 @@ export interface DownloadProgress {
 
 /**
  * 下载 APK 并触发 Android 安装器
- * 非原生平台时回退到浏览器打开
+ * 使用 fetch 流式读取实现真实进度追踪
  */
 export async function downloadAndInstallApk(
   downloadUrl: string,
@@ -31,12 +31,50 @@ export async function downloadAndInstallApk(
   try {
     onProgress?.({ type: 'downloading', progress: 0 })
 
-    // 使用 Capacitor Filesystem 内置下载，避免将大文件加载到 JS 内存
-    await Filesystem.downloadFile({
-      url: downloadUrl,
+    // 使用 fetch 下载，支持 Content-Length 进度追踪
+    const response = await fetch(downloadUrl)
+    if (!response.ok) {
+      throw new Error(`Download failed: ${response.status}`)
+    }
+
+    const contentLength = parseInt(response.headers.get('content-length') || '0', 10)
+    const reader = response.body?.getReader()
+    if (!reader) throw new Error('Response body not readable')
+
+    const chunks: Uint8Array[] = []
+    let received = 0
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      chunks.push(value)
+      received += value.length
+
+      if (contentLength > 0) {
+        const progress = Math.round((received / contentLength) * 100)
+        onProgress?.({ type: 'downloading', progress })
+      }
+    }
+
+    // 合并所有 chunks
+    const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0)
+    const apkBytes = new Uint8Array(totalLength)
+    let offset = 0
+    for (const chunk of chunks) {
+      apkBytes.set(chunk, offset)
+      offset += chunk.length
+    }
+
+    // 转为 base64 写入文件系统
+    const base64 = btoa(String.fromCharCode(...apkBytes))
+
+    onProgress?.({ type: 'downloading', progress: 100 })
+
+    await Filesystem.writeFile({
       path: apkFilename,
+      data: base64,
       directory: Directory.Cache,
-      recursive: true,
     })
 
     onProgress?.({ type: 'installing' })
@@ -47,7 +85,6 @@ export async function downloadAndInstallApk(
       directory: Directory.Cache,
     })
 
-    // Android 上 stat().uri 返回 file:// URI，提取原生路径
     const nativePath = statResult.uri.replace('file://', '')
 
     // 触发 Android 安装器

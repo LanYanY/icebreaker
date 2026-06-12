@@ -164,6 +164,8 @@ function showToastMsg(msg: string) {
       :show="showUpdateDialog"
       :update-info="updateStore.updateInfo"
       :current-version="appVersion"
+      :is-downloading="isDownloading"
+      :download-progress="downloadProgress"
       @download="handleDownload"
       @dismiss="handleDismiss"
       @close="showUpdateDialog = false"

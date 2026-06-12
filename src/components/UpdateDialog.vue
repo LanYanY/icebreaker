@@ -5,6 +5,8 @@ defineProps<{
   show: boolean
   updateInfo: UpdateInfo | null
   currentVersion: string
+  isDownloading?: boolean
+  downloadProgress?: number
 }>()
 
 const emit = defineEmits<{
@@ -17,39 +19,63 @@ const emit = defineEmits<{
 <template>
   <teleport to="body">
     <transition name="modal">
-      <div v-if="show && updateInfo" class="modal-overlay" @click.self="emit('close')">
+      <div v-if="show && updateInfo" class="modal-overlay" @click.self="!isDownloading && emit('close')">
         <div class="modal-content">
           <!-- 头部 -->
           <div class="update-header">
-            <span class="update-icon">🎉</span>
-            <h3 class="update-title">发现新版本</h3>
+            <span class="update-icon">{{ isDownloading ? '📥' : '🎉' }}</span>
+            <h3 class="update-title">{{ isDownloading ? '正在下载...' : '发现新版本' }}</h3>
           </div>
 
           <!-- 版本信息 -->
-          <div class="version-info">
+          <div v-if="!isDownloading" class="version-info">
             <span class="version-current">v{{ currentVersion }}</span>
             <span class="version-arrow">→</span>
             <span class="version-latest">v{{ updateInfo.version }}</span>
           </div>
 
+          <!-- 下载进度 -->
+          <div v-if="isDownloading" class="progress-section">
+            <div class="progress-bar">
+              <div class="progress-fill" :style="{ width: (downloadProgress || 0) + '%' }"></div>
+            </div>
+            <span class="progress-text">{{ downloadProgress || 0 }}%</span>
+          </div>
+
           <!-- Release Notes -->
-          <div class="release-notes">
+          <div v-if="!isDownloading" class="release-notes">
             <p class="notes-label">更新内容</p>
             <div class="notes-content">{{ updateInfo.releaseNotes || '暂无更新说明' }}</div>
           </div>
 
           <!-- 来源标签 -->
-          <div class="source-tag">
+          <div v-if="!isDownloading" class="source-tag">
             来源: {{ updateInfo.source === 'gitee' ? 'Gitee' : 'GitHub' }}
           </div>
 
           <!-- 操作按钮 -->
           <div class="modal-actions">
-            <button class="modal-button later" @click="emit('dismiss')">
+            <button
+              v-if="!isDownloading"
+              class="modal-button later"
+              @click="emit('dismiss')"
+            >
               稍后再说
             </button>
-            <button class="modal-button download" @click="emit('download')">
+            <button
+              v-if="!isDownloading"
+              class="modal-button download"
+              @click="emit('download')"
+            >
               立即更新
+            </button>
+            <button
+              v-if="isDownloading"
+              class="modal-button download downloading"
+              disabled
+            >
+              <span class="download-spinner"></span>
+              下载中，请勿关闭...
             </button>
           </div>
         </div>
@@ -126,6 +152,34 @@ const emit = defineEmits<{
   color: var(--color-accent-primary);
 }
 
+/* 下载进度 */
+.progress-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  display: block;
+}
+
 .release-notes {
   margin-bottom: var(--spacing-lg);
 }
@@ -183,7 +237,29 @@ const emit = defineEmits<{
   color: white;
 }
 
-.modal-button:active {
+.modal-button.downloading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.download-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.modal-button:active:not(:disabled) {
   transform: scale(0.98);
 }
 

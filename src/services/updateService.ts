@@ -63,8 +63,10 @@ async function fetchGiteeRelease(currentVersion: string): Promise<UpdateInfo | n
     const releases = await response.json()
     if (!Array.isArray(releases) || releases.length === 0) return null
 
-    // 取最新的 release（列表按时间倒序）
-    const data = releases[0]
+    // Gitee 列表不保证倒序，按 created_at 排取最新
+    const data = releases.sort((a: any, b: any) => {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    })[0]
     const tagName: string = data.tag_name || ''
     const latestVersion = tagName.replace(/^v/, '')
 
