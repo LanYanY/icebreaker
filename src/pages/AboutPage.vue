@@ -112,7 +112,7 @@ function showToastMsg(msg: string) {
         <h3 class="card-title">关于应用</h3>
         <p class="card-text">
           开场白是一款个人自用的破冰话题卡牌应用。通过抽卡的形式，帮助你在社交场合中自然地开启对话。
-          支持 AI 生成和离线题库两种模式，涵盖多种话题分类，从轻松闲聊到深度交流。
+          通过 AI 智能生成话题，涵盖多种话题分类，从轻松闲聊到深度交流。
         </p>
       </div>
 
@@ -122,11 +122,11 @@ function showToastMsg(msg: string) {
         <ul class="feature-list">
           <li>🎲 6 大话题分类，覆盖不同场景</li>
           <li>🤖 AI 智能生成，千变万化不重复</li>
-          <li>📚 120+ 离线题库，无需联网即可使用</li>
           <li>🔄 分类循环模式，自动轮换话题</li>
           <li>📤 分享精美卡片图片</li>
           <li>🌙 深色模式支持</li>
-          <li>🔔 版本更新检测</li>
+          <li>🔔 应用内版本更新</li>
+          <li>📥 应用内直接下载安装</li>
         </ul>
       </div>
 
@@ -148,7 +148,7 @@ function showToastMsg(msg: string) {
         <h3 class="card-title">权利信息</h3>
         <p class="card-text">
           本应用为个人自用工具，不收集任何用户数据。
-          所有问题内容由 AI 生成或来自离线题库，仅供娱乐参考。
+          所有问题内容由 AI 生成，仅供娱乐参考。
           用户配置的 API Key 仅存储在本地设备，不会上传至任何服务器。
         </p>
       </div>
