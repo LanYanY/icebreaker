@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { App } from '@capacitor/app'
-import { Browser } from '@capacitor/browser'
 import { useUpdateStore } from '@/stores/updateStore'
+import { downloadAndInstallApk } from '@/services/apkInstallService'
 import UpdateDialog from '@/components/UpdateDialog.vue'
 
 const updateStore = useUpdateStore()
 const appVersion = ref('1.0.0')
 const showUpdateDialog = ref(false)
+const isDownloading = ref(false)
+const downloadProgress = ref(0)
 const toastMessage = ref('')
 const showToast = ref(false)
 
@@ -35,16 +37,27 @@ async function handleCheckUpdate() {
   }
 }
 
-/** 下载更新 */
+/** 下载并安装更新 */
 async function handleDownload() {
   if (!updateStore.updateInfo?.downloadUrl) return
 
+  isDownloading.value = true
+  downloadProgress.value = 0
+
   try {
-    await Browser.open({ url: updateStore.updateInfo.downloadUrl })
+    await downloadAndInstallApk(updateStore.updateInfo.downloadUrl, (status) => {
+      if (status.type === 'downloading') {
+        downloadProgress.value = status.progress || 0
+      } else if (status.type === 'installing') {
+        showToastMsg('正在打开安装器...')
+      }
+    })
     showUpdateDialog.value = false
   } catch (err) {
-    console.warn('[About] Failed to open browser:', err)
-    showToastMsg('无法打开下载链接')
+    console.warn('[About] Download/install failed:', err)
+    showToastMsg('下载失败，请稍后重试')
+  } finally {
+    isDownloading.value = false
   }
 }
 
