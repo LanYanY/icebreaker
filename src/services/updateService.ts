@@ -1,6 +1,6 @@
 import type { UpdateInfo } from '@/types/update'
 
-const GITEE_API = 'https://gitee.com/api/v5/repos/yy_lan/icebreaker/releases'
+const GITEE_API = 'https://gitee.com/api/v5/repos/yy_lan/icebreaker/releases?per_page=100'
 const GITHUB_API = 'https://api.github.com/repos/LanYanY/icebreaker/releases/latest'
 
 /**
